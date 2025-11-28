@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Bundle Identifier -->
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+
+	<!-- Executable Name -->
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+
+	<!-- Bundle Name -->
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+
+	<!-- Bundle Display Name -->
+	<key>CFBundleDisplayName</key>
+	<string>Banking App</string>
+
+	<!-- Bundle Version -->
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+
+	<!-- Package Type -->
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+
+	<!-- Custom URL Scheme for Deep Linking -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.example.bankingapp</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>bankapp</string>
+			</array>
+		</dict>
+	</array>
+
+	<!-- Biometric Authentication Privacy String -->
+	<key>NSFaceIDUsageDescription</key>
+	<string>We use Face ID to securely log you into your account.</string>
+</dict>
+</plist>
