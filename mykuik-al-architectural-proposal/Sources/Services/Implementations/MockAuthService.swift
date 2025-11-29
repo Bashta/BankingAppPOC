@@ -2,15 +2,28 @@ import Foundation
 import Combine
 
 final class MockAuthService: AuthServiceProtocol {
+    // MARK: - Reactive State (AC: #1)
+
     @Published private(set) var isAuthenticated: Bool = false
 
     var isAuthenticatedPublisher: AnyPublisher<Bool, Never> {
         $isAuthenticated.eraseToAnyPublisher()
     }
 
+    // MARK: - Session Management (AC: #1, #6)
+
+    private var authToken: AuthToken?
+    private var sessionTask: Task<Void, Never>?
+    private var cancellables = Set<AnyCancellable>()
+
+    // MARK: - User State
+
     private var currentUser: User?
     private var storedPassword: String = "password"
     private var storedPIN: String = "1234"
+
+    // Session duration in seconds (30 minutes default, reduced for testing)
+    private let sessionDuration: TimeInterval = 1800
 
     func login(username: String, password: String) async throws -> LoginResult {
         try await Task.sleep(nanoseconds: 500_000_000) // 500ms
@@ -19,13 +32,16 @@ final class MockAuthService: AuthServiceProtocol {
             throw AuthError.invalidCredentials
         }
 
+        // AC: #2 - Set authenticated state on login success
         isAuthenticated = true
 
+        // AC: #2 - Create and store auth token with expiration
         let token = AuthToken(
             accessToken: "mock-token-\(UUID().uuidString)",
             refreshToken: "mock-refresh-\(UUID().uuidString)",
-            expiresAt: Date().addingTimeInterval(3600) // 1 hour
+            expiresAt: Date().addingTimeInterval(sessionDuration)
         )
+        authToken = token
 
         currentUser = User(
             id: "USER001",
@@ -35,6 +51,9 @@ final class MockAuthService: AuthServiceProtocol {
             phoneNumber: "+1234567890",
             address: nil
         )
+
+        // AC: #6 - Start session timeout
+        startSessionTimeout(duration: sessionDuration)
 
         return LoginResult(
             token: token,
@@ -46,14 +65,16 @@ final class MockAuthService: AuthServiceProtocol {
     func loginWithBiometric() async throws -> LoginResult {
         try await Task.sleep(nanoseconds: 500_000_000) // 500ms
 
-        // Simulate biometric success
+        // AC: #3 - Set authenticated state on biometric success
         isAuthenticated = true
 
+        // AC: #3 - Generate and store auth token
         let token = AuthToken(
             accessToken: "mock-biometric-token-\(UUID().uuidString)",
             refreshToken: "mock-refresh-\(UUID().uuidString)",
-            expiresAt: Date().addingTimeInterval(3600) // 1 hour
+            expiresAt: Date().addingTimeInterval(sessionDuration)
         )
+        authToken = token
 
         currentUser = User(
             id: "USER001",
@@ -64,6 +85,10 @@ final class MockAuthService: AuthServiceProtocol {
             address: nil
         )
 
+        // AC: #6 - Start session timeout
+        startSessionTimeout(duration: sessionDuration)
+
+        // AC: #3 - Biometric login bypasses OTP requirement
         return LoginResult(
             token: token,
             requiresOTP: false,
@@ -82,19 +107,39 @@ final class MockAuthService: AuthServiceProtocol {
             throw AuthError.otpExpired
         }
 
-        isAuthenticated = true
-
-        return AuthToken(
+        // AC: #4 - Generate auth token
+        let token = AuthToken(
             accessToken: "mock-otp-token-\(UUID().uuidString)",
             refreshToken: "mock-refresh-\(UUID().uuidString)",
-            expiresAt: Date().addingTimeInterval(3600) // 1 hour
+            expiresAt: Date().addingTimeInterval(sessionDuration)
         )
+
+        // AC: #4 - Only set isAuthenticated for login purpose
+        // For other OTP purposes (transfer, cardAction), user is already logged in
+        if reference.purpose == .login {
+            isAuthenticated = true
+            authToken = token
+            startSessionTimeout(duration: sessionDuration)
+        }
+        // AC: #4 - For transfer, cardPINChange, passwordReset: don't change auth state
+
+        return token
     }
 
     func logout() async throws {
         try await Task.sleep(nanoseconds: 300_000_000) // 300ms
 
+        // AC: #5 - Clear authentication state
         isAuthenticated = false
+
+        // AC: #5 - Clear auth token
+        authToken = nil
+
+        // AC: #5 - Cancel session timeout task to prevent zombie tasks
+        sessionTask?.cancel()
+        sessionTask = nil
+
+        // AC: #5 - Clear user data (mock secure storage clearing)
         currentUser = nil
     }
 
@@ -157,6 +202,34 @@ final class MockAuthService: AuthServiceProtocol {
         }
 
         storedPIN = newPIN
+    }
+
+    // MARK: - Session Timeout (AC: #6)
+
+    /// Starts a background task that expires the session after the specified duration.
+    /// Uses Task.sleep for simulation; in production, this would use proper token expiration.
+    private func startSessionTimeout(duration: TimeInterval) {
+        // Cancel existing session task if running
+        sessionTask?.cancel()
+
+        // Create new session timeout task with weak self to prevent retain cycles
+        sessionTask = Task { [weak self] in
+            do {
+                // Sleep for session duration
+                try await Task.sleep(nanoseconds: UInt64(duration * 1_000_000_000))
+
+                // Check if task was cancelled during sleep
+                guard !Task.isCancelled else { return }
+
+                // Expire session on main actor (UI state updates must be on main thread)
+                await MainActor.run {
+                    self?.isAuthenticated = false
+                    self?.authToken = nil
+                }
+            } catch {
+                // Task was cancelled, no action needed
+            }
+        }
     }
 }
 
