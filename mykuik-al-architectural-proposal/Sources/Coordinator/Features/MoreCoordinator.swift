@@ -107,21 +107,22 @@ final class MoreCoordinator: ObservableObject {
         presentedFullScreen = nil
     }
 
-    // MARK: - Logout
+    // MARK: - Logout (Story 2.11 AC: #3)
 
-    /// Logs out the user by delegating to parent AppCoordinator.
+    /// Requests logout by delegating to parent AppCoordinator.
     ///
-    /// Parent-mediated pattern:
+    /// Parent-mediated pattern (Story 2.11 AC: #3):
     /// - MoreCoordinator doesn't directly call AuthService
     /// - Calls parent?.logout() which coordinates:
     ///   1. AuthService.logout() async call
     ///   2. Reset all feature coordinator navigation stacks
-    ///   3. Return to home tab
-    ///   4. RootView observes isAuthenticated change and shows login
+    ///   3. Dismiss any presented modals
+    ///   4. Return to home tab
+    ///   5. RootView observes isAuthenticated change and shows login
     ///
     /// Called by:
-    /// - SecuritySettingsViewModel (user taps logout button)
-    func logout() {
+    /// - MoreMenuViewModel.logout() (user confirms logout from More menu)
+    func requestLogout() {
         parent?.logout()
     }
 

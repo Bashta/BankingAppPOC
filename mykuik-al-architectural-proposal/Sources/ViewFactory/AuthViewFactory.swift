@@ -66,21 +66,8 @@ final class AuthViewFactory {
         return ResetPasswordView(viewModel: viewModel)
     }
 
-    func makeChangePasswordView(coordinator: AuthCoordinator) -> some View {
-        let viewModel = ChangePasswordViewModel(
-            authService: dependencyContainer.authService,
-            coordinator: coordinator
-        )
-        return ChangePasswordView(viewModel: viewModel)
-    }
-
-    func makeChangePINView(coordinator: AuthCoordinator) -> some View {
-        let viewModel = ChangePINViewModel(
-            authService: dependencyContainer.authService,
-            coordinator: coordinator
-        )
-        return ChangePINView(viewModel: viewModel)
-    }
+    // Note: makeChangePasswordView and makeChangePINView are in MoreViewFactory
+    // because these flows are accessed from Security Settings in the More tab
 
     func makeSessionExpiredView(coordinator: AuthCoordinator) -> some View {
         let viewModel = SessionExpiredViewModel(

@@ -276,26 +276,51 @@ final class AppCoordinator: ObservableObject {
 
     /// Logs out the user and resets all navigation state.
     ///
-    /// Flow:
-    /// 1. Call AuthService.logout() async (fire-and-forget with try?)
-    /// 2. Reset all child coordinator navigation stacks (popToRoot)
-    /// 3. Return to home tab
+    /// Flow (Story 2.11 AC: #4):
+    /// 1. Log logout action
+    /// 2. Call AuthService.logout() async (fire-and-forget with try?)
+    /// 3. Reset all child coordinator navigation stacks (popToRoot)
+    /// 4. Dismiss any presented sheets/fullscreen covers
+    /// 5. Return to home tab
+    /// 6. Clear pending deep link
     ///
     /// AuthService will publish isAuthenticated = false, triggering RootView to show login.
     func logout() {
+        Logger.auth.info("AppCoordinator logout initiated - clearing all state")
+
+        // Call AuthService.logout() to clear auth state
         Task {
             try? await dependencyContainer.authService.logout()
         }
 
-        // Reset all navigation stacks
+        // Reset ALL child coordinator navigation stacks
         homeCoordinator.popToRoot()
         accountsCoordinator.popToRoot()
         transferCoordinator.popToRoot()
         cardsCoordinator.popToRoot()
         moreCoordinator.popToRoot()
+        authCoordinator.popToRoot()
+        Logger.auth.debug("All coordinator navigation stacks cleared")
+
+        // Dismiss any presented sheets/fullscreen covers on each coordinator
+        homeCoordinator.dismiss()
+        accountsCoordinator.dismiss()
+        transferCoordinator.dismiss()
+        cardsCoordinator.dismiss()
+        moreCoordinator.dismiss()
+
+        // Dismiss AppCoordinator-level modals
+        presentedSheet = nil
+        presentedFullScreen = nil
+        Logger.auth.debug("All presented modals dismissed")
 
         // Return to home tab
         selectedTab = .home
+
+        // Clear pending deep link
+        pendingDeepLink = nil
+
+        Logger.auth.info("AppCoordinator logout complete - all state cleared")
     }
 
     /// Handles session expiration by clearing all navigation state and presenting session expired modal.

@@ -190,6 +190,7 @@ final class MockAuthService: AuthServiceProtocol {
     }
 
     func logout() async throws {
+        Logger.auth.info("Logout initiated")
         try await Task.sleep(nanoseconds: 300_000_000) // 300ms
 
         // Story 2.6 AC: #2 - Stop session timer before clearing auth state
@@ -197,25 +198,33 @@ final class MockAuthService: AuthServiceProtocol {
         sessionTimer?.invalidate()
         sessionTimer = nil
         lastActivityDate = nil
+        Logger.auth.debug("Session timer invalidated")
 
         // AC: #5 - Clear authentication state
         isAuthenticated = false
+        Logger.auth.debug("Authentication state cleared: isAuthenticated = false")
 
         // AC: #5 - Clear auth token
         authToken = nil
+        Logger.auth.debug("Auth token cleared")
 
         // AC: #5 - Clear user data (mock secure storage clearing)
         currentUser = nil
+        Logger.auth.info("Logout completed - all auth state cleared")
     }
 
     func forgotPassword(email: String) async throws {
+        Logger.auth.debug("[MockAuthService] forgotPassword called for email: \(email.prefix(3))***")
+
         try await Task.sleep(nanoseconds: 500_000_000) // 500ms
 
         // Simulate sending reset email
         guard email.contains("@") else {
+            Logger.auth.error("[MockAuthService] forgotPassword failed: invalid email format")
             throw AuthError.invalidEmail
         }
 
+        Logger.auth.info("[MockAuthService] forgotPassword: password reset email sent successfully")
         // Email sent (no actual email in mock)
     }
 
@@ -234,21 +243,26 @@ final class MockAuthService: AuthServiceProtocol {
     }
 
     func changePassword(oldPassword: String, newPassword: String) async throws {
+        Logger.auth.debug("[MockAuthService] changePassword called")
         try await Task.sleep(nanoseconds: 500_000_000) // 500ms
 
         guard isAuthenticated else {
+            Logger.auth.error("[MockAuthService] changePassword failed: not authenticated")
             throw AuthError.notAuthenticated
         }
 
         guard oldPassword == storedPassword else {
+            Logger.auth.error("[MockAuthService] changePassword failed: invalid current password")
             throw AuthError.invalidCredentials
         }
 
         guard newPassword.count >= 8 else {
+            Logger.auth.error("[MockAuthService] changePassword failed: new password too weak (< 8 chars)")
             throw AuthError.passwordTooWeak
         }
 
         storedPassword = newPassword
+        Logger.auth.info("[MockAuthService] changePassword: password changed successfully")
     }
 
     func changePIN(oldPIN: String, newPIN: String) async throws {

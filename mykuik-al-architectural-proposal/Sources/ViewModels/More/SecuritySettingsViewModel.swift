@@ -242,6 +242,18 @@ final class SecuritySettingsViewModel: ObservableObject {
             : "\(name) is disabled"
     }
 
+    // MARK: - Navigation
+
+    /// Navigates to the Change Password screen
+    func navigateToChangePassword() {
+        coordinator?.push(.changePassword)
+    }
+
+    /// Navigates to the Change PIN screen
+    func navigateToChangePIN() {
+        coordinator?.push(.changePIN)
+    }
+
     // MARK: - Error Clearing
 
     /// Clears the current error.

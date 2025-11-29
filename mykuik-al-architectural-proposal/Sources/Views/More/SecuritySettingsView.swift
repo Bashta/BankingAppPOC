@@ -24,15 +24,39 @@ struct SecuritySettingsView: View {
                     .foregroundColor(.secondary)
             }
 
-            // MARK: - Other Security Options Section (Placeholder for future)
+            // MARK: - Account Security Section
             Section {
-                NavigationLink(destination: Text("Change Password")) {
-                    Label("Change Password", systemImage: "lock.rotation")
+                // Change Password row - navigates via coordinator
+                Button {
+                    viewModel.navigateToChangePassword()
+                } label: {
+                    HStack {
+                        Label("Change Password", systemImage: "lock.rotation")
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    .contentShape(Rectangle())
                 }
+                .buttonStyle(.plain)
+                .foregroundColor(.primary)
 
-                NavigationLink(destination: Text("Change PIN")) {
-                    Label("Change PIN", systemImage: "key.fill")
+                // Change PIN row - navigates via coordinator
+                Button {
+                    viewModel.navigateToChangePIN()
+                } label: {
+                    HStack {
+                        Label("Change PIN", systemImage: "key.fill")
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    .contentShape(Rectangle())
                 }
+                .buttonStyle(.plain)
+                .foregroundColor(.primary)
             } header: {
                 Text("Account Security")
             }
