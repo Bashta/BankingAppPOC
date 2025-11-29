@@ -1,0 +1,39 @@
+{
+  "configurations" : [
+    {
+      "id" : "C8AFC721-7BC5-4E86-8B77-10D8F32E598C",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:mykuik-al-architectural-proposal.xcodeproj",
+      "identifier" : "4222670E2ED93B3700FBEE8D",
+      "name" : "mykuik-al-architectural-proposal"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:mykuik-al-architectural-proposal.xcodeproj",
+        "identifier" : "4222671B2ED93B3800FBEE8D",
+        "name" : "mykuik-al-architectural-proposalTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:mykuik-al-architectural-proposal.xcodeproj",
+        "identifier" : "422267252ED93B3800FBEE8D",
+        "name" : "mykuik-al-architectural-proposalUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

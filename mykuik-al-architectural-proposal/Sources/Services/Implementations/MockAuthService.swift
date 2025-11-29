@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import OSLog
 
 final class MockAuthService: AuthServiceProtocol {
     // MARK: - Reactive State (AC: #1)
@@ -25,13 +26,59 @@ final class MockAuthService: AuthServiceProtocol {
     // Session duration in seconds (30 minutes default, reduced for testing)
     private let sessionDuration: TimeInterval = 1800
 
+    // MARK: - OTP Configuration (AC: #1 - Configurable OTP requirement)
+
+    /// Whether login should require OTP verification (for testing different flows)
+    /// Default: false for basic login flow; set to true to test OTP flow
+    private(set) var requiresOTPForLogin: Bool = false
+
+    /// Enable OTP requirement for login (for testing)
+    func setRequiresOTP(_ requires: Bool) {
+        requiresOTPForLogin = requires
+    }
+
     func login(username: String, password: String) async throws -> LoginResult {
         try await Task.sleep(nanoseconds: 500_000_000) // 500ms
 
-        guard username == "user", password == storedPassword else {
+        // AC: #2 - Validate credentials
+        // For demo: username "user" with password "password" (or "otp" to force OTP flow)
+        let validCredentials = (username == "user" && password == storedPassword) ||
+                               (username == "otp" && password == "password") // Special OTP test user
+        guard validCredentials else {
             throw AuthError.invalidCredentials
         }
 
+        // AC: #1 - Check if OTP is required
+        // OTP required if: requiresOTPForLogin is enabled OR username is "otp" (test user)
+        let needsOTP = requiresOTPForLogin || username == "otp"
+
+        if needsOTP {
+            // Generate OTP reference with 5-minute expiration
+            let otpReference = OTPReference(
+                id: "OTP-\(UUID().uuidString.prefix(8))",
+                expiresAt: Date().addingTimeInterval(300), // 5 minutes
+                purpose: .login
+            )
+
+            // Store user temporarily (will be activated after OTP verification)
+            currentUser = User(
+                id: "USER001",
+                username: username,
+                name: "John Doe",
+                email: "user@example.com",
+                phoneNumber: "+1234567890",
+                address: nil
+            )
+
+            // Return result requiring OTP verification
+            return LoginResult(
+                token: nil,
+                requiresOTP: true,
+                otpReference: otpReference
+            )
+        }
+
+        // Direct login (no OTP required)
         // AC: #2 - Set authenticated state on login success
         isAuthenticated = true
 
@@ -63,10 +110,12 @@ final class MockAuthService: AuthServiceProtocol {
     }
 
     func loginWithBiometric() async throws -> LoginResult {
+        Logger.auth.info("Starting biometric login flow")
         try await Task.sleep(nanoseconds: 500_000_000) // 500ms
 
         // AC: #3 - Set authenticated state on biometric success
         isAuthenticated = true
+        Logger.auth.info("Biometric login: authentication state set to true")
 
         // AC: #3 - Generate and store auth token
         let token = AuthToken(
@@ -75,6 +124,7 @@ final class MockAuthService: AuthServiceProtocol {
             expiresAt: Date().addingTimeInterval(sessionDuration)
         )
         authToken = token
+        Logger.auth.debug("Biometric login: auth token generated, expires at \(token.expiresAt)")
 
         currentUser = User(
             id: "USER001",
@@ -84,11 +134,14 @@ final class MockAuthService: AuthServiceProtocol {
             phoneNumber: "+1234567890",
             address: nil
         )
+        Logger.auth.debug("Biometric login: user profile loaded")
 
         // AC: #6 - Start session timeout
         startSessionTimeout(duration: sessionDuration)
+        Logger.auth.info("Biometric login: session timer started (duration: \(self.sessionDuration)s)")
 
         // AC: #3 - Biometric login bypasses OTP requirement
+        Logger.auth.info("Biometric login completed successfully")
         return LoginResult(
             token: token,
             requiresOTP: false,

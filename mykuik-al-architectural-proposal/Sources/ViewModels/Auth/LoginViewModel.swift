@@ -60,13 +60,14 @@ final class LoginViewModel: ObservableObject {
     /// OTP reference received when login requires multi-factor authentication
     private var otpReference: OTPReference?
 
-    /// Auth service for authentication operations
-    private let authService: AuthServiceProtocol
+    /// Auth service for authentication operations (exposed for OTPViewModel creation)
+    let authService: AuthServiceProtocol
 
     /// Biometric service for Face ID / Touch ID
     private let biometricService: BiometricServiceProtocol
 
     /// Weak coordinator reference for navigation delegation
+    /// Note: Made internal (not private) to allow LoginView to pass to OTPViewModel creation
     weak var coordinator: AuthCoordinator?
 
     // MARK: - Computed Properties
@@ -80,6 +81,29 @@ final class LoginViewModel: ObservableObject {
     /// Returns the OTP reference for modal presentation
     var currentOTPReference: OTPReference? {
         otpReference
+    }
+
+    /// Creates an OTPViewModel for the current OTP reference.
+    /// Used by LoginView to present OTP modal.
+    ///
+    /// - Parameters:
+    ///   - coordinator: AuthCoordinator for navigation
+    /// - Returns: Configured OTPViewModel or nil if no OTP reference
+    func createOTPViewModel(coordinator: AuthCoordinator) -> OTPViewModel? {
+        guard let reference = otpReference else { return nil }
+
+        let viewModel = OTPViewModel(
+            otpReference: reference,
+            authService: authService,
+            coordinator: coordinator
+        )
+
+        // Wire up dismiss callback to close the modal
+        viewModel.onDismiss = { [weak self] in
+            self?.showOTP = false
+        }
+
+        return viewModel
     }
 
     // MARK: - Initialization

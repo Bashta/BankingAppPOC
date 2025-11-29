@@ -297,48 +297,48 @@ struct LoginView: View {
 
     @ViewBuilder
     private var otpModalContent: some View {
+        // Create OTPViewModel with dismiss callback wired up
+        if let coordinator = viewModel.coordinator,
+           let otpViewModel = viewModel.createOTPViewModel(coordinator: coordinator) {
+            OTPView(viewModel: otpViewModel)
+        } else {
+            // Fallback if coordinator or OTP reference is not available
+            fallbackOTPContent
+        }
+    }
+
+    /// Fallback content when OTPViewModel cannot be created
+    private var fallbackOTPContent: some View {
         NavigationView {
             VStack(spacing: 24) {
-                Image(systemName: "lock.shield.fill")
+                Image(systemName: "exclamationmark.triangle.fill")
                     .font(.system(size: 60))
-                    .foregroundColor(.blue)
+                    .foregroundColor(.orange)
                     .padding(.top, 40)
 
                 Text("Verification Required")
                     .font(.title2)
                     .fontWeight(.bold)
 
-                Text("A verification code has been sent to your registered device. Please enter it to complete login.")
+                Text("Unable to load verification screen. Please try again.")
                     .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 32)
 
-                // Placeholder for OTPView - will be implemented in Story 2.5
-                if let otpRef = viewModel.currentOTPReference {
-                    Text("OTP Reference: \(otpRef.id)")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-
-                    Text("Expires: \(otpRef.expiresAt, style: .relative)")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-
                 Spacer()
 
-                // Cancel button to dismiss modal
-                Button("Cancel") {
+                Button("Close") {
                     viewModel.showOTP = false
                 }
                 .foregroundColor(.red)
                 .padding(.bottom, 32)
             }
-            .navigationTitle("Verify Identity")
+            .navigationTitle("Error")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
+                    Button("Close") {
                         viewModel.showOTP = false
                     }
                 }

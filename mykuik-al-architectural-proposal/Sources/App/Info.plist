@@ -44,5 +44,12 @@
 	<!-- Biometric Authentication Privacy String -->
 	<key>NSFaceIDUsageDescription</key>
 	<string>We use Face ID to securely log you into your account.</string>
+
+	<!-- Launch Screen Configuration (required for full-screen support on modern devices) -->
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>AccentColor</string>
+	</dict>
 </dict>
 </plist>
