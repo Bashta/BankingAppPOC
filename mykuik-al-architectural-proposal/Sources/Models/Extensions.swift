@@ -59,3 +59,65 @@ extension TransactionType {
         }
     }
 }
+
+// MARK: - TransactionCategory Extensions
+
+extension TransactionCategory {
+    /// SF Symbol icon for transaction category
+    var icon: String {
+        switch self {
+        case .transfer:
+            return "arrow.left.arrow.right"
+        case .payment:
+            return "creditcard"
+        case .withdrawal:
+            return "banknote"
+        case .deposit:
+            return "arrow.down.to.line"
+        case .fee:
+            return "percent"
+        case .interest:
+            return "chart.line.uptrend.xyaxis"
+        case .purchase:
+            return "cart"
+        case .refund:
+            return "arrow.uturn.backward"
+        case .salary:
+            return "briefcase"
+        case .other:
+            return "questionmark.circle"
+        }
+    }
+}
+
+// MARK: - Date Extensions
+
+extension Date {
+    /// Formats date as relative string for recent transactions
+    /// Today: "Today, 2:30 PM"
+    /// Yesterday: "Yesterday"
+    /// This week: "Monday"
+    /// Older: "Nov 15, 2024"
+    var relativeFormatted: String {
+        let calendar = Calendar.current
+        let now = Date()
+
+        if calendar.isDateInToday(self) {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "h:mm a"
+            return "Today, \(formatter.string(from: self))"
+        } else if calendar.isDateInYesterday(self) {
+            return "Yesterday"
+        } else if let weekAgo = calendar.date(byAdding: .day, value: -7, to: now),
+                  self > weekAgo {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "EEEE"
+            return formatter.string(from: self)
+        } else {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            formatter.timeStyle = .none
+            return formatter.string(from: self)
+        }
+    }
+}

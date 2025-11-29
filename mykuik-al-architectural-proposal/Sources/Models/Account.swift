@@ -7,6 +7,16 @@ enum AccountType: String, Codable, CaseIterable {
     case savings = "SAVINGS"
     case deposit = "DEPOSIT"
     case loan = "LOAN"
+
+    /// Human-readable display name for the account type
+    var displayName: String {
+        switch self {
+        case .checking: return "Checking"
+        case .savings: return "Savings"
+        case .deposit: return "Deposit"
+        case .loan: return "Loan"
+        }
+    }
 }
 
 // MARK: - Account Model
