@@ -7,144 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4C69CC6C8BD24FF88B991028 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F7FB1EEEEE4B7A80738605 /* RootView.swift */; };
-		7BC73486C5AA4A5DB806AAD2 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5649AC62D67483F814961ED /* MainTabView.swift */; };
-		4222675C2ED9E03E00FBEE8D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 422267592ED9E03D00FBEE8D /* README.md */; };
-		4222675D2ED9E03E00FBEE8D /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422267442ED9E03D00FBEE8D /* Routes.swift */; };
-		4222675E2ED9E03E00FBEE8D /* BankingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222673D2ED9E03D00FBEE8D /* BankingApp.swift */; };
-		42A6DE2A2ED9E59300788221 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DE292ED9E59300788221 /* CoordinatorProtocol.swift */; };
-		42A6DE2B2ED9E59300788221 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DE282ED9E59300788221 /* AppCoordinator.swift */; };
-		42A6DECA2EDA757F00788221 /* AuthViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEC52EDA757F00788221 /* AuthViewFactory.swift */; };
-		42A6DECB2EDA757F00788221 /* HomeViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEC72EDA757F00788221 /* HomeViewFactory.swift */; };
-		42A6DECC2EDA757F00788221 /* MoreViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEC82EDA757F00788221 /* MoreViewFactory.swift */; };
-		42A6DECD2EDA757F00788221 /* TransferViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEC92EDA757F00788221 /* TransferViewFactory.swift */; };
-		42A6DECE2EDA757F00788221 /* AccountsViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEC42EDA757F00788221 /* AccountsViewFactory.swift */; };
-		42A6DECF2EDA757F00788221 /* CardsViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEC62EDA757F00788221 /* CardsViewFactory.swift */; };
-		42A6DED12EDA75C400788221 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DED02EDA75C400788221 /* DependencyContainer.swift */; };
-		42A6DED82EDA75D500788221 /* TransferCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DED72EDA75D500788221 /* TransferCoordinator.swift */; };
-		42A6DED92EDA75D500788221 /* AccountsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DED22EDA75D500788221 /* AccountsCoordinator.swift */; };
-		42A6DEDA2EDA75D500788221 /* MoreCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DED62EDA75D500788221 /* MoreCoordinator.swift */; };
-		42A6DEDB2EDA75D500788221 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DED32EDA75D500788221 /* AuthCoordinator.swift */; };
-		42A6DEDC2EDA75D500788221 /* CardsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DED42EDA75D500788221 /* CardsCoordinator.swift */; };
-		42A6DEDD2EDA75D500788221 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DED52EDA75D500788221 /* HomeCoordinator.swift */; };
-		42A6DEE72EDA75F300788221 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEE32EDA75F300788221 /* Notification.swift */; };
-		42A6DEE82EDA75F300788221 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEE62EDA75F300788221 /* User.swift */; };
-		42A6DEE92EDA75F300788221 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEE12EDA75F300788221 /* Card.swift */; };
-		42A6DEEA2EDA75F300788221 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEE22EDA75F300788221 /* Extensions.swift */; };
-		42A6DEEB2EDA75F300788221 /* Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEE52EDA75F300788221 /* Transfer.swift */; };
-		42A6DEEC2EDA75F300788221 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEDF2EDA75F300788221 /* Auth.swift */; };
-		42A6DEED2EDA75F300788221 /* Beneficiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEE02EDA75F300788221 /* Beneficiary.swift */; };
-		42A6DEEE2EDA75F300788221 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEDE2EDA75F300788221 /* Account.swift */; };
-		42A6DEEF2EDA75F300788221 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEE42EDA75F300788221 /* Transaction.swift */; };
-		42A6DEF92EDA761000788221 /* MockTransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEF72EDA761000788221 /* MockTransactionService.swift */; };
-		42A6DEFA2EDA761000788221 /* MockBeneficiaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEF42EDA761000788221 /* MockBeneficiaryService.swift */; };
-		42A6DEFB2EDA761000788221 /* MockCardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEF52EDA761000788221 /* MockCardService.swift */; };
-		42A6DEFC2EDA761000788221 /* MockAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEF32EDA761000788221 /* MockAuthService.swift */; };
-		42A6DEFD2EDA761000788221 /* MockNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEF62EDA761000788221 /* MockNotificationService.swift */; };
-		42A6DEFE2EDA761000788221 /* KeychainSecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEF12EDA761000788221 /* KeychainSecureStorage.swift */; };
-		42A6DEFF2EDA761000788221 /* MockTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEF82EDA761000788221 /* MockTransferService.swift */; };
-		42A6DF002EDA761000788221 /* BiometricService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEF02EDA761000788221 /* BiometricService.swift */; };
-		42A6DF012EDA761000788221 /* MockAccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DEF22EDA761000788221 /* MockAccountService.swift */; };
-		42A6DF0B2EDA761D00788221 /* SecureStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF082EDA761D00788221 /* SecureStorageProtocol.swift */; };
-		42A6DF0C2EDA761D00788221 /* TransactionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF092EDA761D00788221 /* TransactionServiceProtocol.swift */; };
-		42A6DF0D2EDA761D00788221 /* TransferServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF0A2EDA761D00788221 /* TransferServiceProtocol.swift */; };
-		42A6DF0E2EDA761D00788221 /* NotificationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF072EDA761D00788221 /* NotificationServiceProtocol.swift */; };
-		42A6DF0F2EDA761D00788221 /* AccountServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF022EDA761D00788221 /* AccountServiceProtocol.swift */; };
-		42A6DF102EDA761D00788221 /* BiometricServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF052EDA761D00788221 /* BiometricServiceProtocol.swift */; };
-		42A6DF112EDA761D00788221 /* BeneficiaryServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF042EDA761D00788221 /* BeneficiaryServiceProtocol.swift */; };
-		42A6DF122EDA761D00788221 /* CardServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF062EDA761D00788221 /* CardServiceProtocol.swift */; };
-		42A6DF132EDA761D00788221 /* AuthServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF032EDA761D00788221 /* AuthServiceProtocol.swift */; };
-		42A6DF1C2EDA764100788221 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF172EDA764100788221 /* ErrorView.swift */; };
-		42A6DF1D2EDA764100788221 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF162EDA764100788221 /* EmptyStateView.swift */; };
-		42A6DF1E2EDA764100788221 /* AmountInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF152EDA764100788221 /* AmountInputView.swift */; };
-		42A6DF1F2EDA764100788221 /* PINEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF1A2EDA764100788221 /* PINEntryView.swift */; };
-		42A6DF202EDA764100788221 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF142EDA764100788221 /* ActionButton.swift */; };
-		42A6DF212EDA764100788221 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF182EDA764100788221 /* LoadingView.swift */; };
-		42A6DF222EDA764100788221 /* OTPInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF192EDA764100788221 /* OTPInputView.swift */; };
-		42A6DF232EDA764100788221 /* SecureTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF1B2EDA764100788221 /* SecureTextField.swift */; };
-		42A6DF2A2EDA785100788221 /* TransactionHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF292EDA785100788221 /* TransactionHistoryViewModel.swift */; };
-		42A6DF2B2EDA785100788221 /* AccountDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF242EDA785100788221 /* AccountDetailViewModel.swift */; };
-		42A6DF2C2EDA785100788221 /* AccountsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF252EDA785100788221 /* AccountsListViewModel.swift */; };
-		42A6DF2D2EDA785100788221 /* StatementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF272EDA785100788221 /* StatementViewModel.swift */; };
-		42A6DF2E2EDA785100788221 /* StatementDownloadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF262EDA785100788221 /* StatementDownloadViewModel.swift */; };
-		42A6DF2F2EDA785100788221 /* TransactionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF282EDA785100788221 /* TransactionDetailViewModel.swift */; };
-		42A6DF372EDA786F00788221 /* CardDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF322EDA786F00788221 /* CardDetailViewModel.swift */; };
-		42A6DF382EDA786F00788221 /* BlockCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF302EDA786F00788221 /* BlockCardViewModel.swift */; };
-		42A6DF392EDA786F00788221 /* CardActivationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF312EDA786F00788221 /* CardActivationViewModel.swift */; };
-		42A6DF3A2EDA786F00788221 /* CardPINChangeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF342EDA786F00788221 /* CardPINChangeViewModel.swift */; };
-		42A6DF3B2EDA786F00788221 /* CardSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF352EDA786F00788221 /* CardSettingsViewModel.swift */; };
-		42A6DF3C2EDA786F00788221 /* CardLimitsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF332EDA786F00788221 /* CardLimitsViewModel.swift */; };
-		42A6DF3D2EDA786F00788221 /* CardsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF362EDA786F00788221 /* CardsListViewModel.swift */; };
-		42A6DF412EDA788100788221 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF402EDA788100788221 /* NotificationsViewModel.swift */; };
-		42A6DF422EDA788100788221 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF3E2EDA788100788221 /* DashboardViewModel.swift */; };
-		42A6DF432EDA788100788221 /* NotificationDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF3F2EDA788100788221 /* NotificationDetailViewModel.swift */; };
-		42A6DF4D2EDA788A00788221 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF492EDA788A00788221 /* ProfileViewModel.swift */; };
-		42A6DF4E2EDA788A00788221 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF4C2EDA788A00788221 /* TermsViewModel.swift */; };
-		42A6DF4F2EDA788A00788221 /* PrivacyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF482EDA788A00788221 /* PrivacyViewModel.swift */; };
-		42A6DF502EDA788A00788221 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF452EDA788A00788221 /* EditProfileViewModel.swift */; };
-		42A6DF512EDA788A00788221 /* SupportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF4B2EDA788A00788221 /* SupportViewModel.swift */; };
-		42A6DF522EDA788A00788221 /* MoreMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF462EDA788A00788221 /* MoreMenuViewModel.swift */; };
-		42A6DF532EDA788A00788221 /* NotificationSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF472EDA788A00788221 /* NotificationSettingsViewModel.swift */; };
-		42A6DF542EDA788A00788221 /* AboutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF442EDA788A00788221 /* AboutViewModel.swift */; };
-		42A6DF552EDA788A00788221 /* SecuritySettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF4A2EDA788A00788221 /* SecuritySettingsViewModel.swift */; };
-		42A6DF5E2EDA789600788221 /* ExternalTransferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF592EDA789600788221 /* ExternalTransferViewModel.swift */; };
-		42A6DF5F2EDA789600788221 /* InternalTransferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF5A2EDA789600788221 /* InternalTransferViewModel.swift */; };
-		42A6DF602EDA789600788221 /* TransferHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF5C2EDA789600788221 /* TransferHomeViewModel.swift */; };
-		42A6DF612EDA789600788221 /* TransferReceiptViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF5D2EDA789600788221 /* TransferReceiptViewModel.swift */; };
-		42A6DF622EDA789600788221 /* TransferConfirmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF5B2EDA789600788221 /* TransferConfirmViewModel.swift */; };
-		42A6DF632EDA789600788221 /* AddBeneficiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF562EDA789600788221 /* AddBeneficiaryViewModel.swift */; };
-		42A6DF642EDA789600788221 /* EditBeneficiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF582EDA789600788221 /* EditBeneficiaryViewModel.swift */; };
-		42A6DF652EDA789600788221 /* BeneficiaryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF572EDA789600788221 /* BeneficiaryListViewModel.swift */; };
-		42A6DF6C2EDA793300788221 /* TransactionHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF6B2EDA793300788221 /* TransactionHistoryView.swift */; };
-		42A6DF6D2EDA793300788221 /* TransactionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF6A2EDA793300788221 /* TransactionDetailView.swift */; };
-		42A6DF6E2EDA793300788221 /* AccountsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF672EDA793300788221 /* AccountsListView.swift */; };
-		42A6DF6F2EDA793300788221 /* StatementDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF682EDA793300788221 /* StatementDownloadView.swift */; };
-		42A6DF702EDA793300788221 /* StatementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF692EDA793300788221 /* StatementView.swift */; };
-		42A6DF712EDA793300788221 /* AccountDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF662EDA793300788221 /* AccountDetailView.swift */; };
-		42A6DF7A2EDA794000788221 /* ChangePINView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF742EDA794000788221 /* ChangePINView.swift */; };
-		42A6DF7B2EDA794000788221 /* SessionExpiredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF792EDA794000788221 /* SessionExpiredView.swift */; };
-		42A6DF7C2EDA794000788221 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF752EDA794000788221 /* ForgotPasswordView.swift */; };
-		42A6DF7D2EDA794000788221 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF732EDA794000788221 /* ChangePasswordView.swift */; };
-		42A6DF7E2EDA794000788221 /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF772EDA794000788221 /* OTPView.swift */; };
-		42A6DF7F2EDA794000788221 /* BiometricLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF722EDA794000788221 /* BiometricLoginView.swift */; };
-		42A6DF802EDA794000788221 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF762EDA794000788221 /* LoginView.swift */; };
-		42A6DF812EDA794000788221 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF782EDA794000788221 /* ResetPasswordView.swift */; };
-		42A6DF892EDA794900788221 /* CardLimitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF852EDA794900788221 /* CardLimitsView.swift */; };
-		42A6DF8A2EDA794900788221 /* CardsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF882EDA794900788221 /* CardsListView.swift */; };
-		42A6DF8B2EDA794900788221 /* CardPINChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF862EDA794900788221 /* CardPINChangeView.swift */; };
-		42A6DF8C2EDA794900788221 /* BlockCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF822EDA794900788221 /* BlockCardView.swift */; };
-		42A6DF8D2EDA794900788221 /* CardSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF872EDA794900788221 /* CardSettingsView.swift */; };
-		42A6DF8E2EDA794900788221 /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF842EDA794900788221 /* CardDetailView.swift */; };
-		42A6DF8F2EDA794900788221 /* CardActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF832EDA794900788221 /* CardActivationView.swift */; };
-		42A6DF932EDA795600788221 /* NotificationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF912EDA795600788221 /* NotificationDetailView.swift */; };
-		42A6DF942EDA795600788221 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF922EDA795600788221 /* NotificationsView.swift */; };
-		42A6DF952EDA795600788221 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF902EDA795600788221 /* DashboardView.swift */; };
-		42A6DF9F2EDA796000788221 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF972EDA796000788221 /* EditProfileView.swift */; };
-		42A6DFA02EDA796000788221 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF9B2EDA796000788221 /* ProfileView.swift */; };
-		42A6DFA12EDA796000788221 /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF9E2EDA796000788221 /* TermsView.swift */; };
-		42A6DFA22EDA796000788221 /* MoreMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF982EDA796000788221 /* MoreMenuView.swift */; };
-		42A6DFA32EDA796000788221 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF962EDA796000788221 /* AboutView.swift */; };
-		42A6DFA42EDA796000788221 /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF9A2EDA796000788221 /* PrivacyView.swift */; };
-		42A6DFA52EDA796000788221 /* SecuritySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF9C2EDA796000788221 /* SecuritySettingsView.swift */; };
-		42A6DFA62EDA796000788221 /* SupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF9D2EDA796000788221 /* SupportView.swift */; };
-		42A6DFA72EDA796000788221 /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DF992EDA796000788221 /* NotificationSettingsView.swift */; };
-		42A6DFB02EDA796A00788221 /* InternalTransferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DFAC2EDA796A00788221 /* InternalTransferView.swift */; };
-		42A6DFB12EDA796A00788221 /* EditBeneficiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DFAA2EDA796A00788221 /* EditBeneficiaryView.swift */; };
-		42A6DFB22EDA796A00788221 /* AddBeneficiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DFA82EDA796A00788221 /* AddBeneficiaryView.swift */; };
-		42A6DFB32EDA796A00788221 /* BeneficiaryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DFA92EDA796A00788221 /* BeneficiaryListView.swift */; };
-		42A6DFB42EDA796A00788221 /* ExternalTransferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DFAB2EDA796A00788221 /* ExternalTransferView.swift */; };
-		42A6DFB52EDA796A00788221 /* TransferReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DFAF2EDA796A00788221 /* TransferReceiptView.swift */; };
-		42A6DFB62EDA796A00788221 /* TransferConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DFAD2EDA796A00788221 /* TransferConfirmView.swift */; };
-		42A6DFB72EDA796A00788221 /* TransferHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DFAE2EDA796A00788221 /* TransferHomeView.swift */; };
-		42A6DFB92EDA79BA00788221 /* HomeViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DFB82EDA79BA00788221 /* HomeViewFactory.swift */; };
-		42A6DFC22EDA7B6300788221 /* ChangePINViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DFBC2EDA7B6300788221 /* ChangePINViewModel.swift */; };
-		42A6DFC32EDA7B6300788221 /* SessionExpiredViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DFC12EDA7B6300788221 /* SessionExpiredViewModel.swift */; };
-		42A6DFC42EDA7B6300788221 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DFBE2EDA7B6300788221 /* LoginViewModel.swift */; };
-		42A6DFC52EDA7B6300788221 /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DFBB2EDA7B6300788221 /* ChangePasswordViewModel.swift */; };
-		42A6DFC62EDA7B6300788221 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DFBD2EDA7B6300788221 /* ForgotPasswordViewModel.swift */; };
-		42A6DFC72EDA7B6300788221 /* BiometricLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DFBA2EDA7B6300788221 /* BiometricLoginViewModel.swift */; };
-		42A6DFC82EDA7B6300788221 /* OTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DFBF2EDA7B6300788221 /* OTPViewModel.swift */; };
-		42A6DFC92EDA7B6300788221 /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6DFC02EDA7B6300788221 /* ResetPasswordViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,153 +27,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B4F7FB1EEEEE4B7A80738605 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RootView.swift; path = BankingApp/App/RootView.swift; sourceTree = "<group>"; };
-		A5649AC62D67483F814961ED /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainTabView.swift; path = BankingApp/App/MainTabView.swift; sourceTree = "<group>"; };
 		4222670F2ED93B3700FBEE8D /* mykuik-al-architectural-proposal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mykuik-al-architectural-proposal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4222671C2ED93B3800FBEE8D /* mykuik-al-architectural-proposalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mykuik-al-architectural-proposalTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		422267262ED93B3800FBEE8D /* mykuik-al-architectural-proposalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mykuik-al-architectural-proposalUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4222673D2ED9E03D00FBEE8D /* BankingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankingApp.swift; sourceTree = "<group>"; };
-		4222673E2ED9E03D00FBEE8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		422267442ED9E03D00FBEE8D /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
-		422267592ED9E03D00FBEE8D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		42A6DE282ED9E59300788221 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		42A6DE292ED9E59300788221 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
-		42A6DEC42EDA757F00788221 /* AccountsViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewFactory.swift; sourceTree = "<group>"; };
-		42A6DEC52EDA757F00788221 /* AuthViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewFactory.swift; sourceTree = "<group>"; };
-		42A6DEC62EDA757F00788221 /* CardsViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewFactory.swift; sourceTree = "<group>"; };
-		42A6DEC72EDA757F00788221 /* HomeViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewFactory.swift; sourceTree = "<group>"; };
-		42A6DEC82EDA757F00788221 /* MoreViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewFactory.swift; sourceTree = "<group>"; };
-		42A6DEC92EDA757F00788221 /* TransferViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferViewFactory.swift; sourceTree = "<group>"; };
-		42A6DED02EDA75C400788221 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
-		42A6DED22EDA75D500788221 /* AccountsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsCoordinator.swift; sourceTree = "<group>"; };
-		42A6DED32EDA75D500788221 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
-		42A6DED42EDA75D500788221 /* CardsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsCoordinator.swift; sourceTree = "<group>"; };
-		42A6DED52EDA75D500788221 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
-		42A6DED62EDA75D500788221 /* MoreCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreCoordinator.swift; sourceTree = "<group>"; };
-		42A6DED72EDA75D500788221 /* TransferCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferCoordinator.swift; sourceTree = "<group>"; };
-		42A6DEDE2EDA75F300788221 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
-		42A6DEDF2EDA75F300788221 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
-		42A6DEE02EDA75F300788221 /* Beneficiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beneficiary.swift; sourceTree = "<group>"; };
-		42A6DEE12EDA75F300788221 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
-		42A6DEE22EDA75F300788221 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		42A6DEE32EDA75F300788221 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
-		42A6DEE42EDA75F300788221 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
-		42A6DEE52EDA75F300788221 /* Transfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transfer.swift; sourceTree = "<group>"; };
-		42A6DEE62EDA75F300788221 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		42A6DEF02EDA761000788221 /* BiometricService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricService.swift; sourceTree = "<group>"; };
-		42A6DEF12EDA761000788221 /* KeychainSecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainSecureStorage.swift; sourceTree = "<group>"; };
-		42A6DEF22EDA761000788221 /* MockAccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccountService.swift; sourceTree = "<group>"; };
-		42A6DEF32EDA761000788221 /* MockAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthService.swift; sourceTree = "<group>"; };
-		42A6DEF42EDA761000788221 /* MockBeneficiaryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBeneficiaryService.swift; sourceTree = "<group>"; };
-		42A6DEF52EDA761000788221 /* MockCardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCardService.swift; sourceTree = "<group>"; };
-		42A6DEF62EDA761000788221 /* MockNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNotificationService.swift; sourceTree = "<group>"; };
-		42A6DEF72EDA761000788221 /* MockTransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTransactionService.swift; sourceTree = "<group>"; };
-		42A6DEF82EDA761000788221 /* MockTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTransferService.swift; sourceTree = "<group>"; };
-		42A6DF022EDA761D00788221 /* AccountServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountServiceProtocol.swift; sourceTree = "<group>"; };
-		42A6DF032EDA761D00788221 /* AuthServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceProtocol.swift; sourceTree = "<group>"; };
-		42A6DF042EDA761D00788221 /* BeneficiaryServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeneficiaryServiceProtocol.swift; sourceTree = "<group>"; };
-		42A6DF052EDA761D00788221 /* BiometricServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricServiceProtocol.swift; sourceTree = "<group>"; };
-		42A6DF062EDA761D00788221 /* CardServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardServiceProtocol.swift; sourceTree = "<group>"; };
-		42A6DF072EDA761D00788221 /* NotificationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationServiceProtocol.swift; sourceTree = "<group>"; };
-		42A6DF082EDA761D00788221 /* SecureStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorageProtocol.swift; sourceTree = "<group>"; };
-		42A6DF092EDA761D00788221 /* TransactionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionServiceProtocol.swift; sourceTree = "<group>"; };
-		42A6DF0A2EDA761D00788221 /* TransferServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferServiceProtocol.swift; sourceTree = "<group>"; };
-		42A6DF142EDA764100788221 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
-		42A6DF152EDA764100788221 /* AmountInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInputView.swift; sourceTree = "<group>"; };
-		42A6DF162EDA764100788221 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
-		42A6DF172EDA764100788221 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
-		42A6DF182EDA764100788221 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		42A6DF192EDA764100788221 /* OTPInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPInputView.swift; sourceTree = "<group>"; };
-		42A6DF1A2EDA764100788221 /* PINEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINEntryView.swift; sourceTree = "<group>"; };
-		42A6DF1B2EDA764100788221 /* SecureTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTextField.swift; sourceTree = "<group>"; };
-		42A6DF242EDA785100788221 /* AccountDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailViewModel.swift; sourceTree = "<group>"; };
-		42A6DF252EDA785100788221 /* AccountsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListViewModel.swift; sourceTree = "<group>"; };
-		42A6DF262EDA785100788221 /* StatementDownloadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementDownloadViewModel.swift; sourceTree = "<group>"; };
-		42A6DF272EDA785100788221 /* StatementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementViewModel.swift; sourceTree = "<group>"; };
-		42A6DF282EDA785100788221 /* TransactionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewModel.swift; sourceTree = "<group>"; };
-		42A6DF292EDA785100788221 /* TransactionHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryViewModel.swift; sourceTree = "<group>"; };
-		42A6DF302EDA786F00788221 /* BlockCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCardViewModel.swift; sourceTree = "<group>"; };
-		42A6DF312EDA786F00788221 /* CardActivationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardActivationViewModel.swift; sourceTree = "<group>"; };
-		42A6DF322EDA786F00788221 /* CardDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailViewModel.swift; sourceTree = "<group>"; };
-		42A6DF332EDA786F00788221 /* CardLimitsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLimitsViewModel.swift; sourceTree = "<group>"; };
-		42A6DF342EDA786F00788221 /* CardPINChangeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPINChangeViewModel.swift; sourceTree = "<group>"; };
-		42A6DF352EDA786F00788221 /* CardSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSettingsViewModel.swift; sourceTree = "<group>"; };
-		42A6DF362EDA786F00788221 /* CardsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsListViewModel.swift; sourceTree = "<group>"; };
-		42A6DF3E2EDA788100788221 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
-		42A6DF3F2EDA788100788221 /* NotificationDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetailViewModel.swift; sourceTree = "<group>"; };
-		42A6DF402EDA788100788221 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
-		42A6DF442EDA788A00788221 /* AboutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModel.swift; sourceTree = "<group>"; };
-		42A6DF452EDA788A00788221 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
-		42A6DF462EDA788A00788221 /* MoreMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMenuViewModel.swift; sourceTree = "<group>"; };
-		42A6DF472EDA788A00788221 /* NotificationSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewModel.swift; sourceTree = "<group>"; };
-		42A6DF482EDA788A00788221 /* PrivacyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewModel.swift; sourceTree = "<group>"; };
-		42A6DF492EDA788A00788221 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
-		42A6DF4A2EDA788A00788221 /* SecuritySettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecuritySettingsViewModel.swift; sourceTree = "<group>"; };
-		42A6DF4B2EDA788A00788221 /* SupportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportViewModel.swift; sourceTree = "<group>"; };
-		42A6DF4C2EDA788A00788221 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
-		42A6DF562EDA789600788221 /* AddBeneficiaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBeneficiaryViewModel.swift; sourceTree = "<group>"; };
-		42A6DF572EDA789600788221 /* BeneficiaryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeneficiaryListViewModel.swift; sourceTree = "<group>"; };
-		42A6DF582EDA789600788221 /* EditBeneficiaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBeneficiaryViewModel.swift; sourceTree = "<group>"; };
-		42A6DF592EDA789600788221 /* ExternalTransferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalTransferViewModel.swift; sourceTree = "<group>"; };
-		42A6DF5A2EDA789600788221 /* InternalTransferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalTransferViewModel.swift; sourceTree = "<group>"; };
-		42A6DF5B2EDA789600788221 /* TransferConfirmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferConfirmViewModel.swift; sourceTree = "<group>"; };
-		42A6DF5C2EDA789600788221 /* TransferHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferHomeViewModel.swift; sourceTree = "<group>"; };
-		42A6DF5D2EDA789600788221 /* TransferReceiptViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferReceiptViewModel.swift; sourceTree = "<group>"; };
-		42A6DF662EDA793300788221 /* AccountDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailView.swift; sourceTree = "<group>"; };
-		42A6DF672EDA793300788221 /* AccountsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListView.swift; sourceTree = "<group>"; };
-		42A6DF682EDA793300788221 /* StatementDownloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementDownloadView.swift; sourceTree = "<group>"; };
-		42A6DF692EDA793300788221 /* StatementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementView.swift; sourceTree = "<group>"; };
-		42A6DF6A2EDA793300788221 /* TransactionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailView.swift; sourceTree = "<group>"; };
-		42A6DF6B2EDA793300788221 /* TransactionHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryView.swift; sourceTree = "<group>"; };
-		42A6DF722EDA794000788221 /* BiometricLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricLoginView.swift; sourceTree = "<group>"; };
-		42A6DF732EDA794000788221 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
-		42A6DF742EDA794000788221 /* ChangePINView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePINView.swift; sourceTree = "<group>"; };
-		42A6DF752EDA794000788221 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
-		42A6DF762EDA794000788221 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		42A6DF772EDA794000788221 /* OTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
-		42A6DF782EDA794000788221 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
-		42A6DF792EDA794000788221 /* SessionExpiredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionExpiredView.swift; sourceTree = "<group>"; };
-		42A6DF822EDA794900788221 /* BlockCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCardView.swift; sourceTree = "<group>"; };
-		42A6DF832EDA794900788221 /* CardActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardActivationView.swift; sourceTree = "<group>"; };
-		42A6DF842EDA794900788221 /* CardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
-		42A6DF852EDA794900788221 /* CardLimitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLimitsView.swift; sourceTree = "<group>"; };
-		42A6DF862EDA794900788221 /* CardPINChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPINChangeView.swift; sourceTree = "<group>"; };
-		42A6DF872EDA794900788221 /* CardSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSettingsView.swift; sourceTree = "<group>"; };
-		42A6DF882EDA794900788221 /* CardsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsListView.swift; sourceTree = "<group>"; };
-		42A6DF902EDA795600788221 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
-		42A6DF912EDA795600788221 /* NotificationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetailView.swift; sourceTree = "<group>"; };
-		42A6DF922EDA795600788221 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
-		42A6DF962EDA796000788221 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
-		42A6DF972EDA796000788221 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
-		42A6DF982EDA796000788221 /* MoreMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMenuView.swift; sourceTree = "<group>"; };
-		42A6DF992EDA796000788221 /* NotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
-		42A6DF9A2EDA796000788221 /* PrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
-		42A6DF9B2EDA796000788221 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		42A6DF9C2EDA796000788221 /* SecuritySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecuritySettingsView.swift; sourceTree = "<group>"; };
-		42A6DF9D2EDA796000788221 /* SupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportView.swift; sourceTree = "<group>"; };
-		42A6DF9E2EDA796000788221 /* TermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
-		42A6DFA82EDA796A00788221 /* AddBeneficiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBeneficiaryView.swift; sourceTree = "<group>"; };
-		42A6DFA92EDA796A00788221 /* BeneficiaryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeneficiaryListView.swift; sourceTree = "<group>"; };
-		42A6DFAA2EDA796A00788221 /* EditBeneficiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBeneficiaryView.swift; sourceTree = "<group>"; };
-		42A6DFAB2EDA796A00788221 /* ExternalTransferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalTransferView.swift; sourceTree = "<group>"; };
-		42A6DFAC2EDA796A00788221 /* InternalTransferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalTransferView.swift; sourceTree = "<group>"; };
-		42A6DFAD2EDA796A00788221 /* TransferConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferConfirmView.swift; sourceTree = "<group>"; };
-		42A6DFAE2EDA796A00788221 /* TransferHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferHomeView.swift; sourceTree = "<group>"; };
-		42A6DFAF2EDA796A00788221 /* TransferReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferReceiptView.swift; sourceTree = "<group>"; };
-		42A6DFB82EDA79BA00788221 /* HomeViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewFactory.swift; sourceTree = "<group>"; };
-		42A6DFBA2EDA7B6300788221 /* BiometricLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricLoginViewModel.swift; sourceTree = "<group>"; };
-		42A6DFBB2EDA7B6300788221 /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
-		42A6DFBC2EDA7B6300788221 /* ChangePINViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePINViewModel.swift; sourceTree = "<group>"; };
-		42A6DFBD2EDA7B6300788221 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
-		42A6DFBE2EDA7B6300788221 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		42A6DFBF2EDA7B6300788221 /* OTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewModel.swift; sourceTree = "<group>"; };
-		42A6DFC02EDA7B6300788221 /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
-		42A6DFC12EDA7B6300788221 /* SessionExpiredViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionExpiredViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		42A6DFD42EDB000000788221 /* Exceptions for "mykuik-al-architectural-proposal" folder in "mykuik-al-architectural-proposal" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Sources/App/Info.plist,
+			);
+			target = 4222670E2ED93B3700FBEE8D;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		422267112ED93B3700FBEE8D /* mykuik-al-architectural-proposal */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				42A6DFD42EDB000000788221 /* Exceptions for "mykuik-al-architectural-proposal" folder in "mykuik-al-architectural-proposal" target */,
+			);
 			path = "mykuik-al-architectural-proposal";
 			sourceTree = "<group>";
 		};
@@ -355,7 +91,6 @@
 		422267062ED93B3700FBEE8D = {
 			isa = PBXGroup;
 			children = (
-				4222675A2ED9E03D00FBEE8D /* BankingApp */,
 				422267112ED93B3700FBEE8D /* mykuik-al-architectural-proposal */,
 				4222671F2ED93B3800FBEE8D /* mykuik-al-architectural-proposalTests */,
 				422267292ED93B3800FBEE8D /* mykuik-al-architectural-proposalUITests */,
@@ -371,350 +106,6 @@
 				422267262ED93B3800FBEE8D /* mykuik-al-architectural-proposalUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		4222673F2ED9E03D00FBEE8D /* App */ = {
-			isa = PBXGroup;
-			children = (
-				4222673D2ED9E03D00FBEE8D /* BankingApp.swift */,
-				4222673E2ED9E03D00FBEE8D /* Info.plist */,
-			);
-			path = App;
-			sourceTree = "<group>";
-		};
-		422267402ED9E03D00FBEE8D /* Features */ = {
-			isa = PBXGroup;
-			children = (
-				42A6DED22EDA75D500788221 /* AccountsCoordinator.swift */,
-				42A6DED32EDA75D500788221 /* AuthCoordinator.swift */,
-				42A6DED42EDA75D500788221 /* CardsCoordinator.swift */,
-				42A6DED52EDA75D500788221 /* HomeCoordinator.swift */,
-				42A6DED62EDA75D500788221 /* MoreCoordinator.swift */,
-				42A6DED72EDA75D500788221 /* TransferCoordinator.swift */,
-			);
-			path = Features;
-			sourceTree = "<group>";
-		};
-		422267412ED9E03D00FBEE8D /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				42A6DE282ED9E59300788221 /* AppCoordinator.swift */,
-				42A6DE292ED9E59300788221 /* CoordinatorProtocol.swift */,
-				422267402ED9E03D00FBEE8D /* Features */,
-			);
-			path = Coordinator;
-			sourceTree = "<group>";
-		};
-		422267422ED9E03D00FBEE8D /* DI */ = {
-			isa = PBXGroup;
-			children = (
-				42A6DED02EDA75C400788221 /* DependencyContainer.swift */,
-			);
-			path = DI;
-			sourceTree = "<group>";
-		};
-		422267432ED9E03D00FBEE8D /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				42A6DEDE2EDA75F300788221 /* Account.swift */,
-				42A6DEDF2EDA75F300788221 /* Auth.swift */,
-				42A6DEE02EDA75F300788221 /* Beneficiary.swift */,
-				42A6DEE12EDA75F300788221 /* Card.swift */,
-				42A6DEE22EDA75F300788221 /* Extensions.swift */,
-				42A6DEE32EDA75F300788221 /* Notification.swift */,
-				42A6DEE42EDA75F300788221 /* Transaction.swift */,
-				42A6DEE52EDA75F300788221 /* Transfer.swift */,
-				42A6DEE62EDA75F300788221 /* User.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		422267452ED9E03D00FBEE8D /* Router */ = {
-			isa = PBXGroup;
-			children = (
-				422267442ED9E03D00FBEE8D /* Routes.swift */,
-			);
-			path = Router;
-			sourceTree = "<group>";
-		};
-		422267462ED9E03D00FBEE8D /* Implementations */ = {
-			isa = PBXGroup;
-			children = (
-				42A6DEF02EDA761000788221 /* BiometricService.swift */,
-				42A6DEF12EDA761000788221 /* KeychainSecureStorage.swift */,
-				42A6DEF22EDA761000788221 /* MockAccountService.swift */,
-				42A6DEF32EDA761000788221 /* MockAuthService.swift */,
-				42A6DEF42EDA761000788221 /* MockBeneficiaryService.swift */,
-				42A6DEF52EDA761000788221 /* MockCardService.swift */,
-				42A6DEF62EDA761000788221 /* MockNotificationService.swift */,
-				42A6DEF72EDA761000788221 /* MockTransactionService.swift */,
-				42A6DEF82EDA761000788221 /* MockTransferService.swift */,
-			);
-			path = Implementations;
-			sourceTree = "<group>";
-		};
-		422267472ED9E03D00FBEE8D /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				42A6DF022EDA761D00788221 /* AccountServiceProtocol.swift */,
-				42A6DF032EDA761D00788221 /* AuthServiceProtocol.swift */,
-				42A6DF042EDA761D00788221 /* BeneficiaryServiceProtocol.swift */,
-				42A6DF052EDA761D00788221 /* BiometricServiceProtocol.swift */,
-				42A6DF062EDA761D00788221 /* CardServiceProtocol.swift */,
-				42A6DF072EDA761D00788221 /* NotificationServiceProtocol.swift */,
-				42A6DF082EDA761D00788221 /* SecureStorageProtocol.swift */,
-				42A6DF092EDA761D00788221 /* TransactionServiceProtocol.swift */,
-				42A6DF0A2EDA761D00788221 /* TransferServiceProtocol.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		422267482ED9E03D00FBEE8D /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				422267462ED9E03D00FBEE8D /* Implementations */,
-				422267472ED9E03D00FBEE8D /* Protocols */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		422267492ED9E03D00FBEE8D /* ViewFactory */ = {
-			isa = PBXGroup;
-			children = (
-				42A6DFB82EDA79BA00788221 /* HomeViewFactory.swift */,
-				42A6DEC42EDA757F00788221 /* AccountsViewFactory.swift */,
-				42A6DEC52EDA757F00788221 /* AuthViewFactory.swift */,
-				42A6DEC62EDA757F00788221 /* CardsViewFactory.swift */,
-				42A6DEC72EDA757F00788221 /* HomeViewFactory.swift */,
-				42A6DEC82EDA757F00788221 /* MoreViewFactory.swift */,
-				42A6DEC92EDA757F00788221 /* TransferViewFactory.swift */,
-			);
-			path = ViewFactory;
-			sourceTree = "<group>";
-		};
-		4222674A2ED9E03D00FBEE8D /* Accounts */ = {
-			isa = PBXGroup;
-			children = (
-				42A6DF242EDA785100788221 /* AccountDetailViewModel.swift */,
-				42A6DF252EDA785100788221 /* AccountsListViewModel.swift */,
-				42A6DF262EDA785100788221 /* StatementDownloadViewModel.swift */,
-				42A6DF272EDA785100788221 /* StatementViewModel.swift */,
-				42A6DF282EDA785100788221 /* TransactionDetailViewModel.swift */,
-				42A6DF292EDA785100788221 /* TransactionHistoryViewModel.swift */,
-			);
-			path = Accounts;
-			sourceTree = "<group>";
-		};
-		4222674B2ED9E03D00FBEE8D /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				42A6DFBA2EDA7B6300788221 /* BiometricLoginViewModel.swift */,
-				42A6DFBB2EDA7B6300788221 /* ChangePasswordViewModel.swift */,
-				42A6DFBC2EDA7B6300788221 /* ChangePINViewModel.swift */,
-				42A6DFBD2EDA7B6300788221 /* ForgotPasswordViewModel.swift */,
-				42A6DFBE2EDA7B6300788221 /* LoginViewModel.swift */,
-				42A6DFBF2EDA7B6300788221 /* OTPViewModel.swift */,
-				42A6DFC02EDA7B6300788221 /* ResetPasswordViewModel.swift */,
-				42A6DFC12EDA7B6300788221 /* SessionExpiredViewModel.swift */,
-			);
-			path = Auth;
-			sourceTree = "<group>";
-		};
-		4222674C2ED9E03D00FBEE8D /* Cards */ = {
-			isa = PBXGroup;
-			children = (
-				42A6DF302EDA786F00788221 /* BlockCardViewModel.swift */,
-				42A6DF312EDA786F00788221 /* CardActivationViewModel.swift */,
-				42A6DF322EDA786F00788221 /* CardDetailViewModel.swift */,
-				42A6DF332EDA786F00788221 /* CardLimitsViewModel.swift */,
-				42A6DF342EDA786F00788221 /* CardPINChangeViewModel.swift */,
-				42A6DF352EDA786F00788221 /* CardSettingsViewModel.swift */,
-				42A6DF362EDA786F00788221 /* CardsListViewModel.swift */,
-			);
-			path = Cards;
-			sourceTree = "<group>";
-		};
-		4222674D2ED9E03D00FBEE8D /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				42A6DF3E2EDA788100788221 /* DashboardViewModel.swift */,
-				42A6DF3F2EDA788100788221 /* NotificationDetailViewModel.swift */,
-				42A6DF402EDA788100788221 /* NotificationsViewModel.swift */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		4222674E2ED9E03D00FBEE8D /* More */ = {
-			isa = PBXGroup;
-			children = (
-				42A6DF442EDA788A00788221 /* AboutViewModel.swift */,
-				42A6DF452EDA788A00788221 /* EditProfileViewModel.swift */,
-				42A6DF462EDA788A00788221 /* MoreMenuViewModel.swift */,
-				42A6DF472EDA788A00788221 /* NotificationSettingsViewModel.swift */,
-				42A6DF482EDA788A00788221 /* PrivacyViewModel.swift */,
-				42A6DF492EDA788A00788221 /* ProfileViewModel.swift */,
-				42A6DF4A2EDA788A00788221 /* SecuritySettingsViewModel.swift */,
-				42A6DF4B2EDA788A00788221 /* SupportViewModel.swift */,
-				42A6DF4C2EDA788A00788221 /* TermsViewModel.swift */,
-			);
-			path = More;
-			sourceTree = "<group>";
-		};
-		4222674F2ED9E03D00FBEE8D /* Transfer */ = {
-			isa = PBXGroup;
-			children = (
-				42A6DF562EDA789600788221 /* AddBeneficiaryViewModel.swift */,
-				42A6DF572EDA789600788221 /* BeneficiaryListViewModel.swift */,
-				42A6DF582EDA789600788221 /* EditBeneficiaryViewModel.swift */,
-				42A6DF592EDA789600788221 /* ExternalTransferViewModel.swift */,
-				42A6DF5A2EDA789600788221 /* InternalTransferViewModel.swift */,
-				42A6DF5B2EDA789600788221 /* TransferConfirmViewModel.swift */,
-				42A6DF5C2EDA789600788221 /* TransferHomeViewModel.swift */,
-				42A6DF5D2EDA789600788221 /* TransferReceiptViewModel.swift */,
-			);
-			path = Transfer;
-			sourceTree = "<group>";
-		};
-		422267502ED9E03D00FBEE8D /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				4222674A2ED9E03D00FBEE8D /* Accounts */,
-				4222674B2ED9E03D00FBEE8D /* Auth */,
-				4222674C2ED9E03D00FBEE8D /* Cards */,
-				4222674D2ED9E03D00FBEE8D /* Home */,
-				4222674E2ED9E03D00FBEE8D /* More */,
-				4222674F2ED9E03D00FBEE8D /* Transfer */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		422267512ED9E03D00FBEE8D /* Accounts */ = {
-			isa = PBXGroup;
-			children = (
-				42A6DF662EDA793300788221 /* AccountDetailView.swift */,
-				42A6DF672EDA793300788221 /* AccountsListView.swift */,
-				42A6DF682EDA793300788221 /* StatementDownloadView.swift */,
-				42A6DF692EDA793300788221 /* StatementView.swift */,
-				42A6DF6A2EDA793300788221 /* TransactionDetailView.swift */,
-				42A6DF6B2EDA793300788221 /* TransactionHistoryView.swift */,
-			);
-			path = Accounts;
-			sourceTree = "<group>";
-		};
-		422267522ED9E03D00FBEE8D /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				42A6DF722EDA794000788221 /* BiometricLoginView.swift */,
-				42A6DF732EDA794000788221 /* ChangePasswordView.swift */,
-				42A6DF742EDA794000788221 /* ChangePINView.swift */,
-				42A6DF752EDA794000788221 /* ForgotPasswordView.swift */,
-				42A6DF762EDA794000788221 /* LoginView.swift */,
-				42A6DF772EDA794000788221 /* OTPView.swift */,
-				42A6DF782EDA794000788221 /* ResetPasswordView.swift */,
-				42A6DF792EDA794000788221 /* SessionExpiredView.swift */,
-			);
-			path = Auth;
-			sourceTree = "<group>";
-		};
-		422267532ED9E03D00FBEE8D /* Cards */ = {
-			isa = PBXGroup;
-			children = (
-				42A6DF822EDA794900788221 /* BlockCardView.swift */,
-				42A6DF832EDA794900788221 /* CardActivationView.swift */,
-				42A6DF842EDA794900788221 /* CardDetailView.swift */,
-				42A6DF852EDA794900788221 /* CardLimitsView.swift */,
-				42A6DF862EDA794900788221 /* CardPINChangeView.swift */,
-				42A6DF872EDA794900788221 /* CardSettingsView.swift */,
-				42A6DF882EDA794900788221 /* CardsListView.swift */,
-			);
-			path = Cards;
-			sourceTree = "<group>";
-		};
-		422267542ED9E03D00FBEE8D /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				42A6DF142EDA764100788221 /* ActionButton.swift */,
-				42A6DF152EDA764100788221 /* AmountInputView.swift */,
-				42A6DF162EDA764100788221 /* EmptyStateView.swift */,
-				42A6DF172EDA764100788221 /* ErrorView.swift */,
-				42A6DF182EDA764100788221 /* LoadingView.swift */,
-				42A6DF192EDA764100788221 /* OTPInputView.swift */,
-				42A6DF1A2EDA764100788221 /* PINEntryView.swift */,
-				42A6DF1B2EDA764100788221 /* SecureTextField.swift */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		422267552ED9E03D00FBEE8D /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				42A6DF902EDA795600788221 /* DashboardView.swift */,
-				42A6DF912EDA795600788221 /* NotificationDetailView.swift */,
-				42A6DF922EDA795600788221 /* NotificationsView.swift */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		422267562ED9E03D00FBEE8D /* More */ = {
-			isa = PBXGroup;
-			children = (
-				42A6DF962EDA796000788221 /* AboutView.swift */,
-				42A6DF972EDA796000788221 /* EditProfileView.swift */,
-				42A6DF982EDA796000788221 /* MoreMenuView.swift */,
-				42A6DF992EDA796000788221 /* NotificationSettingsView.swift */,
-				42A6DF9A2EDA796000788221 /* PrivacyView.swift */,
-				42A6DF9B2EDA796000788221 /* ProfileView.swift */,
-				42A6DF9C2EDA796000788221 /* SecuritySettingsView.swift */,
-				42A6DF9D2EDA796000788221 /* SupportView.swift */,
-				42A6DF9E2EDA796000788221 /* TermsView.swift */,
-			);
-			path = More;
-			sourceTree = "<group>";
-		};
-		422267572ED9E03D00FBEE8D /* Transfer */ = {
-			isa = PBXGroup;
-			children = (
-				42A6DFA82EDA796A00788221 /* AddBeneficiaryView.swift */,
-				42A6DFA92EDA796A00788221 /* BeneficiaryListView.swift */,
-				42A6DFAA2EDA796A00788221 /* EditBeneficiaryView.swift */,
-				42A6DFAB2EDA796A00788221 /* ExternalTransferView.swift */,
-				42A6DFAC2EDA796A00788221 /* InternalTransferView.swift */,
-				42A6DFAD2EDA796A00788221 /* TransferConfirmView.swift */,
-				42A6DFAE2EDA796A00788221 /* TransferHomeView.swift */,
-				42A6DFAF2EDA796A00788221 /* TransferReceiptView.swift */,
-			);
-			path = Transfer;
-			sourceTree = "<group>";
-		};
-		422267582ED9E03D00FBEE8D /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				422267512ED9E03D00FBEE8D /* Accounts */,
-				422267522ED9E03D00FBEE8D /* Auth */,
-				422267532ED9E03D00FBEE8D /* Cards */,
-				422267542ED9E03D00FBEE8D /* Common */,
-				422267552ED9E03D00FBEE8D /* Home */,
-				422267562ED9E03D00FBEE8D /* More */,
-				422267572ED9E03D00FBEE8D /* Transfer */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		4222675A2ED9E03D00FBEE8D /* BankingApp */ = {
-			isa = PBXGroup;
-			children = (
-				4222673F2ED9E03D00FBEE8D /* App */,
-				422267412ED9E03D00FBEE8D /* Coordinator */,
-				422267422ED9E03D00FBEE8D /* DI */,
-				422267432ED9E03D00FBEE8D /* Models */,
-				422267452ED9E03D00FBEE8D /* Router */,
-				422267482ED9E03D00FBEE8D /* Services */,
-				422267492ED9E03D00FBEE8D /* ViewFactory */,
-				422267502ED9E03D00FBEE8D /* ViewModels */,
-				422267582ED9E03D00FBEE8D /* Views */,
-				422267592ED9E03D00FBEE8D /* README.md */,
-			);
-			path = BankingApp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -837,7 +228,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4222675C2ED9E03E00FBEE8D /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -862,143 +252,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C69CC6C8BD24FF88B991028 /* RootView.swift in Sources */,
-				7BC73486C5AA4A5DB806AAD2 /* MainTabView.swift in Sources */,
-				4222675D2ED9E03E00FBEE8D /* Routes.swift in Sources */,
-				4222675E2ED9E03E00FBEE8D /* BankingApp.swift in Sources */,
-				42A6DECA2EDA757F00788221 /* AuthViewFactory.swift in Sources */,
-				42A6DEF92EDA761000788221 /* MockTransactionService.swift in Sources */,
-				42A6DF1C2EDA764100788221 /* ErrorView.swift in Sources */,
-				42A6DF1D2EDA764100788221 /* EmptyStateView.swift in Sources */,
-				42A6DF4D2EDA788A00788221 /* ProfileViewModel.swift in Sources */,
-				42A6DF4E2EDA788A00788221 /* TermsViewModel.swift in Sources */,
-				42A6DF4F2EDA788A00788221 /* PrivacyViewModel.swift in Sources */,
-				42A6DF502EDA788A00788221 /* EditProfileViewModel.swift in Sources */,
-				42A6DF932EDA795600788221 /* NotificationDetailView.swift in Sources */,
-				42A6DF942EDA795600788221 /* NotificationsView.swift in Sources */,
-				42A6DF952EDA795600788221 /* DashboardView.swift in Sources */,
-				42A6DF512EDA788A00788221 /* SupportViewModel.swift in Sources */,
-				42A6DF522EDA788A00788221 /* MoreMenuViewModel.swift in Sources */,
-				42A6DF532EDA788A00788221 /* NotificationSettingsViewModel.swift in Sources */,
-				42A6DF542EDA788A00788221 /* AboutViewModel.swift in Sources */,
-				42A6DFB02EDA796A00788221 /* InternalTransferView.swift in Sources */,
-				42A6DFB12EDA796A00788221 /* EditBeneficiaryView.swift in Sources */,
-				42A6DFB22EDA796A00788221 /* AddBeneficiaryView.swift in Sources */,
-				42A6DFB32EDA796A00788221 /* BeneficiaryListView.swift in Sources */,
-				42A6DFB42EDA796A00788221 /* ExternalTransferView.swift in Sources */,
-				42A6DFB52EDA796A00788221 /* TransferReceiptView.swift in Sources */,
-				42A6DFB62EDA796A00788221 /* TransferConfirmView.swift in Sources */,
-				42A6DFB72EDA796A00788221 /* TransferHomeView.swift in Sources */,
-				42A6DF552EDA788A00788221 /* SecuritySettingsViewModel.swift in Sources */,
-				42A6DF6C2EDA793300788221 /* TransactionHistoryView.swift in Sources */,
-				42A6DF6D2EDA793300788221 /* TransactionDetailView.swift in Sources */,
-				42A6DF6E2EDA793300788221 /* AccountsListView.swift in Sources */,
-				42A6DF6F2EDA793300788221 /* StatementDownloadView.swift in Sources */,
-				42A6DFC22EDA7B6300788221 /* ChangePINViewModel.swift in Sources */,
-				42A6DFC32EDA7B6300788221 /* SessionExpiredViewModel.swift in Sources */,
-				42A6DFC42EDA7B6300788221 /* LoginViewModel.swift in Sources */,
-				42A6DFC52EDA7B6300788221 /* ChangePasswordViewModel.swift in Sources */,
-				42A6DFC62EDA7B6300788221 /* ForgotPasswordViewModel.swift in Sources */,
-				42A6DFC72EDA7B6300788221 /* BiometricLoginViewModel.swift in Sources */,
-				42A6DFC82EDA7B6300788221 /* OTPViewModel.swift in Sources */,
-				42A6DFC92EDA7B6300788221 /* ResetPasswordViewModel.swift in Sources */,
-				42A6DF702EDA793300788221 /* StatementView.swift in Sources */,
-				42A6DF712EDA793300788221 /* AccountDetailView.swift in Sources */,
-				42A6DF1E2EDA764100788221 /* AmountInputView.swift in Sources */,
-				42A6DF7A2EDA794000788221 /* ChangePINView.swift in Sources */,
-				42A6DF7B2EDA794000788221 /* SessionExpiredView.swift in Sources */,
-				42A6DF7C2EDA794000788221 /* ForgotPasswordView.swift in Sources */,
-				42A6DF7D2EDA794000788221 /* ChangePasswordView.swift in Sources */,
-				42A6DF7E2EDA794000788221 /* OTPView.swift in Sources */,
-				42A6DF7F2EDA794000788221 /* BiometricLoginView.swift in Sources */,
-				42A6DF802EDA794000788221 /* LoginView.swift in Sources */,
-				42A6DF812EDA794000788221 /* ResetPasswordView.swift in Sources */,
-				42A6DF1F2EDA764100788221 /* PINEntryView.swift in Sources */,
-				42A6DF202EDA764100788221 /* ActionButton.swift in Sources */,
-				42A6DF212EDA764100788221 /* LoadingView.swift in Sources */,
-				42A6DF222EDA764100788221 /* OTPInputView.swift in Sources */,
-				42A6DF892EDA794900788221 /* CardLimitsView.swift in Sources */,
-				42A6DF8A2EDA794900788221 /* CardsListView.swift in Sources */,
-				42A6DF8B2EDA794900788221 /* CardPINChangeView.swift in Sources */,
-				42A6DF8C2EDA794900788221 /* BlockCardView.swift in Sources */,
-				42A6DF8D2EDA794900788221 /* CardSettingsView.swift in Sources */,
-				42A6DF8E2EDA794900788221 /* CardDetailView.swift in Sources */,
-				42A6DF8F2EDA794900788221 /* CardActivationView.swift in Sources */,
-				42A6DF232EDA764100788221 /* SecureTextField.swift in Sources */,
-				42A6DEFA2EDA761000788221 /* MockBeneficiaryService.swift in Sources */,
-				42A6DEFB2EDA761000788221 /* MockCardService.swift in Sources */,
-				42A6DEFC2EDA761000788221 /* MockAuthService.swift in Sources */,
-				42A6DF0B2EDA761D00788221 /* SecureStorageProtocol.swift in Sources */,
-				42A6DF0C2EDA761D00788221 /* TransactionServiceProtocol.swift in Sources */,
-				42A6DF372EDA786F00788221 /* CardDetailViewModel.swift in Sources */,
-				42A6DF382EDA786F00788221 /* BlockCardViewModel.swift in Sources */,
-				42A6DF392EDA786F00788221 /* CardActivationViewModel.swift in Sources */,
-				42A6DF3A2EDA786F00788221 /* CardPINChangeViewModel.swift in Sources */,
-				42A6DF3B2EDA786F00788221 /* CardSettingsViewModel.swift in Sources */,
-				42A6DF3C2EDA786F00788221 /* CardLimitsViewModel.swift in Sources */,
-				42A6DF3D2EDA786F00788221 /* CardsListViewModel.swift in Sources */,
-				42A6DF0D2EDA761D00788221 /* TransferServiceProtocol.swift in Sources */,
-				42A6DF0E2EDA761D00788221 /* NotificationServiceProtocol.swift in Sources */,
-				42A6DF2A2EDA785100788221 /* TransactionHistoryViewModel.swift in Sources */,
-				42A6DF2B2EDA785100788221 /* AccountDetailViewModel.swift in Sources */,
-				42A6DF2C2EDA785100788221 /* AccountsListViewModel.swift in Sources */,
-				42A6DF2D2EDA785100788221 /* StatementViewModel.swift in Sources */,
-				42A6DF2E2EDA785100788221 /* StatementDownloadViewModel.swift in Sources */,
-				42A6DF2F2EDA785100788221 /* TransactionDetailViewModel.swift in Sources */,
-				42A6DF0F2EDA761D00788221 /* AccountServiceProtocol.swift in Sources */,
-				42A6DF102EDA761D00788221 /* BiometricServiceProtocol.swift in Sources */,
-				42A6DF112EDA761D00788221 /* BeneficiaryServiceProtocol.swift in Sources */,
-				42A6DF122EDA761D00788221 /* CardServiceProtocol.swift in Sources */,
-				42A6DF132EDA761D00788221 /* AuthServiceProtocol.swift in Sources */,
-				42A6DEFD2EDA761000788221 /* MockNotificationService.swift in Sources */,
-				42A6DEFE2EDA761000788221 /* KeychainSecureStorage.swift in Sources */,
-				42A6DEFF2EDA761000788221 /* MockTransferService.swift in Sources */,
-				42A6DF002EDA761000788221 /* BiometricService.swift in Sources */,
-				42A6DF012EDA761000788221 /* MockAccountService.swift in Sources */,
-				42A6DECB2EDA757F00788221 /* HomeViewFactory.swift in Sources */,
-				42A6DECC2EDA757F00788221 /* MoreViewFactory.swift in Sources */,
-				42A6DED82EDA75D500788221 /* TransferCoordinator.swift in Sources */,
-				42A6DED92EDA75D500788221 /* AccountsCoordinator.swift in Sources */,
-				42A6DEE72EDA75F300788221 /* Notification.swift in Sources */,
-				42A6DEE82EDA75F300788221 /* User.swift in Sources */,
-				42A6DF412EDA788100788221 /* NotificationsViewModel.swift in Sources */,
-				42A6DF422EDA788100788221 /* DashboardViewModel.swift in Sources */,
-				42A6DF432EDA788100788221 /* NotificationDetailViewModel.swift in Sources */,
-				42A6DEE92EDA75F300788221 /* Card.swift in Sources */,
-				42A6DEEA2EDA75F300788221 /* Extensions.swift in Sources */,
-				42A6DEEB2EDA75F300788221 /* Transfer.swift in Sources */,
-				42A6DEEC2EDA75F300788221 /* Auth.swift in Sources */,
-				42A6DF9F2EDA796000788221 /* EditProfileView.swift in Sources */,
-				42A6DFA02EDA796000788221 /* ProfileView.swift in Sources */,
-				42A6DFA12EDA796000788221 /* TermsView.swift in Sources */,
-				42A6DFA22EDA796000788221 /* MoreMenuView.swift in Sources */,
-				42A6DFA32EDA796000788221 /* AboutView.swift in Sources */,
-				42A6DFA42EDA796000788221 /* PrivacyView.swift in Sources */,
-				42A6DFA52EDA796000788221 /* SecuritySettingsView.swift in Sources */,
-				42A6DFA62EDA796000788221 /* SupportView.swift in Sources */,
-				42A6DFB92EDA79BA00788221 /* HomeViewFactory.swift in Sources */,
-				42A6DFA72EDA796000788221 /* NotificationSettingsView.swift in Sources */,
-				42A6DEED2EDA75F300788221 /* Beneficiary.swift in Sources */,
-				42A6DEEE2EDA75F300788221 /* Account.swift in Sources */,
-				42A6DEEF2EDA75F300788221 /* Transaction.swift in Sources */,
-				42A6DEDA2EDA75D500788221 /* MoreCoordinator.swift in Sources */,
-				42A6DF5E2EDA789600788221 /* ExternalTransferViewModel.swift in Sources */,
-				42A6DF5F2EDA789600788221 /* InternalTransferViewModel.swift in Sources */,
-				42A6DF602EDA789600788221 /* TransferHomeViewModel.swift in Sources */,
-				42A6DF612EDA789600788221 /* TransferReceiptViewModel.swift in Sources */,
-				42A6DF622EDA789600788221 /* TransferConfirmViewModel.swift in Sources */,
-				42A6DF632EDA789600788221 /* AddBeneficiaryViewModel.swift in Sources */,
-				42A6DF642EDA789600788221 /* EditBeneficiaryViewModel.swift in Sources */,
-				42A6DF652EDA789600788221 /* BeneficiaryListViewModel.swift in Sources */,
-				42A6DEDB2EDA75D500788221 /* AuthCoordinator.swift in Sources */,
-				42A6DEDC2EDA75D500788221 /* CardsCoordinator.swift in Sources */,
-				42A6DEDD2EDA75D500788221 /* HomeCoordinator.swift in Sources */,
-				42A6DED12EDA75C400788221 /* DependencyContainer.swift in Sources */,
-				42A6DECD2EDA757F00788221 /* TransferViewFactory.swift in Sources */,
-				42A6DECE2EDA757F00788221 /* AccountsViewFactory.swift in Sources */,
-				42A6DECF2EDA757F00788221 /* CardsViewFactory.swift in Sources */,
-				42A6DE2A2ED9E59300788221 /* CoordinatorProtocol.swift in Sources */,
-				42A6DE2B2ED9E59300788221 /* AppCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1163,7 +416,7 @@
 				DEVELOPMENT_TEAM = 5UT2V483BQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = BankingApp/App/Info.plist;
+				INFOPLIST_FILE = "mykuik-al-architectural-proposal/Sources/App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1201,7 +454,7 @@
 				DEVELOPMENT_TEAM = 5UT2V483BQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = BankingApp/App/Info.plist;
+				INFOPLIST_FILE = "mykuik-al-architectural-proposal/Sources/App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1237,7 +490,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5UT2V483BQ;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = BankingApp/App/Info.plist;
+				INFOPLIST_FILE = "mykuik-al-architectural-proposal/Sources/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "bashta.mykuik-al-architectural-proposalTests";
@@ -1264,7 +517,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5UT2V483BQ;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = BankingApp/App/Info.plist;
+				INFOPLIST_FILE = "mykuik-al-architectural-proposal/Sources/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "bashta.mykuik-al-architectural-proposalTests";
@@ -1290,7 +543,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5UT2V483BQ;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = BankingApp/App/Info.plist;
+				INFOPLIST_FILE = "mykuik-al-architectural-proposal/Sources/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "bashta.mykuik-al-architectural-proposalUITests";
@@ -1316,7 +569,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5UT2V483BQ;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = BankingApp/App/Info.plist;
+				INFOPLIST_FILE = "mykuik-al-architectural-proposal/Sources/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "bashta.mykuik-al-architectural-proposalUITests";
