@@ -339,6 +339,8 @@ extension OTPPurpose {
             return "Enter OTP to change your card PIN"
         case .passwordReset:
             return "Enter OTP to reset your password"
+        case .changePIN:
+            return "Enter OTP to change your PIN"
         }
     }
 
@@ -352,6 +354,8 @@ extension OTPPurpose {
         case .cardPINChange:
             return "creditcard.fill"
         case .passwordReset:
+            return "key.fill"
+        case .changePIN:
             return "key.fill"
         }
     }

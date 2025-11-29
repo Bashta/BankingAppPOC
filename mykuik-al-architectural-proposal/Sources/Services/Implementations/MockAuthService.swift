@@ -186,6 +186,11 @@ final class MockAuthService: AuthServiceProtocol {
         }
         // AC: #4 - For transfer, cardPINChange, passwordReset: don't change auth state
 
+        // Story 2.10: Commit PIN change after OTP verification
+        if reference.purpose == .changePIN {
+            commitPINChange()
+        }
+
         return token
     }
 
@@ -265,22 +270,52 @@ final class MockAuthService: AuthServiceProtocol {
         Logger.auth.info("[MockAuthService] changePassword: password changed successfully")
     }
 
-    func changePIN(oldPIN: String, newPIN: String) async throws {
+    func changePIN(oldPIN: String, newPIN: String) async throws -> OTPReference {
+        Logger.auth.debug("[MockAuthService] changePIN called")
         try await Task.sleep(nanoseconds: 500_000_000) // 500ms
 
         guard isAuthenticated else {
+            Logger.auth.error("[MockAuthService] changePIN failed: not authenticated")
             throw AuthError.notAuthenticated
         }
 
+        // AC #13: Validate oldPIN matches stored PIN (mock: "1234")
         guard oldPIN == storedPIN else {
+            Logger.auth.error("[MockAuthService] changePIN failed: invalid current PIN")
+            throw AuthError.invalidCredentials
+        }
+
+        // AC #13: Validate newPIN is 4 digits numeric
+        guard newPIN.count == 4, newPIN.allSatisfy({ $0.isNumber }) else {
+            Logger.auth.error("[MockAuthService] changePIN failed: new PIN invalid format (must be 4 digits)")
             throw AuthError.invalidPIN
         }
 
-        guard newPIN.count >= 4 else {
-            throw AuthError.pinTooShort
-        }
+        // Store new PIN temporarily (will be committed after OTP verification)
+        // In production, this would be handled server-side
+        pendingNewPIN = newPIN
 
-        storedPIN = newPIN
+        Logger.auth.info("[MockAuthService] changePIN: PIN change initiated, OTP required")
+
+        // AC #13: Return OTPReference for verification step
+        return OTPReference(
+            id: "PIN-CHANGE-\(UUID().uuidString.prefix(8))",
+            expiresAt: Date().addingTimeInterval(300), // 5 minutes
+            purpose: .changePIN
+        )
+    }
+
+    /// Pending new PIN waiting for OTP verification
+    private var pendingNewPIN: String?
+
+    /// Commits pending PIN change after successful OTP verification
+    /// Called internally after verifyOTP succeeds for .changePIN purpose
+    func commitPINChange() {
+        if let newPIN = pendingNewPIN {
+            storedPIN = newPIN
+            pendingNewPIN = nil
+            Logger.auth.info("[MockAuthService] PIN change committed successfully")
+        }
     }
 
     // MARK: - Session Timeout (Story 2.6 AC: #2, #3)

@@ -7,6 +7,7 @@ enum OTPPurpose: String, Codable {
     case transfer
     case cardPINChange
     case passwordReset
+    case changePIN
 }
 
 // MARK: - AuthToken Model
