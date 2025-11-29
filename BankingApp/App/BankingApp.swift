@@ -2,40 +2,26 @@ import SwiftUI
 
 @main
 struct BankingApp: App {
+    // Create DependencyContainer once at app launch
+    private let container: DependencyContainer
+
+    // Create AppCoordinator with container
+    @StateObject private var appCoordinator: AppCoordinator
+
+    init() {
+        let container = DependencyContainer()
+        self.container = container
+
+        // AppCoordinator receives container via initializer
+        _appCoordinator = StateObject(wrappedValue: AppCoordinator(dependencyContainer: container))
+    }
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView(coordinator: appCoordinator)
+                .onOpenURL { url in
+                    appCoordinator.handle(deepLink: url)
+                }
         }
     }
-}
-
-struct ContentView: View {
-    var body: some View {
-        NavigationView {
-            VStack(spacing: 20) {
-                Image(systemName: "banknote")
-                    .font(.system(size: 80))
-                    .foregroundColor(.blue)
-
-                Text("Banking App")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-
-                Text("MVVM-C Architecture Foundation")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-
-                Text("Project structure initialized successfully!")
-                    .font(.caption)
-                    .foregroundColor(.green)
-                    .padding()
-            }
-            .navigationTitle("Welcome")
-        }
-        .navigationViewStyle(.stack)
-    }
-}
-
-#Preview {
-    ContentView()
 }
