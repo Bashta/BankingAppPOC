@@ -21,6 +21,7 @@ final class AuthViewFactory {
         let viewModel = LoginViewModel(
             authService: dependencyContainer.authService,
             biometricService: dependencyContainer.biometricService,
+            secureStorage: dependencyContainer.secureStorage,
             coordinator: coordinator
         )
         return LoginView(viewModel: viewModel)

@@ -66,6 +66,9 @@ final class LoginViewModel: ObservableObject {
     /// Biometric service for Face ID / Touch ID
     private let biometricService: BiometricServiceProtocol
 
+    /// Secure storage for reading biometric preference
+    private let secureStorage: SecureStorageProtocol
+
     /// Weak coordinator reference for navigation delegation
     /// Note: Made internal (not private) to allow LoginView to pass to OTPViewModel creation
     weak var coordinator: AuthCoordinator?
@@ -113,14 +116,17 @@ final class LoginViewModel: ObservableObject {
     /// - Parameters:
     ///   - authService: Service for authentication operations
     ///   - biometricService: Service for biometric authentication
+    ///   - secureStorage: Service for reading biometric preference
     ///   - coordinator: AuthCoordinator for navigation (weak reference)
     init(
         authService: AuthServiceProtocol,
         biometricService: BiometricServiceProtocol,
+        secureStorage: SecureStorageProtocol,
         coordinator: AuthCoordinator
     ) {
         self.authService = authService
         self.biometricService = biometricService
+        self.secureStorage = secureStorage
         self.coordinator = coordinator
     }
 
@@ -261,17 +267,35 @@ final class LoginViewModel: ObservableObject {
 
     /// Checks and updates biometric availability state.
     ///
+    /// Biometric login button is shown only if BOTH conditions are met:
+    /// 1. Device has biometric capability (Face ID/Touch ID available)
+    /// 2. User has enabled biometric preference in Security Settings
+    ///
     /// Called on view appear via .task modifier.
     /// Updates canUseBiometrics and biometricType for UI.
     func checkBiometricAvailability() {
-        canUseBiometrics = biometricService.canUseBiometrics()
-        if canUseBiometrics {
+        // First check device capability
+        let deviceHasBiometrics = biometricService.canUseBiometrics()
+
+        if deviceHasBiometrics {
             biometricType = biometricService.biometricType()
+
+            // Check user preference - only show biometric if both device supports AND user enabled
+            do {
+                let preference = try secureStorage.loadBiometricPreference()
+                canUseBiometrics = preference?.isEnabled ?? false
+            } catch {
+                // If preference load fails, default to not showing biometric button
+                canUseBiometrics = false
+                Logger.biometric.error("Failed to load biometric preference: \(error.localizedDescription)")
+            }
         } else {
+            // Device doesn't support biometrics
+            canUseBiometrics = false
             biometricType = .none
         }
 
-        Logger.biometric.debug("Biometric check: available=\(self.canUseBiometrics), type=\(String(describing: self.biometricType))")
+        Logger.biometric.debug("Biometric check: deviceCapable=\(deviceHasBiometrics), userEnabled=\(self.canUseBiometrics), type=\(String(describing: self.biometricType))")
     }
 
     // MARK: - Error Clearing

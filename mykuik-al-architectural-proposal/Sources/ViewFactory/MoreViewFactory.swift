@@ -42,8 +42,8 @@ final class MoreViewFactory {
 
     func makeSecuritySettingsView(coordinator: MoreCoordinator) -> some View {
         let viewModel = SecuritySettingsViewModel(
-            authService: dependencyContainer.authService,
             biometricService: dependencyContainer.biometricService,
+            secureStorage: dependencyContainer.secureStorage,
             coordinator: coordinator
         )
         return SecuritySettingsView(viewModel: viewModel)

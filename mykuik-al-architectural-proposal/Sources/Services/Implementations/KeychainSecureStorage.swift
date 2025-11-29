@@ -2,6 +2,15 @@ import Foundation
 import Security
 
 final class KeychainSecureStorage: SecureStorageProtocol {
+
+    // MARK: - Constants
+
+    private enum Keys {
+        static let biometricPreference = "com.bankingapp.biometricPreference"
+    }
+
+    // MARK: - Generic Data Operations
+
     func save(_ data: Data, forKey key: String) throws {
         // Create query dictionary
         let query: [String: Any] = [
@@ -59,6 +68,26 @@ final class KeychainSecureStorage: SecureStorageProtocol {
         guard status == errSecSuccess || status == errSecItemNotFound else {
             throw KeychainError.unableToDelete(status)
         }
+    }
+
+    // MARK: - Biometric Preference Operations
+
+    func saveBiometricPreference(_ preference: BiometricPreference) throws {
+        let encoder = JSONEncoder()
+        let data = try encoder.encode(preference)
+        try save(data, forKey: Keys.biometricPreference)
+    }
+
+    func loadBiometricPreference() throws -> BiometricPreference? {
+        guard let data = try load(forKey: Keys.biometricPreference) else {
+            return nil
+        }
+        let decoder = JSONDecoder()
+        return try decoder.decode(BiometricPreference.self, from: data)
+    }
+
+    func deleteBiometricPreference() throws {
+        try delete(forKey: Keys.biometricPreference)
     }
 }
 
