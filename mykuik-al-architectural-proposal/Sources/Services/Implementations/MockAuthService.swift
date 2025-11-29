@@ -11,20 +11,29 @@ final class MockAuthService: AuthServiceProtocol {
         $isAuthenticated.eraseToAnyPublisher()
     }
 
-    // MARK: - Session Management (AC: #1, #6)
+    // MARK: - Session Management (Story 2.6 AC: #1, #2, #3)
+    // Using Timer.scheduledTimer pattern for explicit session timeout handling
 
     private var authToken: AuthToken?
-    private var sessionTask: Task<Void, Never>?
     private var cancellables = Set<AnyCancellable>()
+
+    /// Tracks when the user last authenticated or performed activity (AC: #1)
+    private var lastActivityDate: Date?
+
+    /// Timer for session timeout management (AC: #1)
+    /// Fires after sessionTimeout interval to trigger session expiration
+    private var sessionTimer: Timer?
+
+    /// Session timeout duration in seconds (AC: #11)
+    /// Default: 300 seconds (5 minutes) for POC testing
+    /// Production recommendation: 1800 seconds (30 minutes)
+    private var sessionTimeout: TimeInterval = 300.0
 
     // MARK: - User State
 
     private var currentUser: User?
     private var storedPassword: String = "password"
     private var storedPIN: String = "1234"
-
-    // Session duration in seconds (30 minutes default, reduced for testing)
-    private let sessionDuration: TimeInterval = 1800
 
     // MARK: - OTP Configuration (AC: #1 - Configurable OTP requirement)
 
@@ -86,7 +95,7 @@ final class MockAuthService: AuthServiceProtocol {
         let token = AuthToken(
             accessToken: "mock-token-\(UUID().uuidString)",
             refreshToken: "mock-refresh-\(UUID().uuidString)",
-            expiresAt: Date().addingTimeInterval(sessionDuration)
+            expiresAt: Date().addingTimeInterval(sessionTimeout)
         )
         authToken = token
 
@@ -99,8 +108,8 @@ final class MockAuthService: AuthServiceProtocol {
             address: nil
         )
 
-        // AC: #6 - Start session timeout
-        startSessionTimeout(duration: sessionDuration)
+        // AC: #2 - Start session timer (Story 2.6)
+        startSessionTimer()
 
         return LoginResult(
             token: token,
@@ -121,7 +130,7 @@ final class MockAuthService: AuthServiceProtocol {
         let token = AuthToken(
             accessToken: "mock-biometric-token-\(UUID().uuidString)",
             refreshToken: "mock-refresh-\(UUID().uuidString)",
-            expiresAt: Date().addingTimeInterval(sessionDuration)
+            expiresAt: Date().addingTimeInterval(sessionTimeout)
         )
         authToken = token
         Logger.auth.debug("Biometric login: auth token generated, expires at \(token.expiresAt)")
@@ -136,9 +145,9 @@ final class MockAuthService: AuthServiceProtocol {
         )
         Logger.auth.debug("Biometric login: user profile loaded")
 
-        // AC: #6 - Start session timeout
-        startSessionTimeout(duration: sessionDuration)
-        Logger.auth.info("Biometric login: session timer started (duration: \(self.sessionDuration)s)")
+        // AC: #2 - Start session timer (Story 2.6)
+        startSessionTimer()
+        Logger.auth.info("Biometric login: session timer started (duration: \(self.sessionTimeout)s)")
 
         // AC: #3 - Biometric login bypasses OTP requirement
         Logger.auth.info("Biometric login completed successfully")
@@ -164,7 +173,7 @@ final class MockAuthService: AuthServiceProtocol {
         let token = AuthToken(
             accessToken: "mock-otp-token-\(UUID().uuidString)",
             refreshToken: "mock-refresh-\(UUID().uuidString)",
-            expiresAt: Date().addingTimeInterval(sessionDuration)
+            expiresAt: Date().addingTimeInterval(sessionTimeout)
         )
 
         // AC: #4 - Only set isAuthenticated for login purpose
@@ -172,7 +181,8 @@ final class MockAuthService: AuthServiceProtocol {
         if reference.purpose == .login {
             isAuthenticated = true
             authToken = token
-            startSessionTimeout(duration: sessionDuration)
+            // AC: #2 - Start session timer (Story 2.6)
+            startSessionTimer()
         }
         // AC: #4 - For transfer, cardPINChange, passwordReset: don't change auth state
 
@@ -182,15 +192,17 @@ final class MockAuthService: AuthServiceProtocol {
     func logout() async throws {
         try await Task.sleep(nanoseconds: 300_000_000) // 300ms
 
+        // Story 2.6 AC: #2 - Stop session timer before clearing auth state
+        // Invalidate timer first to prevent race conditions where timer fires during logout
+        sessionTimer?.invalidate()
+        sessionTimer = nil
+        lastActivityDate = nil
+
         // AC: #5 - Clear authentication state
         isAuthenticated = false
 
         // AC: #5 - Clear auth token
         authToken = nil
-
-        // AC: #5 - Cancel session timeout task to prevent zombie tasks
-        sessionTask?.cancel()
-        sessionTask = nil
 
         // AC: #5 - Clear user data (mock secure storage clearing)
         currentUser = nil
@@ -257,32 +269,81 @@ final class MockAuthService: AuthServiceProtocol {
         storedPIN = newPIN
     }
 
-    // MARK: - Session Timeout (AC: #6)
+    // MARK: - Session Timeout (Story 2.6 AC: #2, #3)
 
-    /// Starts a background task that expires the session after the specified duration.
-    /// Uses Task.sleep for simulation; in production, this would use proper token expiration.
-    private func startSessionTimeout(duration: TimeInterval) {
-        // Cancel existing session task if running
-        sessionTask?.cancel()
+    /// Starts a session timer that fires after the configured timeout duration (AC: #2)
+    ///
+    /// Timer Pattern:
+    /// - Invalidates any existing timer to prevent duplicates
+    /// - Records lastActivityDate for tracking
+    /// - Creates Timer.scheduledTimer with sessionTimeout interval
+    /// - Timer handler calls handleSessionExpired() when fired
+    ///
+    /// Called after successful login (password, biometric, or OTP verification)
+    private func startSessionTimer() {
+        // Invalidate existing timer if any (AC: #2 - prevent duplicate timers)
+        sessionTimer?.invalidate()
 
-        // Create new session timeout task with weak self to prevent retain cycles
-        sessionTask = Task { [weak self] in
-            do {
-                // Sleep for session duration
-                try await Task.sleep(nanoseconds: UInt64(duration * 1_000_000_000))
+        // Record activity timestamp (AC: #1)
+        lastActivityDate = Date()
 
-                // Check if task was cancelled during sleep
-                guard !Task.isCancelled else { return }
+        // Schedule new timer on main run loop (AC: #2)
+        // Using scheduledTimer ensures timer fires on main thread
+        sessionTimer = Timer.scheduledTimer(withTimeInterval: sessionTimeout, repeats: false) { [weak self] _ in
+            // Timer fired - session has expired
+            // Check if enough time has actually passed (defensive check)
+            guard let self = self,
+                  let lastActivity = self.lastActivityDate,
+                  Date().timeIntervalSince(lastActivity) >= self.sessionTimeout else {
+                return
+            }
 
-                // Expire session on main actor (UI state updates must be on main thread)
-                await MainActor.run {
-                    self?.isAuthenticated = false
-                    self?.authToken = nil
-                }
-            } catch {
-                // Task was cancelled, no action needed
+            // Handle expiration on main actor for thread-safe UI updates
+            Task { @MainActor in
+                self.handleSessionExpired()
             }
         }
+    }
+
+    /// Handles session expiration by clearing auth state and notifying observers (AC: #3)
+    ///
+    /// Called when:
+    /// - Session timer fires after timeout interval
+    ///
+    /// Actions:
+    /// 1. Invalidate and clear session timer
+    /// 2. Set isAuthenticated = false (triggers AppCoordinator observation)
+    /// 3. Clear auth token and user data
+    /// 4. Post notification for session expiration event (analytics/logging)
+    ///
+    /// Note: Production implementation should cancel in-flight network requests.
+    /// Mock services have no persistent state to clear. (AC: #9)
+    /// TODO: Production enhancement - implement request cancellation
+    @MainActor
+    private func handleSessionExpired() {
+        // Invalidate timer and clear reference (AC: #3)
+        sessionTimer?.invalidate()
+        sessionTimer = nil
+
+        // Set isAuthenticated = false to trigger auth state observers (AC: #3)
+        // This will cause AppCoordinator.observeAuthState() sink to fire
+        isAuthenticated = false
+
+        // Clear auth token/credentials (AC: #3)
+        authToken = nil
+        currentUser = nil
+        lastActivityDate = nil
+
+        // Post notification for session expiration event (AC: #3 - optional)
+        // Useful for analytics, logging, or other observers
+        NotificationCenter.default.post(name: .sessionExpired, object: nil)
+    }
+
+    // MARK: - Deinit
+
+    deinit {
+        // Invalidate timer to prevent zombie callbacks
+        sessionTimer?.invalidate()
     }
 }
 
@@ -298,4 +359,12 @@ enum AuthError: Error {
     case passwordTooWeak
     case invalidPIN
     case pinTooShort
+}
+
+// MARK: - Notification Extension for Session Expiration (Story 2.6)
+
+extension Notification.Name {
+    /// Posted when user session expires due to timeout
+    /// Useful for analytics, logging, or other system observers
+    static let sessionExpired = Notification.Name("com.bankingapp.sessionExpired")
 }

@@ -298,17 +298,50 @@ final class AppCoordinator: ObservableObject {
         selectedTab = .home
     }
 
-    /// Handles session expiration by forcing logout and presenting session expired screen.
+    /// Handles session expiration by clearing all navigation state and presenting session expired modal.
+    /// (Story 2.6 AC: #4, #7, #8)
     ///
     /// Flow:
-    /// 1. Set isAuthenticated = false (AuthService also does this)
-    /// 2. Present full-screen auth modal with sessionExpired route
+    /// 1. Clear ALL feature coordinator navigation stacks (popToRoot for each)
+    /// 2. Dismiss any presented sheets/fullscreen covers on each coordinator
+    /// 3. Reset selected tab to .home
+    /// 4. Set isAuthenticated = false (AuthService has already done this)
+    /// 5. Present session expired view as full-screen cover
     ///
     /// Called by:
-    /// - Services when detecting expired session (HTTP 401)
-    /// - Timer-based session timeout (if implemented)
+    /// - AuthService.handleSessionExpired() triggers isAuthenticated = false
+    /// - observeAuthState() sink detects change and calls this method
+    /// - OR called directly by services detecting expired session (HTTP 401)
+    ///
+    /// Important:
+    /// - Must clear navigation BEFORE presenting modal for clean slate
+    /// - Fullscreen cover cannot be dismissed without "Log in Again" action
     func sessionExpired() {
+        // AC: #7 - Clear all feature coordinator navigation stacks
+        homeCoordinator.popToRoot()
+        accountsCoordinator.popToRoot()
+        transferCoordinator.popToRoot()
+        cardsCoordinator.popToRoot()
+        moreCoordinator.popToRoot()
+        authCoordinator.popToRoot()
+
+        // AC: #7 - Dismiss any presented sheets/fullscreen covers on each coordinator
+        homeCoordinator.dismiss()
+        accountsCoordinator.dismiss()
+        transferCoordinator.dismiss()
+        cardsCoordinator.dismiss()
+        moreCoordinator.dismiss()
+
+        // AC: #7 - Reset tab to home
+        selectedTab = .home
+
+        // AC: #4 - Set isAuthenticated = false
+        // Note: AuthService.handleSessionExpired() already sets this, but we set it here
+        // in case sessionExpired() is called directly (e.g., HTTP 401 detection)
         isAuthenticated = false
+
+        // AC: #8 - Present session expired view as full-screen cover
+        // Uses NavigationItem type-erasing wrapper for AuthRoute
         presentedFullScreen = NavigationItem(AuthRoute.sessionExpired)
     }
 }
