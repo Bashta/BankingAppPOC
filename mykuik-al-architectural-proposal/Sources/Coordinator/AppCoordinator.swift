@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import Combine
+import OSLog
 
 // MARK: - AppTab Enum
 
@@ -197,7 +198,7 @@ final class AppCoordinator: ObservableObject {
         case .success(let route):
             handle(route: route)
         case .failure(let error):
-            print("[AppCoordinator] Deep link parsing error: \(error)")
+            Logger.deepLink.error("Deep link parsing error: \(error)")
         }
     }
 

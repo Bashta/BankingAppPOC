@@ -6,9 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		4222671D2ED93B3800FBEE8D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -38,7 +35,7 @@
 			membershipExceptions = (
 				Sources/App/Info.plist,
 			);
-			target = 4222670E2ED93B3700FBEE8D;
+			target = 4222670E2ED93B3700FBEE8D /* mykuik-al-architectural-proposal */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
