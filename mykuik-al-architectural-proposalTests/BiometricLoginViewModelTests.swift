@@ -56,7 +56,9 @@ final class MockAuthServiceForBiometric: AuthServiceProtocol {
     func forgotPassword(email: String) async throws {}
     func resetPassword(token: String, newPassword: String) async throws {}
     func changePassword(oldPassword: String, newPassword: String) async throws {}
-    func changePIN(oldPIN: String, newPIN: String) async throws {}
+    func changePIN(oldPIN: String, newPIN: String) async throws -> OTPReference {
+        return OTPReference(id: "test", expiresAt: Date(), purpose: .changePIN)
+    }
 }
 
 // MARK: - BiometricLoginViewModel Tests

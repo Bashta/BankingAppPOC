@@ -27,7 +27,7 @@
 		4222670F2ED93B3700FBEE8D /* mykuik-al-architectural-proposal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mykuik-al-architectural-proposal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4222671C2ED93B3800FBEE8D /* mykuik-al-architectural-proposalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mykuik-al-architectural-proposalTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		422267262ED93B3800FBEE8D /* mykuik-al-architectural-proposalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mykuik-al-architectural-proposalUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		423F6F702EDB6B1A00B02C43 /* mykuik-al-architectural-proposal.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mykuik-al-architectural-proposal.xctestplan"; sourceTree = "<group>"; };
+		423F6F702EDB6B1A00B02C43 /* mykuik-al-architectural-proposal.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "mykuik-al-architectural-proposal.xctestplan"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */

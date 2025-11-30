@@ -93,6 +93,15 @@ extension TransactionCategory {
 // MARK: - Date Extensions
 
 extension Date {
+    /// Formats date as full date and time string
+    /// Example: "January 15, 2024 at 2:30 PM"
+    func fullDateTimeString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .short
+        return formatter.string(from: self)
+    }
+
     /// Formats date as relative string for recent transactions
     /// Today: "Today, 2:30 PM"
     /// Yesterday: "Yesterday"
