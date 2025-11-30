@@ -166,7 +166,12 @@ struct TransactionDetailView: View {
 
             Divider()
 
-            // Account ID Row (masked as account number)
+            // Account Name Row (if available)
+            if let accountName = transaction.accountName {
+                detailRow(label: "Account Name", value: accountName)
+            }
+
+            // Account Number Row (masked)
             detailRow(label: "Account Number", value: transaction.accountId.maskedAccountNumber, isLast: true)
         }
         .background(Color(.systemBackground))

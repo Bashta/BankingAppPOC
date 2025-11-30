@@ -3,6 +3,13 @@ import Foundation
 final class MockTransactionService: TransactionServiceProtocol {
     private var transactionsByAccount: [String: [Transaction]] = [:]
 
+    private let accountNames: [String: String] = [
+        "ACC001": "Primary Checking",
+        "ACC002": "Emergency Savings",
+        "ACC003": "Investment Account",
+        "ACC004": "Daily Expenses"
+    ]
+
     init() {
         // Generate realistic transactions for each account
         let accountIds = ["ACC001", "ACC002", "ACC003", "ACC004"]
@@ -13,6 +20,7 @@ final class MockTransactionService: TransactionServiceProtocol {
     }
 
     private func generateTransactions(for accountId: String) -> [Transaction] {
+        let accountName = accountNames[accountId]
         let startingBalance: Decimal = accountId == "ACC001" ? 5432.50 : (accountId == "ACC002" ? 15000.00 : (accountId == "ACC003" ? 25000.00 : 892.35))
         var balance = startingBalance
         var transactions: [Transaction] = []
@@ -48,6 +56,7 @@ final class MockTransactionService: TransactionServiceProtocol {
             let transaction = Transaction(
                 id: "TXN\(String(format: "%06d", index + 1))",
                 accountId: accountId,
+                accountName: accountName,
                 type: data.amount > 0 ? .credit : .debit,
                 amount: abs(data.amount),
                 currency: "USD",

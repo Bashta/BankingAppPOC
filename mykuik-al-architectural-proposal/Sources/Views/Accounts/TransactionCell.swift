@@ -54,6 +54,7 @@ struct TransactionCell: View {
         transaction: Transaction(
             id: "TXN001",
             accountId: "ACC001",
+            accountName: "Primary Checking",
             type: .debit,
             amount: 45.99,
             currency: "USD",
@@ -74,6 +75,7 @@ struct TransactionCell: View {
         transaction: Transaction(
             id: "TXN002",
             accountId: "ACC001",
+            accountName: "Primary Checking",
             type: .credit,
             amount: 3500.00,
             currency: "USD",
@@ -94,6 +96,7 @@ struct TransactionCell: View {
         transaction: Transaction(
             id: "TXN003",
             accountId: "ACC001",
+            accountName: "Primary Checking",
             type: .debit,
             amount: 500.00,
             currency: "USD",

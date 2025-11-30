@@ -164,6 +164,7 @@ private func makePreviewViewModel(isLoading: Bool) -> AccountDetailViewModel {
             Transaction(
                 id: "TXN001",
                 accountId: "ACC001",
+                accountName: "Primary Checking",
                 type: .debit,
                 amount: 45.99,
                 currency: "USD",
@@ -178,6 +179,7 @@ private func makePreviewViewModel(isLoading: Bool) -> AccountDetailViewModel {
             Transaction(
                 id: "TXN002",
                 accountId: "ACC001",
+                accountName: "Primary Checking",
                 type: .credit,
                 amount: 3500.00,
                 currency: "USD",
@@ -224,6 +226,7 @@ private struct PreviewTransactionService: TransactionServiceProtocol {
         Transaction(
             id: id,
             accountId: "ACC001",
+            accountName: "Primary Checking",
             type: .debit,
             amount: 10,
             currency: "USD",

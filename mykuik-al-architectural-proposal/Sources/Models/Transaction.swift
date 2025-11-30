@@ -36,6 +36,7 @@ enum TransactionStatus: String, Codable {
 struct Transaction: Identifiable, Hashable, Codable {
     let id: String
     let accountId: String
+    let accountName: String?
     let type: TransactionType
     let amount: Decimal
     let currency: String

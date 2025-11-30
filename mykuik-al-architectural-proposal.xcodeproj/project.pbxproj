@@ -14,19 +14,11 @@
 			remoteGlobalIDString = 4222670E2ED93B3700FBEE8D;
 			remoteInfo = "mykuik-al-architectural-proposal";
 		};
-		422267272ED93B3800FBEE8D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 422267072ED93B3700FBEE8D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4222670E2ED93B3700FBEE8D;
-			remoteInfo = "mykuik-al-architectural-proposal";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		4222670F2ED93B3700FBEE8D /* mykuik-al-architectural-proposal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mykuik-al-architectural-proposal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4222671C2ED93B3800FBEE8D /* mykuik-al-architectural-proposalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mykuik-al-architectural-proposalTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		422267262ED93B3800FBEE8D /* mykuik-al-architectural-proposalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mykuik-al-architectural-proposalUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		423F6F702EDB6B1A00B02C43 /* mykuik-al-architectural-proposal.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "mykuik-al-architectural-proposal.xctestplan"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -54,11 +46,6 @@
 			path = "mykuik-al-architectural-proposalTests";
 			sourceTree = "<group>";
 		};
-		422267292ED93B3800FBEE8D /* mykuik-al-architectural-proposalUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "mykuik-al-architectural-proposalUITests";
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,13 +63,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		422267232ED93B3800FBEE8D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -92,7 +72,6 @@
 				423F6F702EDB6B1A00B02C43 /* mykuik-al-architectural-proposal.xctestplan */,
 				422267112ED93B3700FBEE8D /* mykuik-al-architectural-proposal */,
 				4222671F2ED93B3800FBEE8D /* mykuik-al-architectural-proposalTests */,
-				422267292ED93B3800FBEE8D /* mykuik-al-architectural-proposalUITests */,
 				422267102ED93B3700FBEE8D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -102,7 +81,6 @@
 			children = (
 				4222670F2ED93B3700FBEE8D /* mykuik-al-architectural-proposal.app */,
 				4222671C2ED93B3800FBEE8D /* mykuik-al-architectural-proposalTests.xctest */,
-				422267262ED93B3800FBEE8D /* mykuik-al-architectural-proposalUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -155,29 +133,6 @@
 			productReference = 4222671C2ED93B3800FBEE8D /* mykuik-al-architectural-proposalTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		422267252ED93B3800FBEE8D /* mykuik-al-architectural-proposalUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 422267362ED93B3800FBEE8D /* Build configuration list for PBXNativeTarget "mykuik-al-architectural-proposalUITests" */;
-			buildPhases = (
-				422267222ED93B3800FBEE8D /* Sources */,
-				422267232ED93B3800FBEE8D /* Frameworks */,
-				422267242ED93B3800FBEE8D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				422267282ED93B3800FBEE8D /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				422267292ED93B3800FBEE8D /* mykuik-al-architectural-proposalUITests */,
-			);
-			name = "mykuik-al-architectural-proposalUITests";
-			packageProductDependencies = (
-			);
-			productName = "mykuik-al-architectural-proposalUITests";
-			productReference = 422267262ED93B3800FBEE8D /* mykuik-al-architectural-proposalUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -192,10 +147,6 @@
 						CreatedOnToolsVersion = 26.0;
 					};
 					4222671B2ED93B3800FBEE8D = {
-						CreatedOnToolsVersion = 26.0;
-						TestTargetID = 4222670E2ED93B3700FBEE8D;
-					};
-					422267252ED93B3800FBEE8D = {
 						CreatedOnToolsVersion = 26.0;
 						TestTargetID = 4222670E2ED93B3700FBEE8D;
 					};
@@ -217,7 +168,6 @@
 			targets = (
 				4222670E2ED93B3700FBEE8D /* mykuik-al-architectural-proposal */,
 				4222671B2ED93B3800FBEE8D /* mykuik-al-architectural-proposalTests */,
-				422267252ED93B3800FBEE8D /* mykuik-al-architectural-proposalUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -231,13 +181,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		4222671A2ED93B3800FBEE8D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		422267242ED93B3800FBEE8D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -261,13 +204,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		422267222ED93B3800FBEE8D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -275,11 +211,6 @@
 			isa = PBXTargetDependency;
 			target = 4222670E2ED93B3700FBEE8D /* mykuik-al-architectural-proposal */;
 			targetProxy = 4222671D2ED93B3800FBEE8D /* PBXContainerItemProxy */;
-		};
-		422267282ED93B3800FBEE8D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4222670E2ED93B3700FBEE8D /* mykuik-al-architectural-proposal */;
-			targetProxy = 422267272ED93B3800FBEE8D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -535,58 +466,6 @@
 			};
 			name = Release;
 		};
-		422267372ED93B3800FBEE8D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5UT2V483BQ;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "mykuik-al-architectural-proposal/Sources/App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "bashta.mykuik-al-architectural-proposalUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = "mykuik-al-architectural-proposal";
-			};
-			name = Debug;
-		};
-		422267382ED93B3800FBEE8D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5UT2V483BQ;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "mykuik-al-architectural-proposal/Sources/App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "bashta.mykuik-al-architectural-proposalUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = "mykuik-al-architectural-proposal";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -613,15 +492,6 @@
 			buildConfigurations = (
 				422267342ED93B3800FBEE8D /* Debug */,
 				422267352ED93B3800FBEE8D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		422267362ED93B3800FBEE8D /* Build configuration list for PBXNativeTarget "mykuik-al-architectural-proposalUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				422267372ED93B3800FBEE8D /* Debug */,
-				422267382ED93B3800FBEE8D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
