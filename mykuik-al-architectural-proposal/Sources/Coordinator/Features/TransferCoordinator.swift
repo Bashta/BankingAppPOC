@@ -212,8 +212,10 @@ final class TransferCoordinator: ObservableObject {
         case .confirm(let request):
             viewFactory.makeTransferConfirmView(request: request, coordinator: self)
 
-        case .confirmation(let transferId):
-            viewFactory.makeTransferConfirmationView(transferId: transferId, coordinator: self)
+        case .confirmation:
+            // Legacy route - confirmation now requires full TransferRequest via .confirm(request:)
+            // Deep links to confirmation should go to transfer home instead
+            viewFactory.makeTransferHomeView(coordinator: self)
 
         case .receipt(let transferId):
             viewFactory.makeTransferReceiptView(transferId: transferId, coordinator: self)
@@ -271,21 +273,28 @@ struct TransferCoordinatorView: View {
 
     // MARK: - Navigation Links
 
-    /// Hidden NavigationLinks for programmatic navigation.
-    /// Creates links for each item in navigation stack.
+    /// Hidden NavigationLink for programmatic navigation.
+    /// Only creates ONE link at root - recursion handles deeper levels.
     @ViewBuilder
     private var navigationLinks: some View {
-        ForEach(Array(coordinator.navigationStack.enumerated()), id: \.element.id) { index, item in
-            if let route = item.route.base as? TransferRoute {
-                NavigationLink(
-                    destination: coordinator.build(route)
-                        .background(nestedLinks(from: index + 1)),
-                    isActive: binding(for: index)
-                ) {
-                    EmptyView()
-                }
-                .hidden()
+        // Only create link for first item - nestedLinks handles the rest
+        if let firstItem = coordinator.navigationStack.first,
+           let route = firstItem.route.base as? TransferRoute {
+            NavigationLink(
+                destination: coordinator.build(route)
+                    .background(nestedLinks(from: 1)),
+                isActive: Binding(
+                    get: { !coordinator.navigationStack.isEmpty },
+                    set: { isActive in
+                        if !isActive {
+                            coordinator.navigationStack.removeAll()
+                        }
+                    }
+                )
+            ) {
+                EmptyView()
             }
+            .hidden()
         }
     }
 
@@ -296,7 +305,6 @@ struct TransferCoordinatorView: View {
     ///
     /// - Parameter index: The stack index to create links from
     /// - Returns: Nested NavigationLinks for remaining stack
-    @ViewBuilder
     private func nestedLinks(from index: Int) -> AnyView {
         if index < coordinator.navigationStack.count,
            let route = coordinator.navigationStack[index].route.base as? TransferRoute {
