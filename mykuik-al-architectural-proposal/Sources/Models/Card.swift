@@ -111,6 +111,13 @@ struct CardLimits: Hashable, Codable {
     let dailyWithdrawal: Decimal
     let onlineTransaction: Decimal
     let contactless: Decimal
+
+    // MARK: - Validation Constants
+
+    static let maxDailyPurchase: Decimal = 10000
+    static let maxDailyWithdrawal: Decimal = 2000
+    static let maxOnlineTransaction: Decimal = 5000
+    static let maxContactless: Decimal = 500
 }
 
 // MARK: - Card Model

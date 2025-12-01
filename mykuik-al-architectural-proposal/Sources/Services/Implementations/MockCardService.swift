@@ -238,6 +238,20 @@ final class MockCardService: CardServiceProtocol {
     func updateLimits(id: String, limits: CardLimits) async throws -> Card {
         try await Task.sleep(nanoseconds: UInt64.random(in: 300_000_000...500_000_000))
 
+        // Validate limits are within bounds
+        if limits.dailyPurchase <= 0 || limits.dailyPurchase > CardLimits.maxDailyPurchase {
+            throw CardError.invalidLimits("Daily purchase limit must be between $1 and $\(CardLimits.maxDailyPurchase)")
+        }
+        if limits.dailyWithdrawal <= 0 || limits.dailyWithdrawal > CardLimits.maxDailyWithdrawal {
+            throw CardError.invalidLimits("Daily withdrawal limit must be between $1 and $\(CardLimits.maxDailyWithdrawal)")
+        }
+        if limits.onlineTransaction <= 0 || limits.onlineTransaction > CardLimits.maxOnlineTransaction {
+            throw CardError.invalidLimits("Online transaction limit must be between $1 and $\(CardLimits.maxOnlineTransaction)")
+        }
+        if limits.contactless <= 0 || limits.contactless > CardLimits.maxContactless {
+            throw CardError.invalidLimits("Contactless limit must be between $1 and $\(CardLimits.maxContactless)")
+        }
+
         guard let index = cards.firstIndex(where: { $0.id == id }) else {
             throw CardError.cardNotFound
         }
@@ -287,6 +301,7 @@ enum CardError: Error, LocalizedError {
     case cardNotBlocked
     case cannotUnblock
     case invalidOTP
+    case invalidLimits(String)
 
     var errorDescription: String? {
         switch self {
@@ -304,6 +319,8 @@ enum CardError: Error, LocalizedError {
             return "This card cannot be unblocked. Please contact support for a replacement card."
         case .invalidOTP:
             return "Invalid verification code"
+        case .invalidLimits(let message):
+            return message
         }
     }
 }
