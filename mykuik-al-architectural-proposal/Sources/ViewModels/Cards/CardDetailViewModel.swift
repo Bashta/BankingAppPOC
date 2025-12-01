@@ -155,6 +155,15 @@ final class CardDetailViewModel: ObservableObject {
         coordinator?.push(.block(cardId: cardId, currentStatus: card.status, blockReason: card.blockReason))
     }
 
+    func changePIN() {
+        guard card?.status == .active else {
+            Logger.cards.warning("Cannot change PIN: card is not active")
+            return
+        }
+        Logger.cards.debug("Navigating to PIN change: \(self.cardId)")
+        coordinator?.push(.pinChange(cardId: cardId))
+    }
+
     // MARK: - Computed Properties
 
     /// Determines if the card can be activated
@@ -179,6 +188,12 @@ final class CardDetailViewModel: ObservableObject {
     var isTerminalState: Bool {
         guard let status = card?.status else { return false }
         return status == .expired || status == .cancelled
+    }
+
+    /// Determines if the card PIN can be changed (only for active cards)
+    var canChangePIN: Bool {
+        guard let status = card?.status else { return false }
+        return status == .active
     }
 
     // MARK: - Private Methods

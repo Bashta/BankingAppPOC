@@ -278,10 +278,25 @@ final class MockCardService: CardServiceProtocol {
         return updatedCard
     }
 
-    func requestPINChange(id: String, otpCode: String) async throws {
-        try await Task.sleep(nanoseconds: 500_000_000) // 500ms for OTP verification
+    func requestPINChange(cardId: String) async throws -> OTPReference {
+        try await Task.sleep(nanoseconds: 500_000_000) // 500ms delay
 
-        guard cards.contains(where: { $0.id == id }) else {
+        guard cards.contains(where: { $0.id == cardId }) else {
+            throw CardError.cardNotFound
+        }
+
+        // Return OTP reference for PIN change verification
+        return OTPReference(
+            id: UUID().uuidString,
+            expiresAt: Date().addingTimeInterval(300), // 5 minutes
+            purpose: .cardPINChange
+        )
+    }
+
+    func verifyPINChange(cardId: String, otpCode: String) async throws -> Bool {
+        try await Task.sleep(nanoseconds: 500_000_000) // 500ms delay
+
+        guard cards.contains(where: { $0.id == cardId }) else {
             throw CardError.cardNotFound
         }
 
@@ -289,7 +304,8 @@ final class MockCardService: CardServiceProtocol {
             throw CardError.invalidOTP
         }
 
-        // PIN change request accepted (no actual PIN change in mock)
+        // PIN change verified successfully (new PIN will be sent separately in real implementation)
+        return true
     }
 }
 

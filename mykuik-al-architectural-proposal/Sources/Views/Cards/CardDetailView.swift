@@ -154,6 +154,17 @@ struct CardDetailView: View {
                     action: viewModel.showLimits
                 )
 
+                // Change PIN button - only if card is active
+                if viewModel.canChangePIN {
+                    quickActionButton(
+                        icon: "lock.rotation",
+                        title: "Change PIN",
+                        subtitle: "Request a new card PIN",
+                        style: .standard,
+                        action: viewModel.changePIN
+                    )
+                }
+
                 // Activate button - only if pending activation
                 if viewModel.canActivate {
                     quickActionButton(
