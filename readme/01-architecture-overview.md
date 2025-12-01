@@ -240,8 +240,16 @@ mykuik-al-architectural-proposal/
 │   │   ├── RootView.swift          # Auth gate + navigation
 │   │   └── MainTabView.swift       # Tab bar container
 │   │
-│   ├── Router/
-│   │   └── Routes.swift            # Route enums + DeepLinkParser
+│   ├── Router/                     # Domain-split routing
+│   │   ├── Route.swift             # Route protocol + NavigationItem + DeepLinkError
+│   │   ├── AppRoute.swift          # Root route enum
+│   │   ├── HomeRoute.swift         # Home routes + parse()
+│   │   ├── AccountsRoute.swift     # Accounts routes + parse()
+│   │   ├── TransferRoute.swift     # Transfer routes + parse()
+│   │   ├── CardsRoute.swift        # Cards routes + parse()
+│   │   ├── MoreRoute.swift         # More routes + parse()
+│   │   ├── AuthRoute.swift         # Auth routes + parse()
+│   │   └── DeepLinkParser.swift    # Orchestrator (delegates to feature parsers)
 │   │
 │   ├── Coordinator/
 │   │   ├── CoordinatorProtocol.swift

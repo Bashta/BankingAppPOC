@@ -367,6 +367,20 @@ bankapp://accounts/ACC123/transactions
 
 ### Deep Link Parser
 
+The router uses a **domain-split architecture** where each feature owns its parsing logic:
+
+**File structure:**
+```
+Router/
+├── Route.swift             # Protocol, NavigationItem, DeepLinkError
+├── AppRoute.swift          # Root route enum
+├── AccountsRoute.swift     # AccountsRoute + parse()
+├── CardsRoute.swift        # CardsRoute + parse()
+├── ...                     # Other feature routes
+└── DeepLinkParser.swift    # Orchestrator
+```
+
+**DeepLinkParser (orchestrator):**
 ```swift
 struct DeepLinkParser {
     static func parse(_ url: URL) -> Result<AppRoute, DeepLinkError> {
@@ -376,11 +390,12 @@ struct DeepLinkParser {
 
         let components = url.pathComponents.filter { $0 != "/" }
 
+        // Delegate to feature-specific parsers
         switch components.first {
         case "accounts":
-            return parseAccountsRoute(components)
-        case "transfer":
-            return parseTransferRoute(components)
+            return AccountsRoute.parse(components)
+        case "cards":
+            return CardsRoute.parse(components)
         // ... other features
         default:
             return .failure(.invalidPath)
@@ -388,6 +403,33 @@ struct DeepLinkParser {
     }
 }
 ```
+
+**Feature route with parser (e.g., AccountsRoute.swift):**
+```swift
+enum AccountsRoute: Route {
+    case list
+    case detail(accountId: String)
+    // ... other cases
+}
+
+extension AccountsRoute {
+    static func parse(_ components: [String]) -> Result<AppRoute, DeepLinkError> {
+        guard components.first == "accounts" else {
+            return .failure(.invalidPath)
+        }
+
+        if components.count == 1 {
+            return .success(.accounts(.list))
+        } else if components.count == 2 {
+            return .success(.accounts(.detail(accountId: components[1])))
+        }
+        // ... other patterns
+        return .failure(.invalidPath)
+    }
+}
+```
+
+This pattern ensures each feature owns its route definitions and parsing logic, making it easy to add new features without modifying a central file.
 
 ### Feature Deep Link Handler
 

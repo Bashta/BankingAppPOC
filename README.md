@@ -110,7 +110,16 @@ OTP code for testing: `123456`
 mykuik-al-architectural-proposal/
 ├── Sources/
 │   ├── App/                    # App entry point
-│   ├── Router/                 # Routes & deep linking
+│   ├── Router/                 # Routes & deep linking (domain-split)
+│   │   ├── Route.swift         # Protocol, NavigationItem, DeepLinkError
+│   │   ├── AppRoute.swift      # Root route enum
+│   │   ├── HomeRoute.swift     # Home routes + parser
+│   │   ├── AccountsRoute.swift # Accounts routes + parser
+│   │   ├── TransferRoute.swift # Transfer routes + parser
+│   │   ├── CardsRoute.swift    # Cards routes + parser
+│   │   ├── MoreRoute.swift     # More routes + parser
+│   │   ├── AuthRoute.swift     # Auth routes + parser
+│   │   └── DeepLinkParser.swift# Orchestrator
 │   ├── Coordinator/            # Navigation coordinators
 │   ├── ViewFactory/            # View+ViewModel factories
 │   ├── DI/                     # Dependency container
@@ -168,7 +177,9 @@ Supports URL scheme `bankapp://` for navigation to any screen:
 |---------|------|
 | App Entry | `Sources/App/BankingApp.swift` |
 | Root Coordinator | `Sources/Coordinator/AppCoordinator.swift` |
-| Routes | `Sources/Router/Routes.swift` |
+| Route Protocol | `Sources/Router/Route.swift` |
+| Deep Link Parser | `Sources/Router/DeepLinkParser.swift` |
+| Feature Routes | `Sources/Router/{Feature}Route.swift` |
 | DI Container | `Sources/DI/DependencyContainer.swift` |
 | Example Coordinator | `Sources/Coordinator/Features/AccountsCoordinator.swift` |
 | Example ViewModel | `Sources/ViewModels/Accounts/AccountDetailViewModel.swift` |
@@ -182,12 +193,13 @@ Supports URL scheme `bankapp://` for navigation to any screen:
 See [Adding Features Guide](readme/04-adding-features.md) for step-by-step instructions.
 
 Quick checklist:
-1. Define route enum in `Routes.swift`
-2. Create/update coordinator
-3. Create ViewFactory
-4. Create ViewModel(s)
-5. Create View(s)
-6. Wire up deep links
+1. Create `{Feature}Route.swift` with route enum and `parse()` method
+2. Add case to `AppRoute.swift`
+3. Register in `DeepLinkParser.swift` orchestrator
+4. Create/update coordinator
+5. Create ViewFactory
+6. Create ViewModel(s)
+7. Create View(s)
 
 ### Conventions
 

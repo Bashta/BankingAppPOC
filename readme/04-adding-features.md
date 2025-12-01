@@ -6,25 +6,29 @@ This guide provides a step-by-step workflow for implementing new features in the
 
 Adding a new feature (or screens within an existing feature) follows this sequence:
 
-1. Define Route enum cases
-2. Create/Update Coordinator
-3. Create/Update ViewFactory
-4. Create ViewModel(s)
-5. Create View(s)
-6. Wire up navigation
-7. Add deep link support
+1. Create feature route file with enum + parser
+2. Register in AppRoute and DeepLinkParser
+3. Create/Update Coordinator
+4. Create/Update ViewFactory
+5. Create ViewModel(s)
+6. Create View(s)
+7. Wire up in AppCoordinator
 
 ---
 
-## Step 1: Define Routes
+## Step 1: Create Feature Route File
 
-Routes define all possible navigation destinations within a feature. Each route must be unique and hashable.
+Routes define all possible navigation destinations within a feature. Each feature has its own route file containing the route enum and its parser.
 
-**Location:** `Sources/Router/Routes.swift`
+**Location:** `Sources/Router/YourFeatureRoute.swift`
 
-### Add Route Cases
+### Create Route File with Enum + Parser
 
 ```swift
+import Foundation
+
+// MARK: - YourFeatureRoute
+
 enum YourFeatureRoute: Route {
     case list                           // Root screen
     case detail(itemId: String)         // Detail with parameter
@@ -57,16 +61,100 @@ enum YourFeatureRoute: Route {
         }
     }
 }
+
+// MARK: - YourFeatureRoute Parser
+
+extension YourFeatureRoute {
+    static func parse(_ components: [String]) -> Result<AppRoute, DeepLinkError> {
+        guard !components.isEmpty, components[0] == "yourFeature" else {
+            return .failure(.invalidPath)
+        }
+
+        if components.count == 1 {
+            return .success(.yourFeature(.list))
+        } else if components.count == 2 {
+            if components[1] == "settings" {
+                return .success(.yourFeature(.settings))
+            }
+            return .success(.yourFeature(.detail(itemId: components[1])))
+        } else if components.count == 3 && components[2] == "edit" {
+            return .success(.yourFeature(.edit(itemId: components[1], mode: .update)))
+        }
+
+        return .failure(.invalidPath)
+    }
+}
 ```
 
 ### Key Points
 - `id`: Unique identifier for NavigationItem equality checks
 - `path`: URL path representation for deep linking
+- `parse()`: Static method that parses URL components into route
 - Associated values should be primitive types (String, Int) for Hashable conformance
+- Each route file is self-contained with both enum and parser
 
 ---
 
-## Step 2: Create/Update Coordinator
+## Step 2: Register in AppRoute and DeepLinkParser
+
+After creating your feature route file, register it in two places:
+
+### Add to AppRoute
+
+**Location:** `Sources/Router/AppRoute.swift`
+
+```swift
+enum AppRoute: Route {
+    case home(HomeRoute?)
+    case accounts(AccountsRoute?)
+    // ... existing cases
+    case yourFeature(YourFeatureRoute?)  // Add your feature
+
+    var id: String {
+        switch self {
+        // ... existing cases
+        case .yourFeature(let route):
+            return route?.id ?? "app-yourFeature"
+        }
+    }
+
+    var path: String {
+        switch self {
+        // ... existing cases
+        case .yourFeature(let route):
+            return route?.path ?? "yourFeature"
+        }
+    }
+}
+```
+
+### Register in DeepLinkParser
+
+**Location:** `Sources/Router/DeepLinkParser.swift`
+
+```swift
+struct DeepLinkParser {
+    static func parse(_ url: URL) -> Result<AppRoute, DeepLinkError> {
+        // ... validation code
+
+        switch first {
+        case "home", "notifications":
+            return HomeRoute.parse(components)
+        case "accounts":
+            return AccountsRoute.parse(components)
+        // ... existing cases
+        case "yourFeature":                          // Add your feature
+            return YourFeatureRoute.parse(components)
+        default:
+            return .failure(.invalidPath)
+        }
+    }
+}
+```
+
+---
+
+## Step 3: Create/Update Coordinator
 
 Coordinators manage navigation state and delegate view construction to ViewFactory.
 
@@ -265,7 +353,7 @@ struct YourFeatureCoordinatorView: View {
 
 ---
 
-## Step 3: Create ViewFactory
+## Step 4: Create ViewFactory
 
 ViewFactory creates View+ViewModel pairs, injecting dependencies and coordinator references.
 
@@ -336,7 +424,7 @@ final class YourFeatureViewFactory {
 
 ---
 
-## Step 4: Create ViewModel
+## Step 5: Create ViewModel
 
 ViewModels contain business logic, state management, and navigation delegation.
 
@@ -438,7 +526,7 @@ final class YourDetailViewModel: ObservableObject {
 
 ---
 
-## Step 5: Create View
+## Step 6: Create View
 
 Views are pure SwiftUI with no business logic - only UI rendering.
 
@@ -514,7 +602,7 @@ struct YourDetailView: View {
 
 ---
 
-## Step 6: Wire Up in Parent Coordinator
+## Step 7: Wire Up in Parent Coordinator
 
 Register your coordinator in AppCoordinator.
 
@@ -555,50 +643,18 @@ TabView(selection: $appCoordinator.selectedTab) {
 
 ---
 
-## Step 7: Add Deep Link Support
-
-Update DeepLinkParser to handle your feature's URLs.
-
-**Location:** `Sources/Router/Routes.swift`
-
-```swift
-// In DeepLinkParser.parse(_:)
-case "yourFeature":
-    return parseYourFeatureRoute(components)
-
-// Add parser method
-private static func parseYourFeatureRoute(_ components: [String]) -> Result<AppRoute, DeepLinkError> {
-    if components.count == 1 {
-        return .success(.yourFeature(.list))
-    } else if components.count == 2 {
-        return .success(.yourFeature(.detail(itemId: components[1])))
-    } else if components.count == 3 && components[2] == "settings" {
-        return .success(.yourFeature(.settings))
-    }
-    return .failure(.invalidPath)
-}
-```
-
-### Test Deep Links
-```
-bankapp://yourFeature
-bankapp://yourFeature/ITEM123
-bankapp://yourFeature/ITEM123/settings
-```
-
----
-
 ## Checklist
 
 Before marking your feature complete, verify:
 
-- [ ] Route enum with unique `id` and `path` for each case
+- [ ] Feature route file created with enum + `parse()` method
+- [ ] Route registered in `AppRoute.swift`
+- [ ] Route registered in `DeepLinkParser.swift`
 - [ ] Coordinator with all navigation methods (push, pop, popToRoot, present, dismiss)
 - [ ] CoordinatorView with iOS 15 NavigationLink pattern
 - [ ] ViewFactory creating View+ViewModel pairs
 - [ ] ViewModels with weak coordinator reference
 - [ ] Views handling all states (loading, content, error, empty)
-- [ ] Deep link parser updated
 - [ ] Logger statements (no print())
 - [ ] Pull-to-refresh on data views
 - [ ] Cross-feature navigation via parent coordinator
@@ -609,7 +665,9 @@ Before marking your feature complete, verify:
 
 | Component | Location |
 |-----------|----------|
-| Routes | `Sources/Router/Routes.swift` |
+| Feature Routes | `Sources/Router/{Feature}Route.swift` |
+| App Route | `Sources/Router/AppRoute.swift` |
+| Deep Link Parser | `Sources/Router/DeepLinkParser.swift` |
 | Coordinator | `Sources/Coordinator/Features/{Feature}Coordinator.swift` |
 | ViewFactory | `Sources/ViewFactory/{Feature}ViewFactory.swift` |
 | ViewModels | `Sources/ViewModels/{Feature}/*.swift` |
