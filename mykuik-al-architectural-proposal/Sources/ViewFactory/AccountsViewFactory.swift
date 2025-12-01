@@ -78,7 +78,7 @@ final class AccountsViewFactory {
     func makeStatementView(accountId: String, coordinator: AccountsCoordinator) -> some View {
         let viewModel = StatementViewModel(
             accountId: accountId,
-            transactionService: dependencyContainer.transactionService,
+            accountService: dependencyContainer.accountService,
             coordinator: coordinator
         )
         return StatementView(viewModel: viewModel)

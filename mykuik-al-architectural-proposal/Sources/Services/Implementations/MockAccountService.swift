@@ -106,6 +106,24 @@ final class MockAccountService: AccountServiceProtocol {
             )
         }
     }
+
+    func generateStatement(accountId: String, month: Int, year: Int) async throws -> URL {
+        // Simulate network delay (1-2 seconds as per AC)
+        try await Task.sleep(nanoseconds: UInt64.random(in: 1_000_000_000...2_000_000_000))
+
+        // Verify account exists
+        guard accounts.contains(where: { $0.id == accountId }) else {
+            throw AccountError.accountNotFound
+        }
+
+        // Return mock PDF URL
+        let monthFormatted = String(format: "%02d", month)
+        let urlString = "https://bank.example.com/statements/\(accountId)-\(monthFormatted)-\(year).pdf"
+        guard let url = URL(string: urlString) else {
+            throw URLError(.badURL)
+        }
+        return url
+    }
 }
 
 enum AccountError: Error {

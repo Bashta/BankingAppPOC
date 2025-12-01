@@ -5,4 +5,5 @@ protocol AccountServiceProtocol {
     func fetchAccount(id: String) async throws -> Account
     func updateAccount(id: String, updates: AccountUpdates) async throws -> Account
     func setDefaultAccount(id: String) async throws
+    func generateStatement(accountId: String, month: Int, year: Int) async throws -> URL
 }

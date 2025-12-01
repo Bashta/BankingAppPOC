@@ -216,6 +216,9 @@ private struct PreviewAccountService: AccountServiceProtocol {
         try await fetchAccount(id: id)
     }
     func setDefaultAccount(id: String) async throws {}
+    func generateStatement(accountId: String, month: Int, year: Int) async throws -> URL {
+        URL(string: "https://bank.example.com/statements/preview.pdf")!
+    }
 }
 
 private struct PreviewTransactionService: TransactionServiceProtocol {
