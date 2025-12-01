@@ -435,23 +435,6 @@ struct CardDetailView: View {
     }
 }
 
-// MARK: - BlockReason Extension
-
-extension BlockReason {
-    var displayName: String {
-        switch self {
-        case .lost:
-            return "Card reported lost"
-        case .stolen:
-            return "Card reported stolen"
-        case .damaged:
-            return "Card damaged"
-        case .suspicious:
-            return "Suspicious activity detected"
-        }
-    }
-}
-
 // MARK: - Preview
 
 #if DEBUG

@@ -35,6 +35,19 @@ enum BlockReason: String, Codable {
     case stolen
     case damaged
     case suspicious
+
+    var displayName: String {
+        switch self {
+        case .lost:
+            return "Card reported lost"
+        case .stolen:
+            return "Card reported stolen"
+        case .damaged:
+            return "Card damaged"
+        case .suspicious:
+            return "Suspicious activity detected"
+        }
+    }
 }
 
 // MARK: - CardLimits Model
