@@ -32,8 +32,23 @@ struct NotificationGroup: Identifiable {
 // MARK: - NotificationSettings Model
 
 struct NotificationSettings: Hashable, Codable {
-    let enablePush: Bool
-    let enableEmail: Bool
-    let enableSMS: Bool
-    let transactionMinAmount: Decimal
+    var pushEnabled: Bool
+    var emailEnabled: Bool
+    var smsEnabled: Bool
+    var transactionAlertsEnabled: Bool
+    var securityAlertsEnabled: Bool  // Always true - cannot be disabled
+    var promotionsEnabled: Bool
+    var minimumAlertAmount: Decimal
+
+    static var `default`: NotificationSettings {
+        NotificationSettings(
+            pushEnabled: true,
+            emailEnabled: true,
+            smsEnabled: false,
+            transactionAlertsEnabled: true,
+            securityAlertsEnabled: true,
+            promotionsEnabled: false,
+            minimumAlertAmount: 0
+        )
+    }
 }

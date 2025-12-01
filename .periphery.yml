@@ -1,0 +1,4 @@
+project: mykuik-al-architectural-proposal.xcodeproj
+retain_public: true
+schemes:
+- mykuik-al-architectural-proposal

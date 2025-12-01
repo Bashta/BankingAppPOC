@@ -1,6 +1,9 @@
 import Foundation
+import OSLog
 
 final class MockNotificationService: NotificationServiceProtocol {
+    private var storedSettings: NotificationSettings = .default
+
     private var notifications: [BankNotification] = [
         // Today notifications (within last 24 hours)
         BankNotification(
@@ -99,6 +102,22 @@ final class MockNotificationService: NotificationServiceProtocol {
         try await Task.sleep(nanoseconds: 200_000_000) // 200ms
 
         return notifications.filter { !$0.isRead }.count
+    }
+
+    func fetchSettings() async throws -> NotificationSettings {
+        try await Task.sleep(nanoseconds: 300_000_000) // 300ms
+        Logger.services.debug("Fetching notification settings")
+        return storedSettings
+    }
+
+    func updateSettings(_ settings: NotificationSettings) async throws {
+        try await Task.sleep(nanoseconds: 400_000_000) // 400ms
+        Logger.services.debug("Updating notification settings")
+        // Ensure security alerts cannot be disabled
+        var updatedSettings = settings
+        updatedSettings.securityAlertsEnabled = true
+        storedSettings = updatedSettings
+        Logger.services.info("Notification settings updated successfully")
     }
 }
 
