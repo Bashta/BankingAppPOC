@@ -360,30 +360,3 @@ struct ChangePasswordView: View {
         .accessibilityLabel("Changing password, please wait")
     }
 }
-
-// MARK: - Preview
-
-#Preview("ChangePasswordView - Form State") {
-    NavigationView {
-        ChangePasswordView(
-            viewModel: ChangePasswordViewModel(
-                authService: MockAuthService(),
-                coordinator: nil
-            )
-        )
-    }
-}
-
-#Preview("ChangePasswordView - Success State") {
-    NavigationView {
-        let viewModel = ChangePasswordViewModel(
-            authService: MockAuthService(),
-            coordinator: nil
-        )
-        ChangePasswordView(viewModel: viewModel)
-            .onAppear {
-                viewModel.hasChanged = true
-                viewModel.successMessage = "Password changed successfully"
-            }
-    }
-}

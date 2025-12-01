@@ -152,15 +152,3 @@ struct NotificationsView: View {
         .disabled(!viewModel.hasUnreadNotifications)
     }
 }
-
-// MARK: - Preview
-
-#if DEBUG
-struct NotificationsView_Previews: PreviewProvider {
-    static var previews: some View {
-        // Use a simple placeholder for preview since coordinators are final classes
-        Text("NotificationsView Preview")
-            .previewDisplayName("Notifications")
-    }
-}
-#endif

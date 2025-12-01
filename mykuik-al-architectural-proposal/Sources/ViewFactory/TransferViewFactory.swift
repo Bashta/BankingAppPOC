@@ -75,15 +75,6 @@ final class TransferViewFactory {
         return TransferReceiptView(viewModel: viewModel)
     }
 
-    func makeBeneficiaryListView(coordinator: TransferCoordinator, selectionMode: Bool = false) -> some View {
-        let viewModel = BeneficiaryListViewModel(
-            beneficiaryService: dependencyContainer.beneficiaryService,
-            coordinator: coordinator,
-            selectionMode: selectionMode
-        )
-        return BeneficiaryListView(viewModel: viewModel)
-    }
-
     func makeAddBeneficiaryView(coordinator: TransferCoordinator, beneficiary: Beneficiary? = nil) -> some View {
         let viewModel = AddBeneficiaryViewModel(
             beneficiaryService: dependencyContainer.beneficiaryService,
@@ -93,7 +84,7 @@ final class TransferViewFactory {
         return AddBeneficiaryView(viewModel: viewModel)
     }
 
-    func makeEditBeneficiaryView(beneficiaryId: String, coordinator: TransferCoordinator, beneficiary: Beneficiary?) -> some View {
+    func makeEditBeneficiaryView(coordinator: TransferCoordinator, beneficiary: Beneficiary?) -> some View {
         // Use AddBeneficiaryView in edit mode with the beneficiary
         let viewModel = AddBeneficiaryViewModel(
             beneficiaryService: dependencyContainer.beneficiaryService,

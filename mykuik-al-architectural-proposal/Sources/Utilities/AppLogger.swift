@@ -54,9 +54,6 @@ extension Logger {
 
     // MARK: - Infrastructure Loggers
 
-    /// Navigation and coordinator events
-    static let navigation = Logger(subsystem: subsystem, category: "navigation")
-
     /// Service layer and network operations
     static let services = Logger(subsystem: subsystem, category: "services")
 

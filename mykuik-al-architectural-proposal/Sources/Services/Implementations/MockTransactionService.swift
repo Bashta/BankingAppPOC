@@ -174,5 +174,4 @@ final class MockTransactionService: TransactionServiceProtocol {
 
 enum TransactionError: Error {
     case transactionNotFound
-    case invalidDateRange
 }

@@ -24,17 +24,6 @@ final class CardsViewFactory {
         self.dependencyContainer = dependencyContainer
     }
 
-    /// Clears all cached ViewModels - call when user logs out or navigation resets
-    func clearCache() {
-        cachedCardsListViewModel = nil
-        cachedCardDetailViewModels.removeAll()
-        cachedCardActivationViewModels.removeAll()
-        cachedBlockCardViewModels.removeAll()
-        cachedCardLimitsViewModels.removeAll()
-        cachedCardPINChangeViewModels.removeAll()
-        cachedCardSettingsViewModels.removeAll()
-    }
-
     // MARK: - Cards Feature Views
 
     func makeCardsListView(coordinator: CardsCoordinator) -> some View {

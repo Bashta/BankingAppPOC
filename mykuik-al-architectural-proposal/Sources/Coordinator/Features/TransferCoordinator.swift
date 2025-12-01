@@ -43,9 +43,6 @@ final class TransferCoordinator: ObservableObject {
     /// Used for cross-feature navigation if needed.
     private weak var parent: AppCoordinator?
 
-    /// Child coordinator storage (optional pattern, not heavily used in this implementation).
-    var childCoordinators: [String: AnyObject] = [:]
-
     // MARK: - Dependencies
 
     /// Dependency container providing service access.
@@ -124,20 +121,6 @@ final class TransferCoordinator: ObservableObject {
         navigationStack.removeAll()
     }
 
-    /// Presents a route modally (sheet or full-screen).
-    ///
-    /// - Parameters:
-    ///   - route: The TransferRoute to present
-    ///   - fullScreen: If true, uses fullScreenCover; otherwise uses sheet
-    func present(_ route: TransferRoute, fullScreen: Bool = false) {
-        let item = NavigationItem(route)
-        if fullScreen {
-            presentedFullScreen = item
-        } else {
-            presentedSheet = item
-        }
-    }
-
     /// Dismisses the currently presented modal (sheet or full-screen).
     func dismiss() {
         presentedSheet = nil
@@ -152,13 +135,6 @@ final class TransferCoordinator: ObservableObject {
     func navigateToHome() {
         popToRoot()
         parent?.switchTab(.home)
-    }
-
-    /// Navigates to Accounts tab after completing transfer flow.
-    /// Implements FR104 cross-feature navigation pattern.
-    func navigateToAccounts() {
-        popToRoot()
-        parent?.switchTab(.accounts)
     }
 
     /// Presents a share sheet with the provided text.
@@ -288,7 +264,7 @@ final class TransferCoordinator: ObservableObject {
         case .editBeneficiary(let beneficiaryId):
             // Look up beneficiary from cache for edit mode
             let beneficiary = findCachedBeneficiary(id: beneficiaryId)
-            viewFactory.makeEditBeneficiaryView(beneficiaryId: beneficiaryId, coordinator: self, beneficiary: beneficiary)
+            viewFactory.makeEditBeneficiaryView(coordinator: self, beneficiary: beneficiary)
 
         case .confirm(let request):
             viewFactory.makeTransferConfirmView(request: request, coordinator: self)

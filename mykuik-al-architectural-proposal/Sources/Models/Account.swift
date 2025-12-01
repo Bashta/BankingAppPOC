@@ -32,10 +32,3 @@ struct Account: Identifiable, Hashable, Codable {
     let iban: String?
     let isDefault: Bool
 }
-
-// MARK: - AccountUpdates Model
-
-struct AccountUpdates: Hashable, Codable {
-    let accountName: String?
-    let isDefault: Bool?
-}

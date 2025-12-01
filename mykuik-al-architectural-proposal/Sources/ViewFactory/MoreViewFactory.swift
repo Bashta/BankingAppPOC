@@ -20,13 +20,6 @@ final class MoreViewFactory {
         self.dependencyContainer = dependencyContainer
     }
 
-    // MARK: - Cache Management
-
-    /// Clears cached ViewModels (call on logout or when state should reset)
-    func clearCache() {
-        cachedProfileViewModel = nil
-    }
-
     // MARK: - More Feature Views
 
     func makeMoreMenuView(coordinator: MoreCoordinator) -> some View {
@@ -97,14 +90,6 @@ final class MoreViewFactory {
         return NotificationSettingsView(viewModel: viewModel)
     }
 
-    func makeNotificationPreferencesView(coordinator: MoreCoordinator) -> some View {
-        let viewModel = NotificationSettingsViewModel(
-            notificationService: dependencyContainer.notificationService,
-            coordinator: coordinator
-        )
-        return NotificationSettingsView(viewModel: viewModel)
-    }
-
     func makeSupportView(coordinator: MoreCoordinator) -> some View {
         let viewModel = SupportViewModel(
             coordinator: coordinator
@@ -117,19 +102,5 @@ final class MoreViewFactory {
             coordinator: coordinator
         )
         return AboutView(viewModel: viewModel)
-    }
-
-    func makeTermsView(coordinator: MoreCoordinator) -> some View {
-        let viewModel = TermsViewModel(
-            coordinator: coordinator
-        )
-        return TermsView(viewModel: viewModel)
-    }
-
-    func makePrivacyView(coordinator: MoreCoordinator) -> some View {
-        let viewModel = PrivacyViewModel(
-            coordinator: coordinator
-        )
-        return PrivacyView(viewModel: viewModel)
     }
 }

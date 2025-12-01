@@ -29,21 +29,3 @@ struct ErrorView: View {
         .padding()
     }
 }
-
-// MARK: - Preview
-
-#Preview("ErrorView") {
-    ErrorView(
-        message: "Unable to load accounts. Please check your internet connection and try again.",
-        retryAction: {
-            print("Retry tapped")
-        }
-    )
-}
-
-#Preview("ErrorView - Short Message") {
-    ErrorView(
-        message: "Network error",
-        retryAction: {}
-    )
-}

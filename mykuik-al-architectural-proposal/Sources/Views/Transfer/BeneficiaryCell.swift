@@ -47,32 +47,3 @@ struct BeneficiaryCell: View {
         .contentShape(Rectangle())
     }
 }
-
-#if DEBUG
-struct BeneficiaryCell_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            BeneficiaryCell(beneficiary: Beneficiary(
-                id: "BEN001",
-                name: "Jane Smith",
-                accountNumber: "9876543210",
-                iban: "US12CHAS98765432101234",
-                bankName: "Chase Bank",
-                type: .external,
-                isFavorite: true
-            ))
-
-            BeneficiaryCell(beneficiary: Beneficiary(
-                id: "BEN002",
-                name: "Robert Johnson",
-                accountNumber: "5544332211",
-                iban: "US12BOFA55443322111234",
-                bankName: "Bank of America",
-                type: .external,
-                isFavorite: false
-            ))
-        }
-        .listStyle(.insetGrouped)
-    }
-}
-#endif

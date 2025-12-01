@@ -38,31 +38,6 @@ enum TransferRoute: Route {
             "transfer-receipt-\(transferId)"
         }
     }
-
-    var path: String {
-        switch self {
-        case .home:
-            return "transfer"
-        case .internalTransfer:
-            return "transfer/internal"
-        case .internalTransferWithAccount(let fromAccountId):
-            return "transfer/internal/\(fromAccountId)"
-        case .externalTransfer:
-            return "transfer/external"
-        case .beneficiaryList:
-            return "transfer/beneficiaries"
-        case .addBeneficiary:
-            return "transfer/beneficiaries/add"
-        case .editBeneficiary(let beneficiaryId):
-            return "transfer/beneficiaries/\(beneficiaryId)/edit"
-        case .confirm(let request):
-            return "transfer/confirm/\(request.id)"
-        case .confirmation(let transferId):
-            return "transfer/confirmation/\(transferId)"
-        case .receipt(let transferId):
-            return "transfer/receipt/\(transferId)"
-        }
-    }
 }
 
 // MARK: - TransferRoute Parser

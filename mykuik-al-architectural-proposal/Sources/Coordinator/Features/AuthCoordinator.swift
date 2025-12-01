@@ -38,20 +38,7 @@ final class AuthCoordinator: ObservableObject {
     /// Full-screen modal presentation. Used for immersive flows.
     @Published var presentedFullScreen: NavigationItem?
 
-    // MARK: - Parent Reference
-
-    /// Weak reference to AppCoordinator.
-    /// NOTE: Auth coordinator has minimal parent interaction since it's presented modally.
-    /// Parent mainly uses this coordinator when presenting session expired screen.
-    private weak var parent: AppCoordinator?
-
-    /// Child coordinator storage (optional pattern, not heavily used in this implementation).
-    var childCoordinators: [String: AnyObject] = [:]
-
     // MARK: - Dependencies
-
-    /// Dependency container providing service access.
-    private let dependencyContainer: DependencyContainer
 
     /// View factory for creating Auth feature views with ViewModels.
     private let viewFactory: AuthViewFactory
@@ -61,11 +48,9 @@ final class AuthCoordinator: ObservableObject {
     /// Creates AuthCoordinator with parent and dependencies.
     ///
     /// - Parameters:
-    ///   - parent: AppCoordinator reference (weak)
+    ///   - parent: AppCoordinator reference (weak, unused but kept for API consistency)
     ///   - dependencyContainer: Service container
     init(parent: AppCoordinator, dependencyContainer: DependencyContainer) {
-        self.parent = parent
-        self.dependencyContainer = dependencyContainer
         self.viewFactory = AuthViewFactory(dependencyContainer: dependencyContainer)
     }
 
@@ -88,20 +73,6 @@ final class AuthCoordinator: ObservableObject {
     /// Clears the entire navigation stack, returning to root (login).
     func popToRoot() {
         navigationStack.removeAll()
-    }
-
-    /// Presents a route modally (sheet or full-screen).
-    ///
-    /// - Parameters:
-    ///   - route: The AuthRoute to present
-    ///   - fullScreen: If true, uses fullScreenCover; otherwise uses sheet
-    func present(_ route: AuthRoute, fullScreen: Bool = false) {
-        let item = NavigationItem(route)
-        if fullScreen {
-            presentedFullScreen = item
-        } else {
-            presentedSheet = item
-        }
     }
 
     /// Dismisses the currently presented modal (sheet or full-screen).

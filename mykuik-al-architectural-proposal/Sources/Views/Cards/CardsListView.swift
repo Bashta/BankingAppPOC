@@ -111,19 +111,3 @@ struct CardsListView: View {
         )
     }
 }
-
-// MARK: - Previews
-
-#if DEBUG
-struct CardsListView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            CardsListView(viewModel: CardsListViewModel(
-                cardService: MockCardService(),
-                coordinator: nil
-            ))
-        }
-        .navigationViewStyle(.stack)
-    }
-}
-#endif

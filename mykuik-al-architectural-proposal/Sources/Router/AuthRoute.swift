@@ -26,23 +26,6 @@ enum AuthRoute: Route {
             return "auth-sessionExpired"
         }
     }
-
-    var path: String {
-        switch self {
-        case .login:
-            return "auth/login"
-        case .biometric:
-            return "auth/biometric"
-        case .otp(let reference):
-            return "auth/otp/\(reference)"
-        case .forgotPassword:
-            return "auth/forgot-password"
-        case .resetPassword(let token):
-            return "auth/reset-password/\(token)"
-        case .sessionExpired:
-            return "auth/session-expired"
-        }
-    }
 }
 
 // MARK: - AuthRoute Parser

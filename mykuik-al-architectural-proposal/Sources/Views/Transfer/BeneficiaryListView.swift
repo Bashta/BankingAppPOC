@@ -170,18 +170,3 @@ struct BeneficiaryListView: View {
         .padding()
     }
 }
-
-#if DEBUG
-struct BeneficiaryListView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            BeneficiaryListView(viewModel: BeneficiaryListViewModel(
-                beneficiaryService: MockBeneficiaryService(),
-                coordinator: nil,
-                selectionMode: false
-            ))
-        }
-        .navigationViewStyle(.stack)
-    }
-}
-#endif

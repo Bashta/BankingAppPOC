@@ -22,18 +22,3 @@ struct LoadingView: View {
         .accessibilityLabel("Loading")
     }
 }
-
-// MARK: - Preview
-
-#Preview("LoadingView - No Message") {
-    LoadingView(message: nil)
-}
-
-#Preview("LoadingView - With Message") {
-    LoadingView(message: "Loading accounts...")
-}
-
-#Preview("LoadingView - Long Message") {
-    LoadingView(message: "Please wait while we securely fetch your transaction history...")
-        .padding()
-}

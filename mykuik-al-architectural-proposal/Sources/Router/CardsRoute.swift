@@ -29,25 +29,6 @@ enum CardsRoute: Route {
             return "cards-pinChange-\(cardId)"
         }
     }
-
-    var path: String {
-        switch self {
-        case .list:
-            return "cards"
-        case .detail(let cardId):
-            return "cards/\(cardId)"
-        case .settings(let cardId):
-            return "cards/\(cardId)/settings"
-        case .limits(let cardId):
-            return "cards/\(cardId)/limits"
-        case .block(let cardId, _, _):
-            return "cards/\(cardId)/block"
-        case .activate(let cardId):
-            return "cards/\(cardId)/activate"
-        case .pinChange(let cardId):
-            return "cards/\(cardId)/pin-change"
-        }
-    }
 }
 
 // MARK: - CardsRoute Parser

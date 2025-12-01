@@ -456,29 +456,3 @@ struct CardDetailView: View {
         .shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 2)
     }
 }
-
-// MARK: - Preview
-
-#if DEBUG
-struct CardDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            CardDetailView(viewModel: createPreviewViewModel())
-        }
-        .navigationViewStyle(.stack)
-    }
-
-    static func createPreviewViewModel() -> CardDetailViewModel {
-        // This is just for preview - actual dependencies would be injected
-        let container = DependencyContainer()
-        let viewModel = CardDetailViewModel(
-            cardId: "CARD001",
-            cardService: container.cardService,
-            accountService: container.accountService,
-            transactionService: container.transactionService,
-            coordinator: nil
-        )
-        return viewModel
-    }
-}
-#endif

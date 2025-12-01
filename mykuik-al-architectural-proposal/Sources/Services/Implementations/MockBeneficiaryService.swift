@@ -195,6 +195,4 @@ final class MockBeneficiaryService: BeneficiaryServiceProtocol {
 
 enum BeneficiaryError: Error {
     case beneficiaryNotFound
-    case invalidAccountNumber
-    case duplicateBeneficiary
 }

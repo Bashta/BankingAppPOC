@@ -21,14 +21,6 @@ final class AccountsViewFactory {
         self.dependencyContainer = dependencyContainer
     }
 
-    /// Clears all cached ViewModels - call when user logs out or navigation resets
-    func clearCache() {
-        cachedAccountsListViewModel = nil
-        cachedAccountDetailViewModels.removeAll()
-        cachedTransactionHistoryViewModels.removeAll()
-        cachedTransactionDetailViewModels.removeAll()
-    }
-
     // MARK: - Accounts Feature Views
 
     func makeAccountsListView(coordinator: AccountsCoordinator) -> some View {

@@ -236,35 +236,3 @@ struct TransactionDetailView: View {
         }
     }
 }
-
-// MARK: - Preview
-
-#if DEBUG
-#Preview("TransactionDetailView - Credit") {
-    NavigationView {
-        TransactionDetailView(
-            viewModel: TransactionDetailViewModel(
-                transactionId: "TXN000001",
-                transactionService: MockTransactionService(),
-                coordinator: nil
-            )
-        )
-    }
-}
-
-#Preview("TransactionDetailView - Loading") {
-    NavigationView {
-        TransactionDetailView(
-            viewModel: {
-                let vm = TransactionDetailViewModel(
-                    transactionId: "TXN000001",
-                    transactionService: MockTransactionService(),
-                    coordinator: nil
-                )
-                vm.isLoading = true
-                return vm
-            }()
-        )
-    }
-}
-#endif

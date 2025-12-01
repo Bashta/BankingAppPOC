@@ -42,13 +42,7 @@ final class MoreCoordinator: ObservableObject {
     /// CRITICAL: Used for logout delegation to coordinate app-wide logout.
     private weak var parent: AppCoordinator?
 
-    /// Child coordinator storage (optional pattern, not heavily used in this implementation).
-    var childCoordinators: [String: AnyObject] = [:]
-
     // MARK: - Dependencies
-
-    /// Dependency container providing service access.
-    private let dependencyContainer: DependencyContainer
 
     /// View factory for creating More feature views with ViewModels.
     private let viewFactory: MoreViewFactory
@@ -62,7 +56,6 @@ final class MoreCoordinator: ObservableObject {
     ///   - dependencyContainer: Service container
     init(parent: AppCoordinator, dependencyContainer: DependencyContainer) {
         self.parent = parent
-        self.dependencyContainer = dependencyContainer
         self.viewFactory = MoreViewFactory(dependencyContainer: dependencyContainer)
     }
 
@@ -85,20 +78,6 @@ final class MoreCoordinator: ObservableObject {
     /// Clears the entire navigation stack, returning to root (more menu).
     func popToRoot() {
         navigationStack.removeAll()
-    }
-
-    /// Presents a route modally (sheet or full-screen).
-    ///
-    /// - Parameters:
-    ///   - route: The MoreRoute to present
-    ///   - fullScreen: If true, uses fullScreenCover; otherwise uses sheet
-    func present(_ route: MoreRoute, fullScreen: Bool = false) {
-        let item = NavigationItem(route)
-        if fullScreen {
-            presentedFullScreen = item
-        } else {
-            presentedSheet = item
-        }
     }
 
     /// Dismisses the currently presented modal (sheet or full-screen).

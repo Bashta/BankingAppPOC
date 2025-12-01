@@ -35,29 +35,6 @@ enum MoreRoute: Route {
             return "more-about"
         }
     }
-
-    var path: String {
-        switch self {
-        case .menu:
-            return "more"
-        case .profile:
-            return "more/profile"
-        case .editProfile:
-            return "more/profile/edit"
-        case .security:
-            return "more/security"
-        case .changePassword:
-            return "more/security/change-password"
-        case .changePIN:
-            return "more/security/change-pin"
-        case .notificationSettings:
-            return "more/notification-settings"
-        case .support:
-            return "more/support"
-        case .about:
-            return "more/about"
-        }
-    }
 }
 
 // MARK: - MoreRoute Parser

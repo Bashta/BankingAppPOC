@@ -80,16 +80,3 @@ struct SessionExpiredView: View {
         .navigationBarBackButtonHidden(true) // Cannot dismiss without action
     }
 }
-
-// MARK: - Preview
-
-#if DEBUG
-struct SessionExpiredView_Previews: PreviewProvider {
-    static var previews: some View {
-        // Note: Preview requires mock coordinator setup
-        NavigationView {
-            Text("Session Expired Preview")
-        }
-    }
-}
-#endif

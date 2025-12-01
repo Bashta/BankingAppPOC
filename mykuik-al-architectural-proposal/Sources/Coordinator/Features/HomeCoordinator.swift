@@ -39,13 +39,7 @@ final class HomeCoordinator: ObservableObject {
     /// Used for cross-feature navigation (e.g., navigate to accounts from dashboard).
     private weak var parent: AppCoordinator?
 
-    /// Child coordinator storage (optional pattern, not heavily used in this implementation).
-    var childCoordinators: [String: AnyObject] = [:]
-
     // MARK: - Dependencies
-
-    /// Dependency container providing service access.
-    private let dependencyContainer: DependencyContainer
 
     /// View factory for creating Home feature views with ViewModels.
     private let viewFactory: HomeViewFactory
@@ -59,7 +53,6 @@ final class HomeCoordinator: ObservableObject {
     ///   - dependencyContainer: Service container
     init(parent: AppCoordinator, dependencyContainer: DependencyContainer) {
         self.parent = parent
-        self.dependencyContainer = dependencyContainer
         self.viewFactory = HomeViewFactory(dependencyContainer: dependencyContainer)
     }
 
@@ -72,30 +65,9 @@ final class HomeCoordinator: ObservableObject {
         navigationStack.append(NavigationItem(route))
     }
 
-    /// Pops the top route from the navigation stack.
-    /// Defensive: does nothing if stack is empty.
-    func pop() {
-        guard !navigationStack.isEmpty else { return }
-        navigationStack.removeLast()
-    }
-
     /// Clears the entire navigation stack, returning to root (dashboard).
     func popToRoot() {
         navigationStack.removeAll()
-    }
-
-    /// Presents a route modally (sheet or full-screen).
-    ///
-    /// - Parameters:
-    ///   - route: The HomeRoute to present
-    ///   - fullScreen: If true, uses fullScreenCover; otherwise uses sheet
-    func present(_ route: HomeRoute, fullScreen: Bool = false) {
-        let item = NavigationItem(route)
-        if fullScreen {
-            presentedFullScreen = item
-        } else {
-            presentedSheet = item
-        }
     }
 
     /// Dismisses the currently presented modal (sheet or full-screen).

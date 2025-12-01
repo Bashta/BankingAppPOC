@@ -50,10 +50,7 @@ final class TransferReceiptViewModel: ObservableObject {
 
         do {
             transfer = try await transferService.fetchTransfer(id: transferId)
-
-            #if DEBUG
             Logger.transfer.debug("Loaded transfer receipt: \(self.transferId)")
-            #endif
         } catch {
             self.error = error
             Logger.transfer.error("Failed to load transfer: \(error.localizedDescription)")
@@ -65,10 +62,7 @@ final class TransferReceiptViewModel: ObservableObject {
 
         let receiptText = formatReceiptText(transfer)
         coordinator?.presentShareSheet(text: receiptText)
-
-        #if DEBUG
         Logger.transfer.debug("Sharing receipt for transfer: \(transfer.reference)")
-        #endif
     }
 
     func copyReference() {
@@ -80,20 +74,13 @@ final class TransferReceiptViewModel: ObservableObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
             self?.showCopiedToast = false
         }
-
-        #if DEBUG
         Logger.transfer.debug("Copied reference to clipboard: \(transfer.reference)")
-        #endif
     }
 
     // MARK: - Navigation
 
     func navigateToHome() {
         coordinator?.navigateToHome()
-    }
-
-    func navigateToAccounts() {
-        coordinator?.navigateToAccounts()
     }
 
     // MARK: - Private Methods

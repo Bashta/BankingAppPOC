@@ -137,12 +137,4 @@ struct Card: Identifiable, Hashable, Codable {
     let activatedDate: Date?
     let blockedDate: Date?
     let blockReason: BlockReason?
-
-    var expiryDate: Date {
-        var components = DateComponents()
-        components.month = expiryMonth
-        components.year = expiryYear
-        components.day = 1
-        return Calendar.current.date(from: components) ?? Date()
-    }
 }

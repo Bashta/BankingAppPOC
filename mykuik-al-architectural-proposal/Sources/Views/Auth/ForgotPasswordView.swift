@@ -242,30 +242,3 @@ struct ForgotPasswordView: View {
         .accessibilityLabel("Sending password reset link, please wait")
     }
 }
-
-// MARK: - Preview
-
-#Preview("ForgotPasswordView - Form State") {
-    NavigationView {
-        ForgotPasswordView(
-            viewModel: ForgotPasswordViewModel(
-                authService: MockAuthService(),
-                coordinator: nil
-            )
-        )
-    }
-}
-
-#Preview("ForgotPasswordView - Success State") {
-    NavigationView {
-        let viewModel = ForgotPasswordViewModel(
-            authService: MockAuthService(),
-            coordinator: nil
-        )
-        ForgotPasswordView(viewModel: viewModel)
-            .onAppear {
-                viewModel.hasSubmitted = true
-                viewModel.successMessage = "Password reset link sent to your email"
-            }
-    }
-}

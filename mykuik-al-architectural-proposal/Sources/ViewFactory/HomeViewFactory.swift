@@ -107,16 +107,4 @@ final class HomeViewFactory {
         return NotificationDetailView(viewModel: viewModel)
     }
 
-    // MARK: - Cache Management (AC: #16, Story 6.1; AC: #14, Story 6.2)
-
-    /// Clears all cached ViewModels.
-    ///
-    /// Call this when:
-    /// - User logs out (to reset state)
-    /// - Session expires
-    /// - Need to force fresh data load
-    func clearCache() {
-        cachedDashboardViewModel = nil
-        cachedNotificationsViewModel = nil
-    }
 }

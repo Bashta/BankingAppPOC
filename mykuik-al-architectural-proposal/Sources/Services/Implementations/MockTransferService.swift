@@ -130,16 +130,6 @@ final class MockTransferService: TransferServiceProtocol {
         return updatedTransfer
     }
 
-    func fetchTransferStatus(id: String) async throws -> Transfer {
-        try await Task.sleep(nanoseconds: UInt64.random(in: 300_000_000...500_000_000))
-
-        guard let transfer = transfers.first(where: { $0.id == id }) else {
-            throw TransferError.transferNotFound
-        }
-
-        return transfer
-    }
-
     func fetchTransfer(id: String) async throws -> Transfer {
         try await Task.sleep(nanoseconds: UInt64.random(in: 300_000_000...500_000_000))
 
@@ -271,8 +261,6 @@ final class MockTransferService: TransferServiceProtocol {
 enum TransferError: Error {
     case transferNotFound
     case invalidOTP
-    case insufficientFunds
-    case invalidAmount
     case invalidStatus
     case cannotCancelCompleted
 }

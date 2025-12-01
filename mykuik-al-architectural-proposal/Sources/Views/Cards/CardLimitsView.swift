@@ -421,30 +421,3 @@ struct LimitEditRow: View {
         return formatter.string(from: value as NSDecimalNumber) ?? "$\(value)"
     }
 }
-
-// MARK: - Preview
-
-#if DEBUG
-struct CardLimitsView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            CardLimitsView(viewModel: createPreviewViewModel())
-        }
-        .navigationViewStyle(.stack)
-    }
-
-    static func createPreviewViewModel() -> CardLimitsViewModel {
-        // This is just for preview - actual dependencies would be injected
-        let container = DependencyContainer()
-        let viewModel = CardLimitsViewModel(
-            cardId: "CARD001",
-            cardService: container.cardService,
-            coordinator: CardsCoordinator(
-                parent: AppCoordinator(dependencyContainer: container),
-                dependencyContainer: container
-            )
-        )
-        return viewModel
-    }
-}
-#endif

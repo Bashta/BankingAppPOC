@@ -42,13 +42,7 @@ final class AccountsCoordinator: ObservableObject {
     /// Used for cross-feature navigation (e.g., initiate transfer from account detail).
     private weak var parent: AppCoordinator?
 
-    /// Child coordinator storage (optional pattern, not heavily used in this implementation).
-    var childCoordinators: [String: AnyObject] = [:]
-
     // MARK: - Dependencies
-
-    /// Dependency container providing service access.
-    private let dependencyContainer: DependencyContainer
 
     /// View factory for creating Accounts feature views with ViewModels.
     private let viewFactory: AccountsViewFactory
@@ -62,7 +56,6 @@ final class AccountsCoordinator: ObservableObject {
     ///   - dependencyContainer: Service container
     init(parent: AppCoordinator, dependencyContainer: DependencyContainer) {
         self.parent = parent
-        self.dependencyContainer = dependencyContainer
         self.viewFactory = AccountsViewFactory(dependencyContainer: dependencyContainer)
     }
 
@@ -75,30 +68,9 @@ final class AccountsCoordinator: ObservableObject {
         navigationStack.append(NavigationItem(route))
     }
 
-    /// Pops the top route from the navigation stack.
-    /// Defensive: does nothing if stack is empty.
-    func pop() {
-        guard !navigationStack.isEmpty else { return }
-        navigationStack.removeLast()
-    }
-
     /// Clears the entire navigation stack, returning to root (accounts list).
     func popToRoot() {
         navigationStack.removeAll()
-    }
-
-    /// Presents a route modally (sheet or full-screen).
-    ///
-    /// - Parameters:
-    ///   - route: The AccountsRoute to present
-    ///   - fullScreen: If true, uses fullScreenCover; otherwise uses sheet
-    func present(_ route: AccountsRoute, fullScreen: Bool = false) {
-        let item = NavigationItem(route)
-        if fullScreen {
-            presentedFullScreen = item
-        } else {
-            presentedSheet = item
-        }
     }
 
     /// Dismisses the currently presented modal (sheet or full-screen).

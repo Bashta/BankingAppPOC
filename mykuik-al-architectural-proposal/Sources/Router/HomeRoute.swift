@@ -17,17 +17,6 @@ enum HomeRoute: Route {
             return "home-notificationDetail-\(notificationId)"
         }
     }
-
-    var path: String {
-        switch self {
-        case .dashboard:
-            return "home"
-        case .notifications:
-            return "notifications"
-        case .notificationDetail(let notificationId):
-            return "notifications/\(notificationId)"
-        }
-    }
 }
 
 // MARK: - HomeRoute Parser

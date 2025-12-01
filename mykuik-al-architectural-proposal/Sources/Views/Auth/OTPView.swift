@@ -323,35 +323,3 @@ struct OTPView: View {
         .accessibilityLabel("Verifying OTP code, please wait")
     }
 }
-
-// MARK: - Preview
-
-#Preview("OTPView - Fresh") {
-    let container = DependencyContainer()
-    let coordinator = AuthCoordinator(parent: AppCoordinator(dependencyContainer: container), dependencyContainer: container)
-    let viewModel = OTPViewModel(
-        otpReference: OTPReference(
-            id: "OTP-123",
-            expiresAt: Date().addingTimeInterval(300),
-            purpose: .login
-        ),
-        authService: container.authService,
-        coordinator: coordinator
-    )
-    return OTPView(viewModel: viewModel)
-}
-
-#Preview("OTPView - Expired") {
-    let container = DependencyContainer()
-    let coordinator = AuthCoordinator(parent: AppCoordinator(dependencyContainer: container), dependencyContainer: container)
-    let viewModel = OTPViewModel(
-        otpReference: OTPReference(
-            id: "OTP-456",
-            expiresAt: Date().addingTimeInterval(-60), // Already expired
-            purpose: .transfer
-        ),
-        authService: container.authService,
-        coordinator: coordinator
-    )
-    return OTPView(viewModel: viewModel)
-}

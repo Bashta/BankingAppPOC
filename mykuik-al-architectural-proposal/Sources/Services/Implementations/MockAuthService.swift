@@ -15,7 +15,6 @@ final class MockAuthService: AuthServiceProtocol {
     // Using Timer.scheduledTimer pattern for explicit session timeout handling
 
     private var authToken: AuthToken?
-    private var cancellables = Set<AnyCancellable>()
 
     /// Tracks when the user last authenticated or performed activity (AC: #1)
     private var lastActivityDate: Date?
@@ -39,12 +38,7 @@ final class MockAuthService: AuthServiceProtocol {
 
     /// Whether login should require OTP verification (for testing different flows)
     /// Default: false for basic login flow; set to true to test OTP flow
-    private(set) var requiresOTPForLogin: Bool = false
-
-    /// Enable OTP requirement for login (for testing)
-    func setRequiresOTP(_ requires: Bool) {
-        requiresOTPForLogin = requires
-    }
+    private var requiresOTPForLogin: Bool = false
 
     func login(username: String, password: String) async throws -> LoginResult {
         try await Task.sleep(nanoseconds: 500_000_000) // 500ms
@@ -231,20 +225,6 @@ final class MockAuthService: AuthServiceProtocol {
 
         Logger.auth.info("[MockAuthService] forgotPassword: password reset email sent successfully")
         // Email sent (no actual email in mock)
-    }
-
-    func resetPassword(token: String, newPassword: String) async throws {
-        try await Task.sleep(nanoseconds: 500_000_000) // 500ms
-
-        guard !token.isEmpty else {
-            throw AuthError.invalidToken
-        }
-
-        guard newPassword.count >= 8 else {
-            throw AuthError.passwordTooWeak
-        }
-
-        storedPassword = newPassword
     }
 
     func changePassword(oldPassword: String, newPassword: String) async throws {

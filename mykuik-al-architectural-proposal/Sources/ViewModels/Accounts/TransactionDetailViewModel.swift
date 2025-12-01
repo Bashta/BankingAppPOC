@@ -70,10 +70,7 @@ final class TransactionDetailViewModel: ObservableObject {
 
         do {
             transaction = try await transactionService.fetchTransaction(id: transactionId)
-
-            #if DEBUG
             Logger.accounts.debug("Loaded transaction: \(self.transactionId)")
-            #endif
         } catch {
             self.error = error
             Logger.accounts.error("Failed to load transaction \(self.transactionId): \(error.localizedDescription)")
@@ -92,10 +89,7 @@ final class TransactionDetailViewModel: ObservableObject {
         do {
             transaction = try await transactionService.fetchTransaction(id: transactionId)
             error = nil
-
-            #if DEBUG
             Logger.accounts.debug("Refreshed transaction: \(self.transactionId)")
-            #endif
         } catch {
             self.error = error
             Logger.accounts.error("Failed to refresh transaction \(self.transactionId): \(error.localizedDescription)")

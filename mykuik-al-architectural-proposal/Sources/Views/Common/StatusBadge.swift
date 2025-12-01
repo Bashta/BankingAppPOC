@@ -66,22 +66,3 @@ extension CardStatus {
         }
     }
 }
-
-// MARK: - Previews
-
-#if DEBUG
-struct StatusBadge_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack(spacing: 16) {
-            StatusBadge(cardStatus: .active)
-            StatusBadge(cardStatus: .blocked)
-            StatusBadge(cardStatus: .pending)
-            StatusBadge(cardStatus: .expired)
-            StatusBadge(cardStatus: .cancelled)
-            StatusBadge(text: "Custom", color: .purple)
-        }
-        .padding()
-        .previewLayout(.sizeThatFits)
-    }
-}
-#endif

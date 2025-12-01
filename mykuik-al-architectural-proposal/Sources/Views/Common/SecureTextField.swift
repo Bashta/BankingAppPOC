@@ -34,26 +34,3 @@ struct SecureTextField: View {
         .cornerRadius(8)
     }
 }
-
-// MARK: - Preview
-
-#Preview("SecureTextField") {
-    struct PreviewWrapper: View {
-        @State private var password = "MySecretPass123"
-
-        var body: some View {
-            VStack(spacing: 20) {
-                SecureTextField(text: $password, placeholder: "Password")
-
-                SecureTextField(text: .constant(""), placeholder: "Enter password")
-
-                Text("Current value: \(password)")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-            .padding()
-        }
-    }
-
-    return PreviewWrapper()
-}

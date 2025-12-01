@@ -4,7 +4,6 @@ import Foundation
 
 protocol Route: Hashable, Identifiable {
     var id: String { get }
-    var path: String { get }
 }
 
 // MARK: - NavigationItem

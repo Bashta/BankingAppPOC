@@ -56,28 +56,3 @@ struct QuickActionButton: View {
         .accessibilityLabel(action.title)
     }
 }
-
-// MARK: - Preview
-
-#Preview("QuickActionsRow - Two Actions") {
-    QuickActionsRow(actions: [
-        QuickAction(title: "Transfer", icon: "arrow.right.circle.fill", action: {}),
-        QuickAction(title: "Statement", icon: "doc.text.fill", action: {})
-    ])
-    .padding()
-}
-
-#Preview("QuickActionsRow - Three Actions") {
-    QuickActionsRow(actions: [
-        QuickAction(title: "Transfer", icon: "arrow.right.circle.fill", action: {}),
-        QuickAction(title: "Statement", icon: "doc.text.fill", action: {}),
-        QuickAction(title: "Details", icon: "info.circle.fill", action: {})
-    ])
-    .padding()
-}
-
-#Preview("QuickActionButton") {
-    QuickActionButton(action: QuickAction(title: "Transfer", icon: "arrow.right.circle.fill", action: {}))
-        .frame(width: 150)
-        .padding()
-}

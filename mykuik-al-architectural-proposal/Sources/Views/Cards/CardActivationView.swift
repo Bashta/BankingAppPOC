@@ -173,30 +173,3 @@ struct CardActivationView: View {
         }
     }
 }
-
-// MARK: - Preview
-
-#if DEBUG
-struct CardActivationView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            CardActivationView(viewModel: createPreviewViewModel())
-        }
-        .navigationViewStyle(.stack)
-    }
-
-    static func createPreviewViewModel() -> CardActivationViewModel {
-        let container = DependencyContainer()
-        return CardActivationViewModel(
-            cardId: "CARD003",
-            cardService: container.cardService,
-            coordinator: createMockCoordinator()
-        )
-    }
-
-    static func createMockCoordinator() -> CardsCoordinator {
-        // This is for preview only - actual coordinator would be provided by app
-        fatalError("Coordinator should be provided by the app")
-    }
-}
-#endif

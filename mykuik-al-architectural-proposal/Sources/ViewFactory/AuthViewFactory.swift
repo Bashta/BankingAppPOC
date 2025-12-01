@@ -45,10 +45,6 @@ final class AuthViewFactory {
         return OTPView(viewModel: viewModel)
     }
 
-    func makeOTPVerificationView(otpReference: OTPReference, coordinator: AuthCoordinator) -> some View {
-        makeOTPView(otpReference: otpReference, coordinator: coordinator)
-    }
-
     func makeForgotPasswordView(coordinator: AuthCoordinator) -> some View {
         let viewModel = ForgotPasswordViewModel(
             authService: dependencyContainer.authService,

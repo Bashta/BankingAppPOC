@@ -61,30 +61,6 @@ final class MockAccountService: AccountServiceProtocol {
         return account
     }
 
-    func updateAccount(id: String, updates: AccountUpdates) async throws -> Account {
-        try await Task.sleep(nanoseconds: UInt64.random(in: 300_000_000...500_000_000))
-        guard let index = accounts.firstIndex(where: { $0.id == id }) else {
-            throw AccountError.accountNotFound
-        }
-
-        let account = accounts[index]
-
-        let updatedAccount = Account(
-            id: account.id,
-            accountNumber: account.accountNumber,
-            accountType: account.accountType,
-            currency: account.currency,
-            balance: account.balance,
-            availableBalance: account.availableBalance,
-            accountName: updates.accountName ?? account.accountName,
-            iban: account.iban,
-            isDefault: updates.isDefault ?? account.isDefault
-        )
-
-        accounts[index] = updatedAccount
-        return updatedAccount
-    }
-
     func setDefaultAccount(id: String) async throws {
         try await Task.sleep(nanoseconds: UInt64.random(in: 300_000_000...500_000_000))
         guard accounts.contains(where: { $0.id == id }) else {
@@ -128,6 +104,4 @@ final class MockAccountService: AccountServiceProtocol {
 
 enum AccountError: Error {
     case accountNotFound
-    case insufficientBalance
-    case invalidAccountNumber
 }

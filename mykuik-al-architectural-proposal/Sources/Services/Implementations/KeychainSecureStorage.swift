@@ -9,9 +9,9 @@ final class KeychainSecureStorage: SecureStorageProtocol {
         static let biometricPreference = "com.bankingapp.biometricPreference"
     }
 
-    // MARK: - Generic Data Operations
+    // MARK: - Private Generic Data Operations
 
-    func save(_ data: Data, forKey key: String) throws {
+    private func save(_ data: Data, forKey key: String) throws {
         // Create query dictionary
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -30,7 +30,7 @@ final class KeychainSecureStorage: SecureStorageProtocol {
         }
     }
 
-    func load(forKey key: String) throws -> Data? {
+    private func load(forKey key: String) throws -> Data? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key,
@@ -56,20 +56,6 @@ final class KeychainSecureStorage: SecureStorageProtocol {
         return data
     }
 
-    func delete(forKey key: String) throws {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: key
-        ]
-
-        let status = SecItemDelete(query as CFDictionary)
-
-        // Consider success even if item doesn't exist
-        guard status == errSecSuccess || status == errSecItemNotFound else {
-            throw KeychainError.unableToDelete(status)
-        }
-    }
-
     // MARK: - Biometric Preference Operations
 
     func saveBiometricPreference(_ preference: BiometricPreference) throws {
@@ -85,17 +71,10 @@ final class KeychainSecureStorage: SecureStorageProtocol {
         let decoder = JSONDecoder()
         return try decoder.decode(BiometricPreference.self, from: data)
     }
-
-    func deleteBiometricPreference() throws {
-        try delete(forKey: Keys.biometricPreference)
-    }
 }
 
 enum KeychainError: Error {
-    case itemNotFound
-    case duplicateItem
     case unableToSave(OSStatus)
-    case unableToDelete(OSStatus)
     case invalidData
     case unknown(OSStatus)
 }

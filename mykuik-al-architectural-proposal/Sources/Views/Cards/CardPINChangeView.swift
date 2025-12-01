@@ -341,24 +341,3 @@ struct CardPINChangeView: View {
         .accessibilityLabel("Verifying OTP code, please wait")
     }
 }
-
-// MARK: - Preview
-
-#if DEBUG
-struct CardPINChangeView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            CardPINChangeView(
-                viewModel: CardPINChangeViewModel(
-                    cardId: "CARD001",
-                    cardService: MockCardService(),
-                    coordinator: CardsCoordinator(
-                        parent: AppCoordinator(dependencyContainer: DependencyContainer()),
-                        dependencyContainer: DependencyContainer()
-                    )
-                )
-            )
-        }
-    }
-}
-#endif

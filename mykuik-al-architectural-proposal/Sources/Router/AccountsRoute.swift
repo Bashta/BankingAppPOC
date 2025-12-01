@@ -26,23 +26,6 @@ enum AccountsRoute: Route {
             return "accounts-statementDownload-\(accountId)-\(month)-\(year)"
         }
     }
-
-    var path: String {
-        switch self {
-        case .list:
-            return "accounts"
-        case .detail(let accountId):
-            return "accounts/\(accountId)"
-        case .transactions(let accountId):
-            return "accounts/\(accountId)/transactions"
-        case .transactionDetail(let transactionId):
-            return "accounts/transactions/\(transactionId)"
-        case .statement(let accountId):
-            return "accounts/\(accountId)/statement"
-        case .statementDownload(let accountId, let month, let year):
-            return "accounts/\(accountId)/statement/\(month)/\(year)"
-        }
-    }
 }
 
 // MARK: - AccountsRoute Parser

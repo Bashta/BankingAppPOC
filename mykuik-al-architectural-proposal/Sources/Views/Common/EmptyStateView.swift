@@ -54,33 +54,3 @@ struct EmptyStateView: View {
         .accessibilityLabel("\(title). \(message)")
     }
 }
-
-// MARK: - Preview
-
-#Preview("EmptyStateView - No Action") {
-    EmptyStateView(
-        iconName: "wallet.pass",
-        title: "No Accounts",
-        message: "You don't have any accounts yet."
-    )
-}
-
-#Preview("EmptyStateView - With Action") {
-    EmptyStateView(
-        iconName: "creditcard",
-        title: "No Cards",
-        message: "You don't have any cards associated with your account.",
-        actionTitle: "Request Card",
-        action: {
-            print("Request card tapped")
-        }
-    )
-}
-
-#Preview("EmptyStateView - Transactions") {
-    EmptyStateView(
-        iconName: "list.bullet.rectangle",
-        title: "No Transactions",
-        message: "No transactions found for the selected filters."
-    )
-}

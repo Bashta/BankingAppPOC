@@ -124,21 +124,3 @@ struct ExternalTransferView: View {
         }
     }
 }
-
-// MARK: - Preview
-
-#Preview("ExternalTransferView - Loading") {
-    NavigationView {
-        ExternalTransferView(
-            viewModel: {
-                let vm = ExternalTransferViewModel(
-                    accountService: MockAccountService(),
-                    transferService: MockTransferService(),
-                    beneficiaryService: MockBeneficiaryService(),
-                    coordinator: TransferCoordinator(parent: nil, dependencyContainer: DependencyContainer())
-                )
-                return vm
-            }()
-        )
-    }
-}

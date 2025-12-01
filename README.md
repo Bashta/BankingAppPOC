@@ -4,6 +4,16 @@ A reference implementation of a SwiftUI banking application using the **MVVM-C-R
 
 ---
 
+## Deep Link Navigation Demo
+
+<p align="center">
+  <img src="readme/vids/RocketSim_Recording_iPhone_17_Pro_6.3_2025-12-01_23.40.35.gif" width="300" alt="Deep Link Navigation Demo"/>
+</p>
+
+> **Universal deep linking** — Navigate to any screen via URL scheme `bankapp://`. Supports authentication-aware routing, tab switching, and nested navigation.
+
+---
+
 ## Documentation
 
 | Document | Description |

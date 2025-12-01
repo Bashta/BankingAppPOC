@@ -148,26 +148,3 @@ struct FilterSheetView: View {
         }
     }
 }
-
-// MARK: - Preview
-
-#Preview("FilterSheetView - Empty") {
-    FilterSheetView(
-        selectedCategories: .constant([]),
-        dateRange: .constant(nil),
-        onApply: {},
-        onClear: {}
-    )
-}
-
-#Preview("FilterSheetView - With Filters") {
-    FilterSheetView(
-        selectedCategories: .constant([.purchase, .transfer]),
-        dateRange: .constant((
-            start: Date().addingTimeInterval(-7 * 24 * 60 * 60),
-            end: Date()
-        )),
-        onApply: {},
-        onClear: {}
-    )
-}
