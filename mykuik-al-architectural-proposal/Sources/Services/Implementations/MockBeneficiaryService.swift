@@ -63,24 +63,35 @@ final class MockBeneficiaryService: BeneficiaryServiceProtocol {
         return beneficiaries
     }
 
-    func addBeneficiary(request: BeneficiaryRequest) async throws -> Beneficiary {
+    func addBeneficiary(_ request: AddBeneficiaryRequest) async throws -> Beneficiary {
         try await Task.sleep(nanoseconds: UInt64.random(in: 300_000_000...500_000_000))
+
+        // Generate a mock bank name based on type
+        let bankName: String
+        switch request.type {
+        case .internal:
+            bankName = "MyKuik Bank"
+        case .external:
+            bankName = "Mock Bank"
+        case .international:
+            bankName = "International Bank"
+        }
 
         let newBeneficiary = Beneficiary(
             id: "BEN\(String(format: "%03d", beneficiaries.count + 1))",
             name: request.name,
             accountNumber: request.accountNumber,
             iban: request.iban,
-            bankName: request.bankName,
+            bankName: bankName,
             type: request.type,
-            isFavorite: false
+            isFavorite: request.isFavorite
         )
 
         beneficiaries.append(newBeneficiary)
         return newBeneficiary
     }
 
-    func updateBeneficiary(id: String, updates: BeneficiaryUpdates) async throws -> Beneficiary {
+    func updateBeneficiary(id: String, request: UpdateBeneficiaryRequest) async throws -> Beneficiary {
         try await Task.sleep(nanoseconds: UInt64.random(in: 300_000_000...500_000_000))
 
         guard let index = beneficiaries.firstIndex(where: { $0.id == id }) else {
@@ -89,14 +100,25 @@ final class MockBeneficiaryService: BeneficiaryServiceProtocol {
 
         let beneficiary = beneficiaries[index]
 
+        // Generate bank name based on type
+        let bankName: String
+        switch request.type {
+        case .internal:
+            bankName = "MyKuik Bank"
+        case .external:
+            bankName = "Mock Bank"
+        case .international:
+            bankName = "International Bank"
+        }
+
         let updatedBeneficiary = Beneficiary(
             id: beneficiary.id,
-            name: updates.name ?? beneficiary.name,
-            accountNumber: beneficiary.accountNumber,
-            iban: beneficiary.iban,
-            bankName: beneficiary.bankName,
-            type: beneficiary.type,
-            isFavorite: updates.isFavorite ?? beneficiary.isFavorite
+            name: request.name,
+            accountNumber: request.accountNumber,
+            iban: request.iban,
+            bankName: bankName,
+            type: request.type,
+            isFavorite: request.isFavorite
         )
 
         beneficiaries[index] = updatedBeneficiary
@@ -113,18 +135,39 @@ final class MockBeneficiaryService: BeneficiaryServiceProtocol {
         beneficiaries.remove(at: index)
     }
 
-    func validateBeneficiary(request: BeneficiaryRequest) async throws -> BeneficiaryValidation {
-        try await Task.sleep(nanoseconds: UInt64.random(in: 300_000_000...500_000_000))
+    func validateBeneficiary(_ request: ValidateBeneficiaryRequest) async throws -> BeneficiaryValidation {
+        try await Task.sleep(nanoseconds: UInt64.random(in: 500_000_000...800_000_000))
 
-        // Simulate bank lookup - return bank name for valid accounts
-        let validBanks = ["Chase Bank", "Bank of America", "Wells Fargo", "Citibank", "US Bank"]
+        // Validate account number format - at least 8 digits
+        let digits = request.accountNumber.filter { $0.isNumber }
+        let isValid = digits.count >= 8
 
-        let isValid = request.bankName.map { validBanks.contains($0) } ?? false && request.accountNumber.count == 10
+        if isValid {
+            // Generate mock bank name based on type
+            let bankName: String
+            switch request.type {
+            case .internal:
+                bankName = "MyKuik Bank"
+            case .external:
+                bankName = "Mock Bank"
+            case .international:
+                bankName = "International Bank"
+            }
 
-        return BeneficiaryValidation(
-            isValid: isValid,
-            accountHolderName: isValid ? "Account Holder" : nil
-        )
+            return BeneficiaryValidation(
+                isValid: true,
+                bankName: bankName,
+                accountHolderName: "Account Holder",
+                errorMessage: nil
+            )
+        } else {
+            return BeneficiaryValidation(
+                isValid: false,
+                bankName: nil,
+                accountHolderName: nil,
+                errorMessage: "Invalid account number. Please enter at least 8 digits."
+            )
+        }
     }
 
     func toggleFavorite(id: String) async throws -> Beneficiary {

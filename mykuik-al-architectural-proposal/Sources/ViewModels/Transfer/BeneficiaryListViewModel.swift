@@ -78,6 +78,8 @@ final class BeneficiaryListViewModel: ObservableObject {
         do {
             beneficiaries = try await beneficiaryService.fetchBeneficiaries()
             filteredBeneficiaries = beneficiaries
+            // Cache beneficiaries in coordinator for edit navigation
+            coordinator?.cacheBeneficiaries(beneficiaries)
             Logger.transfer.debug("Loaded \(self.beneficiaries.count) beneficiaries")
         } catch {
             self.error = error
@@ -93,6 +95,8 @@ final class BeneficiaryListViewModel: ObservableObject {
         do {
             beneficiaries = try await beneficiaryService.fetchBeneficiaries()
             performSearch()
+            // Update cache in coordinator
+            coordinator?.cacheBeneficiaries(beneficiaries)
             Logger.transfer.debug("Refreshed beneficiaries: \(self.beneficiaries.count)")
         } catch {
             self.error = error

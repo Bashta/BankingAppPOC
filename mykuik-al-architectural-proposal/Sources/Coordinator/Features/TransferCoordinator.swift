@@ -76,6 +76,20 @@ final class TransferCoordinator: ObservableObject {
         )
     }()
 
+    /// Cache of beneficiaries for edit navigation.
+    /// Populated by BeneficiaryListViewModel when data loads.
+    var cachedBeneficiaries: [Beneficiary] = []
+
+    /// Caches beneficiaries for quick lookup during edit navigation.
+    func cacheBeneficiaries(_ beneficiaries: [Beneficiary]) {
+        cachedBeneficiaries = beneficiaries
+    }
+
+    /// Finds a cached beneficiary by ID.
+    func findCachedBeneficiary(id: String) -> Beneficiary? {
+        cachedBeneficiaries.first { $0.id == id }
+    }
+
     // MARK: - Initialization
 
     /// Creates TransferCoordinator with parent and dependencies.
@@ -269,10 +283,12 @@ final class TransferCoordinator: ObservableObject {
             BeneficiaryListView(viewModel: beneficiaryListViewModel)
 
         case .addBeneficiary:
-            viewFactory.makeAddBeneficiaryView(coordinator: self)
+            viewFactory.makeAddBeneficiaryView(coordinator: self, beneficiary: nil)
 
         case .editBeneficiary(let beneficiaryId):
-            viewFactory.makeEditBeneficiaryView(beneficiaryId: beneficiaryId, coordinator: self)
+            // Look up beneficiary from cache for edit mode
+            let beneficiary = findCachedBeneficiary(id: beneficiaryId)
+            viewFactory.makeEditBeneficiaryView(beneficiaryId: beneficiaryId, coordinator: self, beneficiary: beneficiary)
 
         case .confirm(let request):
             viewFactory.makeTransferConfirmView(request: request, coordinator: self)
