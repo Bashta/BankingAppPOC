@@ -140,11 +140,36 @@ final class MockTransferService: TransferServiceProtocol {
         return transfer
     }
 
+    func fetchTransfer(id: String) async throws -> Transfer {
+        try await Task.sleep(nanoseconds: UInt64.random(in: 300_000_000...500_000_000))
+
+        // First check in-memory transfers (created during session)
+        if let transfer = transfers.first(where: { $0.id == id }) {
+            return transfer
+        }
+
+        // Check mock transfers from fetchRecentTransfers
+        let mockTransfers = getMockTransfers()
+        if let transfer = mockTransfers.first(where: { $0.id == id }) {
+            return transfer
+        }
+
+        throw TransferError.transferNotFound
+    }
+
     func fetchRecentTransfers(limit: Int) async throws -> [Transfer] {
         try await Task.sleep(nanoseconds: UInt64.random(in: 300_000_000...500_000_000))
 
         // Return mock transfer history with various statuses
-        let mockTransfers: [Transfer] = [
+        let mockTransfers: [Transfer] = getMockTransfers()
+
+        // Return recent transfers (sorted by date, limited)
+        let sortedTransfers = mockTransfers.sorted { $0.date > $1.date }
+        return Array(sortedTransfers.prefix(limit))
+    }
+
+    private func getMockTransfers() -> [Transfer] {
+        return [
             Transfer(
                 id: "TRF001",
                 sourceAccountId: "ACC001",
@@ -240,10 +265,6 @@ final class MockTransferService: TransferServiceProtocol {
                 sourceAccountName: "Emergency Savings"
             )
         ]
-
-        // Return recent transfers (sorted by date, limited)
-        let sortedTransfers = mockTransfers.sorted { $0.date > $1.date }
-        return Array(sortedTransfers.prefix(limit))
     }
 }
 

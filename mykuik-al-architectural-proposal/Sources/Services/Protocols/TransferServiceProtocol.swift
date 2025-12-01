@@ -6,4 +6,5 @@ protocol TransferServiceProtocol {
     func cancelTransfer(id: String) async throws -> Transfer
     func fetchTransferStatus(id: String) async throws -> Transfer
     func fetchRecentTransfers(limit: Int) async throws -> [Transfer]
+    func fetchTransfer(id: String) async throws -> Transfer
 }

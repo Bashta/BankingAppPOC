@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import Combine
+import UIKit
 
 // MARK: - TransferCoordinator
 
@@ -117,6 +118,51 @@ final class TransferCoordinator: ObservableObject {
     func dismiss() {
         presentedSheet = nil
         presentedFullScreen = nil
+    }
+
+    // MARK: - Cross-Feature Navigation
+
+    /// Navigates to Home tab after completing transfer flow.
+    /// Called from TransferReceiptView when user taps "Done".
+    /// Implements FR104 cross-feature navigation pattern.
+    func navigateToHome() {
+        popToRoot()
+        parent?.switchTab(.home)
+    }
+
+    /// Navigates to Accounts tab after completing transfer flow.
+    /// Implements FR104 cross-feature navigation pattern.
+    func navigateToAccounts() {
+        popToRoot()
+        parent?.switchTab(.accounts)
+    }
+
+    /// Presents a share sheet with the provided text.
+    /// Used for sharing transfer receipt.
+    func presentShareSheet(text: String) {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let rootViewController = windowScene.windows.first?.rootViewController else {
+            return
+        }
+
+        let activityVC = UIActivityViewController(
+            activityItems: [text],
+            applicationActivities: nil
+        )
+
+        // Present from the topmost view controller
+        var topController = rootViewController
+        while let presented = topController.presentedViewController {
+            topController = presented
+        }
+
+        if let popover = activityVC.popoverPresentationController {
+            popover.sourceView = topController.view
+            popover.sourceRect = CGRect(x: topController.view.bounds.midX, y: topController.view.bounds.midY, width: 0, height: 0)
+            popover.permittedArrowDirections = []
+        }
+
+        topController.present(activityVC, animated: true)
     }
 
     // MARK: - Deep Link Handling
