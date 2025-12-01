@@ -1,105 +1,227 @@
-# Banking App - MVVM-C Architecture Reference Implementation
+# iOS Banking App - MVVM-C Architecture Reference
 
-## Project Setup
+A reference implementation of a SwiftUI banking application using the **MVVM-C** (Model-View-ViewModel-Coordinator) architecture pattern.
 
-This iOS banking application demonstrates MVVM-C architecture patterns with iOS 15 compatibility.
+---
 
-### Xcode Project Creation
+## Documentation
 
-**Manual Setup (Xcode GUI):**
+| Document | Description |
+|----------|-------------|
+| [Architecture Overview](readme/01-architecture-overview.md) | MVVM-C pattern, folder structure, component responsibilities |
+| [Navigation Patterns](readme/02-navigation-patterns.md) | iOS 15 navigation, coordinators, deep linking |
+| [Dependency Injection](readme/03-dependency-injection.md) | DI container, service layer, mock implementations |
+| [Adding Features](readme/04-adding-features.md) | Step-by-step guide for implementing new features |
+| [Architecture Decisions](readme/05-decisions.md) | ADRs explaining key design choices |
+| [Code Conventions](readme/06-conventions.md) | Naming, patterns, logging, formatting |
 
-1. Open Xcode
-2. File → New → Project
-3. Select "iOS" → "App"
-4. Configure project:
-   - **Product Name:** BankingApp
-   - **Organization Identifier:** com.example
-   - **Interface:** SwiftUI
-   - **Language:** Swift
-   - **Minimum Deployment:** iOS 15.0
+---
 
-5. Save to this directory (BankingApp folder)
+## Tech Stack
 
-6. In Project Settings → General:
-   - Set Deployment Target to **iOS 15.0**
-   - Verify Swift Language Version is **5.9**
+| Component | Technology |
+|-----------|------------|
+| Platform | iOS 15.0+ |
+| UI Framework | SwiftUI |
+| Architecture | MVVM-C (Coordinator) |
+| Reactive | Combine |
+| Language | Swift 5.9 |
+| Build System | Swift Package Manager |
+| Logging | OSLog |
+| Secure Storage | Keychain |
+| Biometrics | LocalAuthentication |
 
-7. In Project Settings → Build Settings:
-   - Ensure Build System is set to **New Build System**
+---
 
-8. Add all folders to Xcode project navigator:
-   - Drag folders from Finder into Xcode
-   - Select "Create groups" (not folder references)
-   - Ensure all folders are added as groups in the project
+## Features
 
-### Info.plist Configuration
+### Completed (Epics 1-4)
 
-The `App/Info.plist` file is already configured with:
+- **Authentication**
+  - Login with username/password
+  - Biometric authentication (Face ID / Touch ID)
+  - OTP verification
+  - Session management
+  - Forgot/Reset password
 
-- **Custom URL Scheme:** `bankapp://` for deep linking
-- **NSFaceIDUsageDescription:** Privacy string for biometric authentication
+- **Accounts**
+  - Account list with balances
+  - Account detail view
+  - Transaction history with pagination
+  - Transaction detail
+  - Statement download
 
-### Folder Structure
+- **Transfers**
+  - Internal transfers (between own accounts)
+  - External transfers (to beneficiaries)
+  - Transfer confirmation with OTP
+  - Transfer receipt
+
+- **Beneficiary Management**
+  - Beneficiary list
+  - Add new beneficiary
+  - Edit beneficiary
+  - Delete beneficiary
+
+### In Progress (Epics 5-6)
+
+- Card management (list, detail, limits, block/unblock)
+- Profile and settings
+- Security settings
+- Notification preferences
+
+---
+
+## Prerequisites
+
+- Xcode 15.0+
+- iOS 15.0+ Simulator or Device
+- macOS Sonoma or later (recommended)
+
+---
+
+## Getting Started
+
+### Clone & Open
+
+```bash
+git clone <repository-url>
+cd mykuik-al-architectural-proposal
+open Package.swift
+```
+
+### Build & Run
+
+1. Open project in Xcode
+2. Select iOS Simulator (iPhone 15 recommended)
+3. Build and Run (Cmd + R)
+
+### Test Credentials
+
+| Username | Password |
+|----------|----------|
+| `user` | `password` |
+
+OTP code for testing: `123456`
+
+---
+
+## Project Structure
 
 ```
-BankingApp/
-├── App/                          # Application entry point
-│   ├── BankingApp.swift          # @main entry
-│   └── Info.plist                # URL scheme, privacy strings
-├── Router/                       # Route enums and DeepLinkParser
-├── Coordinator/                  # Navigation coordinators
-│   └── Features/                 # Feature-specific coordinators
-├── ViewFactory/                  # View+ViewModel construction
-├── DI/                           # Dependency injection container
-├── Services/                     # Service layer
-│   ├── Protocols/                # Service interfaces
-│   └── Implementations/          # Mock/real implementations
-├── Models/                       # Domain models
-├── ViewModels/                   # Business logic layer
-│   ├── Home/
-│   ├── Accounts/
-│   ├── Transfer/
-│   ├── Cards/
-│   ├── More/
-│   └── Auth/
-└── Views/                        # UI layer
-    ├── Common/                   # Reusable components
-    ├── Home/
-    ├── Accounts/
-    ├── Transfer/
-    ├── Cards/
-    ├── More/
-    └── Auth/
+mykuik-al-architectural-proposal/
+├── Sources/
+│   ├── App/                    # App entry point
+│   ├── Router/                 # Routes & deep linking
+│   ├── Coordinator/            # Navigation coordinators
+│   ├── ViewFactory/            # View+ViewModel factories
+│   ├── DI/                     # Dependency container
+│   ├── Services/               # Service protocols & implementations
+│   ├── Models/                 # Domain models
+│   ├── ViewModels/             # Business logic
+│   ├── Views/                  # SwiftUI views
+│   └── Utilities/              # Logging, extensions
+├── readme/                     # Developer documentation
+│   ├── 01-architecture-overview.md
+│   ├── 02-navigation-patterns.md
+│   ├── 03-dependency-injection.md
+│   ├── 04-adding-features.md
+│   ├── 05-decisions.md
+│   └── 06-conventions.md
+└── Package.swift
 ```
 
-### Build and Run
+---
 
-1. Select iOS 15.0+ simulator or device
-2. Build: ⌘B
-3. Run: ⌘R
+## Architecture Highlights
 
-The app should launch with the default template screen showing "Banking App" with project structure confirmation.
+### MVVM-C Pattern
 
-### Next Steps
+```mermaid
+graph LR
+    View[View<br/>SwiftUI] <--> ViewModel[ViewModel<br/>Logic]
+    ViewModel <--> Service[Service<br/>Data]
+    View --> Coordinator[Coordinator<br/>Navigation]
+    ViewModel --> Coordinator
+```
 
-After creating the Xcode project:
+### iOS 15 Navigation
 
-1. **Story 1.2:** Implement Router layer with route enums and DeepLinkParser
-2. **Story 1.3:** Implement CoordinatorProtocol and AppCoordinator
-3. **Story 1.4:** Implement all six feature coordinators
-4. **Story 1.5-1.11:** Continue with remaining Epic 1 stories
+Uses `NavigationView` with hidden `NavigationLink` pattern for programmatic navigation (NavigationStack requires iOS 16+).
 
-### Architecture Constraints
+**Constraints:**
+- NO NavigationStack (iOS 16+)
+- NO navigationDestination modifier (iOS 16+)
+- USE NavigationView with `.navigationViewStyle(.stack)`
+- USE `NavigationLink(destination:isActive:)` for programmatic navigation
 
-**iOS 15 Compatibility:**
-- ❌ NO NavigationStack (iOS 16+)
-- ❌ NO navigationDestination modifier (iOS 16+)
-- ✅ USE NavigationView with .navigationViewStyle(.stack)
-- ✅ USE NavigationLink(destination:isActive:) for programmatic navigation
+### Deep Linking
 
-### References
+Supports URL scheme `bankapp://` for navigation to any screen:
+- `bankapp://accounts/ACC123`
+- `bankapp://transfer/beneficiaries`
+- `bankapp://cards/CARD456/settings`
 
-- **Architecture:** `docs/architecture.md`
-- **PRD:** `docs/prd.md`
-- **Epic 1 Tech Spec:** `docs/sprint/tech-spec-epic-1.md`
-- **Story Context:** `docs/sprint-artifacts/1-1-initialize-xcode-project-and-configure-basic-structure.context.xml`
+---
+
+## Key Files
+
+| Purpose | File |
+|---------|------|
+| App Entry | `Sources/App/BankingApp.swift` |
+| Root Coordinator | `Sources/Coordinator/AppCoordinator.swift` |
+| Routes | `Sources/Router/Routes.swift` |
+| DI Container | `Sources/DI/DependencyContainer.swift` |
+| Example Coordinator | `Sources/Coordinator/Features/AccountsCoordinator.swift` |
+| Example ViewModel | `Sources/ViewModels/Accounts/AccountDetailViewModel.swift` |
+
+---
+
+## Development
+
+### Adding a New Feature
+
+See [Adding Features Guide](readme/04-adding-features.md) for step-by-step instructions.
+
+Quick checklist:
+1. Define route enum in `Routes.swift`
+2. Create/update coordinator
+3. Create ViewFactory
+4. Create ViewModel(s)
+5. Create View(s)
+6. Wire up deep links
+
+### Conventions
+
+- Use `Logger.{category}` for logging (never `print()`)
+- Mask sensitive data (account numbers, card numbers)
+- Always handle loading, error, and empty states
+- Use `weak` for coordinator references in ViewModels
+
+See [Code Conventions](readme/06-conventions.md) for full details.
+
+---
+
+## Architecture Decisions
+
+Key decisions documented in [ADRs](readme/05-decisions.md):
+
+| ADR | Decision |
+|-----|----------|
+| 001 | MVVM-C over VIPER/TCA |
+| 002 | NavigationView for iOS 15 compatibility |
+| 003 | Weak coordinator references |
+| 004 | Mock services for POC phase |
+| 005 | Combine over external state management |
+| 006 | Per-feature coordinators |
+| 007 | Type-safe routing |
+| 008 | Lazy service initialization |
+| 009 | OSLog for logging |
+
+---
+
+## Related Documentation
+
+- [Product Requirements (PRD)](docs/prd.md)
+- [Epic Breakdown](docs/epics.md)
+- [Detailed Architecture](docs/architecture.md)
