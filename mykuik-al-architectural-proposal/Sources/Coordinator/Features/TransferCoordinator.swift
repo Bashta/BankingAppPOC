@@ -66,6 +66,16 @@ final class TransferCoordinator: ObservableObject {
         )
     }()
 
+    /// Cached beneficiary list ViewModel to preserve state across navigation.
+    /// Prevents empty state flash when navigating back to beneficiary list.
+    private lazy var beneficiaryListViewModel: BeneficiaryListViewModel = {
+        BeneficiaryListViewModel(
+            beneficiaryService: dependencyContainer.beneficiaryService,
+            coordinator: self,
+            selectionMode: false
+        )
+    }()
+
     // MARK: - Initialization
 
     /// Creates TransferCoordinator with parent and dependencies.
@@ -210,6 +220,11 @@ final class TransferCoordinator: ObservableObject {
             push(.beneficiaryList)
             push(.addBeneficiary)
 
+        case .editBeneficiary(let beneficiaryId):
+            // Navigate through beneficiary list to edit
+            push(.beneficiaryList)
+            push(.editBeneficiary(beneficiaryId: beneficiaryId))
+
         case .confirm:
             // Cannot deep link directly to confirm with request - need to go through transfer flow
             // Just go to home
@@ -250,10 +265,14 @@ final class TransferCoordinator: ObservableObject {
             viewFactory.makeExternalTransferView(coordinator: self)
 
         case .beneficiaryList:
-            viewFactory.makeBeneficiaryListView(coordinator: self)
+            // Use cached beneficiaryListViewModel to preserve state across navigation
+            BeneficiaryListView(viewModel: beneficiaryListViewModel)
 
         case .addBeneficiary:
             viewFactory.makeAddBeneficiaryView(coordinator: self)
+
+        case .editBeneficiary(let beneficiaryId):
+            viewFactory.makeEditBeneficiaryView(beneficiaryId: beneficiaryId, coordinator: self)
 
         case .confirm(let request):
             viewFactory.makeTransferConfirmView(request: request, coordinator: self)

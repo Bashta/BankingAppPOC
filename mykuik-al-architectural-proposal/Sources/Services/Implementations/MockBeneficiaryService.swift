@@ -37,6 +37,24 @@ final class MockBeneficiaryService: BeneficiaryServiceProtocol {
             bankName: "Citibank",
             type: .external,
             isFavorite: false
+        ),
+        Beneficiary(
+            id: "BEN005",
+            name: "Sarah Wilson",
+            accountNumber: "3344556677",
+            iban: "US12USBA33445566771234",
+            bankName: "US Bank",
+            type: .external,
+            isFavorite: false
+        ),
+        Beneficiary(
+            id: "BEN006",
+            name: "David Martinez",
+            accountNumber: "8899001122",
+            iban: "US12PNCB88990011221234",
+            bankName: "PNC Bank",
+            type: .external,
+            isFavorite: true
         )
     ]
 
