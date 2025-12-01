@@ -53,6 +53,18 @@ final class TransferCoordinator: ObservableObject {
     /// View factory for creating Transfer feature views with ViewModels.
     private let viewFactory: TransferViewFactory
 
+    // MARK: - Cached ViewModels
+
+    /// Cached home ViewModel to preserve state across navigation.
+    /// Created lazily on first access and reused to prevent data loss on back navigation.
+    private lazy var homeViewModel: TransferHomeViewModel = {
+        TransferHomeViewModel(
+            transferService: dependencyContainer.transferService,
+            beneficiaryService: dependencyContainer.beneficiaryService,
+            coordinator: self
+        )
+    }()
+
     // MARK: - Initialization
 
     /// Creates TransferCoordinator with parent and dependencies.
@@ -174,7 +186,8 @@ final class TransferCoordinator: ObservableObject {
     func build(_ route: TransferRoute) -> some View {
         switch route {
         case .home:
-            viewFactory.makeTransferHomeView(coordinator: self)
+            // Use cached homeViewModel to preserve state across navigation
+            TransferHomeView(viewModel: homeViewModel)
 
         case .internalTransfer:
             viewFactory.makeInternalTransferView(coordinator: self)

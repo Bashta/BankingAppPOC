@@ -42,8 +42,8 @@ final class TransferHomeViewModel: ObservableObject {
     /// Only loads if data hasn't been loaded yet (prevents re-fetching on back navigation)
     @MainActor
     func loadData() async {
-        // Skip if data is already loaded to prevent clearing on back navigation
-        guard recentTransfers.isEmpty else { return }
+        // Skip if data is already loaded to prevent re-fetching on back navigation
+        guard recentTransfers.isEmpty && !isLoading else { return }
 
         isLoading = true
         error = nil
