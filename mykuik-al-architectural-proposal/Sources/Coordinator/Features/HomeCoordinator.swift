@@ -104,6 +104,37 @@ final class HomeCoordinator: ObservableObject {
         presentedFullScreen = nil
     }
 
+    // MARK: - Cross-Feature Navigation (AC: #15 - Story 6.1)
+
+    /// Navigates to account detail on Accounts tab.
+    /// - Parameter accountId: The account ID to show details for
+    func navigateToAccountDetail(accountId: String) {
+        parent?.switchTab(.accounts)
+        parent?.accountsCoordinator.push(.detail(accountId: accountId))
+    }
+
+    /// Navigates to transaction detail on Accounts tab.
+    /// - Parameter transactionId: The transaction ID to show details for
+    func navigateToTransactionDetail(transactionId: String) {
+        parent?.switchTab(.accounts)
+        parent?.accountsCoordinator.push(.transactionDetail(transactionId: transactionId))
+    }
+
+    /// Navigates to Transfer tab.
+    func navigateToTransfer() {
+        parent?.switchTab(.transfer)
+    }
+
+    /// Navigates to Cards tab.
+    func navigateToCards() {
+        parent?.switchTab(.cards)
+    }
+
+    /// Navigates to More tab.
+    func navigateToMore() {
+        parent?.switchTab(.more)
+    }
+
     // MARK: - Deep Link Handling
 
     /// Handles deep links to Home feature screens.

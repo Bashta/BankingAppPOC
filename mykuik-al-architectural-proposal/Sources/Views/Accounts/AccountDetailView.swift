@@ -244,4 +244,5 @@ private struct PreviewTransactionService: TransactionServiceProtocol {
     }
     func searchTransactions(accountId: String, query: String) async throws -> [Transaction] { [] }
     func filterTransactions(accountId: String, dateRange: (Date, Date)?, categories: Set<TransactionCategory>) async throws -> [Transaction] { [] }
+    func fetchRecentTransactions(limit: Int) async throws -> [Transaction] { [] }
 }

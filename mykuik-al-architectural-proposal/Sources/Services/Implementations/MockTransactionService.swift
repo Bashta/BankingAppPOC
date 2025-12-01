@@ -154,6 +154,22 @@ final class MockTransactionService: TransactionServiceProtocol {
 
         return filteredTransactions
     }
+
+    func fetchRecentTransactions(limit: Int) async throws -> [Transaction] {
+        try await Task.sleep(nanoseconds: UInt64.random(in: 300_000_000...500_000_000))
+
+        // Collect all transactions from all accounts
+        var allTransactions: [Transaction] = []
+        for transactions in transactionsByAccount.values {
+            allTransactions.append(contentsOf: transactions)
+        }
+
+        // Sort by date descending (newest first) and take limit
+        return allTransactions
+            .sorted { $0.date > $1.date }
+            .prefix(limit)
+            .map { $0 }
+    }
 }
 
 enum TransactionError: Error {
