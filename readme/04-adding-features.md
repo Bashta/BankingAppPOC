@@ -1,6 +1,6 @@
 # Adding New Features
 
-This guide provides a step-by-step workflow for implementing new features in the MVVM-C architecture. Follow these steps to ensure consistency with existing patterns.
+This guide provides a step-by-step workflow for implementing new features in the MVVM-C-R architecture. Follow these steps to ensure consistency with existing patterns.
 
 ## Overview
 

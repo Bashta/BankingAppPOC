@@ -1,12 +1,12 @@
 # Architecture Overview
 
-This document provides a high-level overview of the iOS banking application architecture, including the MVVM-C pattern, folder structure, and component responsibilities.
+This document provides a high-level overview of the iOS banking application architecture, including the MVVM-C-R pattern, folder structure, and component responsibilities.
 
 ---
 
-## Architecture Pattern: MVVM-C
+## Architecture Pattern: MVVM-C-R
 
-The application follows **MVVM-C** (Model-View-ViewModel-Coordinator), a variation of MVVM that extracts navigation logic into dedicated Coordinator objects.
+The application follows **MVVM-C-R** (Model-View-ViewModel-Coordinator-Router), a variation of MVVM that extracts navigation logic into dedicated Coordinator objects and centralizes route definitions in a Router layer.
 
 ```mermaid
 graph TB
@@ -34,9 +34,15 @@ graph TB
 graph LR
     View[View<br/>SwiftUI] <--> ViewModel[ViewModel<br/>Logic]
     ViewModel <--> Service[Service<br/>Data]
-    View --> Coordinator[Coordinator<br/>Navigation]
-    ViewModel --> Coordinator
+    ViewModel --> Coordinator[Coordinator<br/>Navigation]
+    Coordinator -.->|creates| View
 ```
+
+**Data Flow:**
+- View ↔ ViewModel: Two-way binding via `@ObservedObject`
+- ViewModel → Service: Data fetching and mutations
+- ViewModel → Coordinator: Navigation requests (e.g., `coordinator?.push(.detail)`)
+- Coordinator → View: Creates views via ViewFactory (dashed = indirect relationship)
 
 ---
 

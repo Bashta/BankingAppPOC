@@ -4,7 +4,7 @@ This document captures key architectural decisions made during the development o
 
 ---
 
-## ADR-001: MVVM-C Architecture Pattern
+## ADR-001: MVVM-C-R Architecture Pattern
 
 ### Status
 Accepted
@@ -24,11 +24,12 @@ Alternatives considered:
 - **Clean Architecture**: More layers than needed for this POC
 
 ### Decision
-Adopt **MVVM-C** (Model-View-ViewModel-Coordinator) with these responsibilities:
+Adopt **MVVM-C-R** (Model-View-ViewModel-Coordinator-Router) with these responsibilities:
 - **Model**: Domain objects (Account, Transaction, Card)
 - **View**: SwiftUI views (UI only, no business logic)
 - **ViewModel**: Business logic, state management, navigation delegation
 - **Coordinator**: Navigation logic, view factory ownership, deep link handling
+- **Router**: Type-safe route definitions and deep link parsing
 
 ### Consequences
 **Positive:**
@@ -437,7 +438,7 @@ Logger.accounts.error("Failed to load: \(error.localizedDescription)")
 
 | ADR | Decision | Key Trade-off |
 |-----|----------|---------------|
-| 001 | MVVM-C | More files for better separation |
+| 001 | MVVM-C-R | More files for better separation |
 | 002 | NavigationView | iOS 15 support over modern APIs |
 | 003 | Weak coordinator refs | Optional chaining for memory safety |
 | 004 | Mock services | Fast development over real API integration |
