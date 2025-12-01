@@ -2,12 +2,13 @@ import Foundation
 
 final class MockNotificationService: NotificationServiceProtocol {
     private var notifications: [BankNotification] = [
+        // Today notifications (within last 24 hours)
         BankNotification(
             id: "NOTIF001",
             type: .transaction,
             title: "Transaction Alert",
-            message: "Transaction of $45.99 at Amazon",
-            date: Date().addingTimeInterval(-86400 * 1), // 1 day ago
+            message: "Transaction of $45.99 at Amazon has been processed successfully.",
+            date: Date().addingTimeInterval(-3600 * 2), // 2 hours ago
             isRead: false,
             relatedEntityId: "TXN001"
         ),
@@ -16,16 +17,17 @@ final class MockNotificationService: NotificationServiceProtocol {
             type: .security,
             title: "Login from New Device",
             message: "We detected a login from a new device. If this wasn't you, please contact us immediately.",
-            date: Date().addingTimeInterval(-86400 * 2), // 2 days ago
+            date: Date().addingTimeInterval(-3600 * 5), // 5 hours ago
             isRead: false,
             relatedEntityId: nil
         ),
+        // Yesterday notifications
         BankNotification(
             id: "NOTIF003",
             type: .transaction,
             title: "Salary Credited",
             message: "Your salary of $3,500.00 has been credited to your Primary Checking account.",
-            date: Date().addingTimeInterval(-86400 * 3), // 3 days ago
+            date: Date().addingTimeInterval(-86400 * 1 - 3600 * 3), // Yesterday, 3 hours earlier
             isRead: true,
             relatedEntityId: "TXN002"
         ),
@@ -34,16 +36,17 @@ final class MockNotificationService: NotificationServiceProtocol {
             type: .promotion,
             title: "Limited Time Offer",
             message: "Get 2% cashback on all purchases this month with your credit card!",
-            date: Date().addingTimeInterval(-86400 * 4), // 4 days ago
-            isRead: true,
+            date: Date().addingTimeInterval(-86400 * 1 - 3600 * 8), // Yesterday, 8 hours earlier
+            isRead: false,
             relatedEntityId: nil
         ),
+        // Older notifications
         BankNotification(
             id: "NOTIF005",
             type: .security,
             title: "Password Changed",
             message: "Your password was successfully changed. If you didn't make this change, please contact us.",
-            date: Date().addingTimeInterval(-86400 * 5), // 5 days ago
+            date: Date().addingTimeInterval(-86400 * 3), // 3 days ago
             isRead: true,
             relatedEntityId: nil
         ),
@@ -52,7 +55,7 @@ final class MockNotificationService: NotificationServiceProtocol {
             type: .transaction,
             title: "Large Transaction Alert",
             message: "A transaction of $125.80 was made at Walmart.",
-            date: Date().addingTimeInterval(-86400 * 6), // 6 days ago
+            date: Date().addingTimeInterval(-86400 * 5), // 5 days ago
             isRead: true,
             relatedEntityId: "TXN003"
         ),

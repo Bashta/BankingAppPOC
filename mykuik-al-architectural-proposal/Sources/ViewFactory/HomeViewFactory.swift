@@ -25,11 +25,15 @@ import SwiftUI
 final class HomeViewFactory {
     private let dependencyContainer: DependencyContainer
 
-    // MARK: - ViewModel Cache (AC: #16)
+    // MARK: - ViewModel Cache (AC: #16, Story 6.1; AC: #14, Story 6.2)
 
     /// Cached DashboardViewModel to preserve state across navigation.
     /// Created on first access, reused until clearCache() is called.
     private var cachedDashboardViewModel: DashboardViewModel?
+
+    /// Cached NotificationsViewModel to preserve state across navigation. (AC: #14, Story 6.2)
+    /// Created on first access, reused until clearCache() is called.
+    private var cachedNotificationsViewModel: NotificationsViewModel?
 
     // MARK: - Initialization
 
@@ -67,12 +71,29 @@ final class HomeViewFactory {
         return DashboardView(viewModel: viewModel)
     }
 
-    /// Creates NotificationsView with its ViewModel.
+    /// Creates or returns cached NotificationsView with its ViewModel. (AC: #14, Story 6.2)
+    ///
+    /// Caching Pattern:
+    /// 1. Check if cachedNotificationsViewModel exists
+    /// 2. If exists, reuse it (preserves state, read/unread status)
+    /// 3. If nil, create new ViewModel and cache it
+    /// 4. Return NotificationsView with (cached) ViewModel
+    ///
+    /// - Parameter coordinator: HomeCoordinator for navigation
+    /// - Returns: NotificationsView with properly initialized ViewModel
     func makeNotificationsView(coordinator: HomeCoordinator) -> some View {
+        // Return cached ViewModel if available (AC: #14)
+        if let cachedViewModel = cachedNotificationsViewModel {
+            return NotificationsView(viewModel: cachedViewModel)
+        }
+
+        // Create new ViewModel and cache it
         let viewModel = NotificationsViewModel(
             notificationService: dependencyContainer.notificationService,
             coordinator: coordinator
         )
+        cachedNotificationsViewModel = viewModel
+
         return NotificationsView(viewModel: viewModel)
     }
 
@@ -86,9 +107,9 @@ final class HomeViewFactory {
         return NotificationDetailView(viewModel: viewModel)
     }
 
-    // MARK: - Cache Management (AC: #16)
+    // MARK: - Cache Management (AC: #16, Story 6.1; AC: #14, Story 6.2)
 
-    /// Clears the cached DashboardViewModel.
+    /// Clears all cached ViewModels.
     ///
     /// Call this when:
     /// - User logs out (to reset state)
@@ -96,5 +117,6 @@ final class HomeViewFactory {
     /// - Need to force fresh data load
     func clearCache() {
         cachedDashboardViewModel = nil
+        cachedNotificationsViewModel = nil
     }
 }

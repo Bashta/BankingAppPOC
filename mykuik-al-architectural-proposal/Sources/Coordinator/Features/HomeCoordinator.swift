@@ -135,6 +135,13 @@ final class HomeCoordinator: ObservableObject {
         parent?.switchTab(.more)
     }
 
+    /// Navigates to security settings on More tab. (AC13 - Story 6.2)
+    /// Used by notifications when security alert is tapped.
+    func navigateToSecuritySettings() {
+        parent?.switchTab(.more)
+        parent?.moreCoordinator.push(.security)
+    }
+
     // MARK: - Deep Link Handling
 
     /// Handles deep links to Home feature screens.

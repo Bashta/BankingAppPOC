@@ -21,6 +21,14 @@ struct BankNotification: Identifiable, Hashable, Codable {
     let relatedEntityId: String?
 }
 
+// MARK: - NotificationGroup Model
+
+struct NotificationGroup: Identifiable {
+    let id = UUID()
+    let title: String
+    let notifications: [BankNotification]
+}
+
 // MARK: - NotificationSettings Model
 
 struct NotificationSettings: Hashable, Codable {
