@@ -24,6 +24,8 @@ enum CardStatus: String, Codable {
     case blocked
     case pendingActivation
     case pending // Alias for pendingActivation
+    case expired
+    case cancelled
 }
 
 // MARK: - BlockReason Enum

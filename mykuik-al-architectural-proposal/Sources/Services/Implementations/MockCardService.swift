@@ -64,6 +64,48 @@ final class MockCardService: CardServiceProtocol {
             activatedDate: nil,
             blockedDate: nil,
             blockReason: nil
+        ),
+        Card(
+            id: "CARD004",
+            accountId: "ACC001",
+            cardNumber: "379812345678901",
+            cardType: .credit,
+            cardBrand: .amex,
+            cardholderName: "JOHN DOE",
+            expiryMonth: 6,
+            expiryYear: 2026,
+            cvv: "1234",
+            status: .blocked,
+            limits: CardLimits(
+                dailyPurchase: 15000.00,
+                dailyWithdrawal: 2000.00,
+                onlineTransaction: 10000.00,
+                contactless: 500.00
+            ),
+            activatedDate: Date().addingTimeInterval(-86400 * 400),
+            blockedDate: Date().addingTimeInterval(-86400 * 7), // Blocked 1 week ago
+            blockReason: .suspicious
+        ),
+        Card(
+            id: "CARD005",
+            accountId: "ACC002",
+            cardNumber: "4532987654321098",
+            cardType: .prepaid,
+            cardBrand: .visa,
+            cardholderName: "JOHN DOE",
+            expiryMonth: 9,
+            expiryYear: 2025,
+            cvv: "321",
+            status: .active,
+            limits: CardLimits(
+                dailyPurchase: 1000.00,
+                dailyWithdrawal: 500.00,
+                onlineTransaction: 800.00,
+                contactless: 100.00
+            ),
+            activatedDate: Date().addingTimeInterval(-86400 * 90), // 3 months ago
+            blockedDate: nil,
+            blockReason: nil
         )
     ]
 
