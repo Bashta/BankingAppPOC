@@ -11,4 +11,8 @@ protocol AuthServiceProtocol {
     func resetPassword(token: String, newPassword: String) async throws
     func changePassword(oldPassword: String, newPassword: String) async throws
     func changePIN(oldPIN: String, newPIN: String) async throws -> OTPReference
+
+    // MARK: - Profile Operations (Story 6.3)
+    func fetchUserProfile() async throws -> User
+    func updateUserProfile(_ user: User) async throws -> User
 }

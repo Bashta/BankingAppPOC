@@ -17,25 +17,25 @@ enum TransferRoute: Route {
     var id: String {
         switch self {
         case .home:
-            return "transfer-home"
+            "transfer-home"
         case .internalTransfer:
-            return "transfer-internalTransfer"
+            "transfer-internalTransfer"
         case .internalTransferWithAccount(let fromAccountId):
-            return "transfer-internalTransfer-\(fromAccountId)"
+            "transfer-internalTransfer-\(fromAccountId)"
         case .externalTransfer:
-            return "transfer-externalTransfer"
+            "transfer-externalTransfer"
         case .beneficiaryList:
-            return "transfer-beneficiaryList"
+            "transfer-beneficiaryList"
         case .addBeneficiary:
-            return "transfer-addBeneficiary"
+            "transfer-addBeneficiary"
         case .editBeneficiary(let beneficiaryId):
-            return "transfer-editBeneficiary-\(beneficiaryId)"
+            "transfer-editBeneficiary-\(beneficiaryId)"
         case .confirm(let request):
-            return "transfer-confirm-\(request.id)"
+            "transfer-confirm-\(request.id)"
         case .confirmation(let transferId):
-            return "transfer-confirmation-\(transferId)"
+            "transfer-confirmation-\(transferId)"
         case .receipt(let transferId):
-            return "transfer-receipt-\(transferId)"
+            "transfer-receipt-\(transferId)"
         }
     }
 

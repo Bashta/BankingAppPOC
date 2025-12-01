@@ -156,6 +156,10 @@ final class MoreCoordinator: ObservableObject {
         case .profile:
             push(.profile)
 
+        case .editProfile:
+            push(.profile)
+            push(.editProfile)
+
         case .security:
             push(.security)
 
@@ -196,6 +200,9 @@ final class MoreCoordinator: ObservableObject {
 
         case .profile:
             viewFactory.makeProfileView(coordinator: self)
+
+        case .editProfile:
+            viewFactory.makeEditProfileView(coordinator: self)
 
         case .security:
             viewFactory.makeSecuritySettingsView(coordinator: self)
@@ -268,21 +275,28 @@ struct MoreCoordinatorView: View {
 
     // MARK: - Navigation Links
 
-    /// Hidden NavigationLinks for programmatic navigation.
-    /// Creates links for each item in navigation stack.
+    /// Hidden NavigationLink for programmatic navigation.
+    /// Only creates ONE link at root - recursion handles deeper levels.
     @ViewBuilder
     private var navigationLinks: some View {
-        ForEach(Array(coordinator.navigationStack.enumerated()), id: \.element.id) { index, item in
-            if let route = item.route.base as? MoreRoute {
-                NavigationLink(
-                    destination: coordinator.build(route)
-                        .background(nestedLinks(from: index + 1)),
-                    isActive: binding(for: index)
-                ) {
-                    EmptyView()
-                }
-                .hidden()
+        // Only create link for first item - nestedLinks handles the rest
+        if let firstItem = coordinator.navigationStack.first,
+           let route = firstItem.route.base as? MoreRoute {
+            NavigationLink(
+                destination: coordinator.build(route)
+                    .background(nestedLinks(from: 1)),
+                isActive: Binding(
+                    get: { !coordinator.navigationStack.isEmpty },
+                    set: { isActive in
+                        if !isActive {
+                            coordinator.navigationStack.removeAll()
+                        }
+                    }
+                )
+            ) {
+                EmptyView()
             }
+            .hidden()
         }
     }
 

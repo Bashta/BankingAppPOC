@@ -11,8 +11,20 @@ import SwiftUI
 final class MoreViewFactory {
     private let dependencyContainer: DependencyContainer
 
+    // MARK: - Cached ViewModels (Story 6.3 AC: #18)
+
+    /// Cached ProfileViewModel for state persistence across navigation
+    private var cachedProfileViewModel: ProfileViewModel?
+
     init(dependencyContainer: DependencyContainer) {
         self.dependencyContainer = dependencyContainer
+    }
+
+    // MARK: - Cache Management
+
+    /// Clears cached ViewModels (call on logout or when state should reset)
+    func clearCache() {
+        cachedProfileViewModel = nil
     }
 
     // MARK: - More Feature Views
@@ -24,15 +36,27 @@ final class MoreViewFactory {
         return MoreMenuView(viewModel: viewModel)
     }
 
+    /// Creates ProfileView with cached ViewModel (AC: #18)
+    /// ViewModel is cached for state persistence across navigation
     func makeProfileView(coordinator: MoreCoordinator) -> some View {
+        // Return cached ViewModel if exists
+        if let cached = cachedProfileViewModel {
+            return ProfileView(viewModel: cached)
+        }
+
+        // Create new ViewModel and cache it
         let viewModel = ProfileViewModel(
             authService: dependencyContainer.authService,
             coordinator: coordinator
         )
+        cachedProfileViewModel = viewModel
         return ProfileView(viewModel: viewModel)
     }
 
+    /// Creates EditProfileView with NEW ViewModel each time (AC: #18)
+    /// Form state should reset on each edit session - NO caching
     func makeEditProfileView(coordinator: MoreCoordinator) -> some View {
+        // Always create new ViewModel (no caching for form state)
         let viewModel = EditProfileViewModel(
             authService: dependencyContainer.authService,
             coordinator: coordinator

@@ -5,6 +5,7 @@ import Foundation
 enum MoreRoute: Route {
     case menu
     case profile
+    case editProfile
     case security
     case changePassword
     case changePIN
@@ -18,6 +19,8 @@ enum MoreRoute: Route {
             return "more-menu"
         case .profile:
             return "more-profile"
+        case .editProfile:
+            return "more-editProfile"
         case .security:
             return "more-security"
         case .changePassword:
@@ -39,6 +42,8 @@ enum MoreRoute: Route {
             return "more"
         case .profile:
             return "more/profile"
+        case .editProfile:
+            return "more/profile/edit"
         case .security:
             return "more/security"
         case .changePassword:
@@ -87,6 +92,8 @@ extension MoreRoute {
                 } else if components[2] == "change-pin" {
                     return .success(.more(.changePIN))
                 }
+            } else if components[1] == "profile" && components[2] == "edit" {
+                return .success(.more(.editProfile))
             }
         }
 

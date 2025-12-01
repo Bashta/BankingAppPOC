@@ -388,6 +388,85 @@ final class MockAuthService: AuthServiceProtocol {
         NotificationCenter.default.post(name: .sessionExpired, object: nil)
     }
 
+    // MARK: - Profile Operations (Story 6.3 AC: #19, #20)
+
+    /// Fetches the current user's profile
+    /// - Returns: User object with profile information
+    /// - Throws: AuthError.notAuthenticated if user not logged in
+    func fetchUserProfile() async throws -> User {
+        Logger.auth.debug("[MockAuthService] fetchUserProfile called")
+        try await Task.sleep(nanoseconds: 300_000_000) // 300ms delay (AC #20)
+
+        guard isAuthenticated else {
+            Logger.auth.error("[MockAuthService] fetchUserProfile failed: not authenticated")
+            throw AuthError.notAuthenticated
+        }
+
+        // Return current user or create default with full address data
+        if let user = currentUser {
+            // If user has no address, create one with full mock data
+            if user.address == nil {
+                let userWithAddress = User(
+                    id: user.id,
+                    username: user.username,
+                    name: user.name,
+                    email: user.email,
+                    phoneNumber: user.phoneNumber,
+                    address: Address(
+                        street: "123 Banking Street",
+                        city: "Financial City",
+                        state: "CA",
+                        zipCode: "90210",
+                        country: "USA"
+                    )
+                )
+                currentUser = userWithAddress
+                Logger.auth.info("[MockAuthService] fetchUserProfile: profile fetched successfully with mock address")
+                return userWithAddress
+            }
+            Logger.auth.info("[MockAuthService] fetchUserProfile: profile fetched successfully")
+            return user
+        }
+
+        // Create default mock user with realistic data
+        let mockUser = User(
+            id: "USER001",
+            username: "user",
+            name: "John Doe",
+            email: "john.doe@example.com",
+            phoneNumber: "5551234567",
+            address: Address(
+                street: "123 Banking Street",
+                city: "Financial City",
+                state: "CA",
+                zipCode: "90210",
+                country: "USA"
+            )
+        )
+        currentUser = mockUser
+        Logger.auth.info("[MockAuthService] fetchUserProfile: created default mock profile")
+        return mockUser
+    }
+
+    /// Updates the user's profile information
+    /// - Parameter user: Updated User object
+    /// - Returns: Updated User object (confirms update)
+    /// - Throws: AuthError.notAuthenticated if user not logged in
+    func updateUserProfile(_ user: User) async throws -> User {
+        Logger.auth.debug("[MockAuthService] updateUserProfile called")
+        try await Task.sleep(nanoseconds: 500_000_000) // 500ms delay (AC #20)
+
+        guard isAuthenticated else {
+            Logger.auth.error("[MockAuthService] updateUserProfile failed: not authenticated")
+            throw AuthError.notAuthenticated
+        }
+
+        // Store updated user in memory (AC #20)
+        currentUser = user
+        Logger.auth.info("[MockAuthService] updateUserProfile: profile updated successfully")
+        return user
+    }
+
     // MARK: - Deinit
 
     deinit {

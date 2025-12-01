@@ -59,6 +59,14 @@ final class MockAuthServiceForBiometric: AuthServiceProtocol {
     func changePIN(oldPIN: String, newPIN: String) async throws -> OTPReference {
         return OTPReference(id: "test", expiresAt: Date(), purpose: .changePIN)
     }
+
+    func fetchUserProfile() async throws -> User {
+        fatalError("Not used in biometric tests")
+    }
+
+    func updateUserProfile(_ user: User) async throws -> User {
+        fatalError("Not used in biometric tests")
+    }
 }
 
 // MARK: - BiometricLoginViewModel Tests
