@@ -52,6 +52,8 @@ final class CardsViewFactory {
             cachedCardDetailViewModels[cardId] = CardDetailViewModel(
                 cardId: cardId,
                 cardService: dependencyContainer.cardService,
+                accountService: dependencyContainer.accountService,
+                transactionService: dependencyContainer.transactionService,
                 coordinator: coordinator
             )
         }

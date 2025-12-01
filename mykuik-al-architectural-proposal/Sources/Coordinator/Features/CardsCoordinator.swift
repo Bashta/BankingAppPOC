@@ -104,6 +104,17 @@ final class CardsCoordinator: ObservableObject {
         presentedFullScreen = nil
     }
 
+    // MARK: - Cross-Feature Navigation
+
+    /// Navigates to transaction history for a linked account.
+    /// Used by CardDetailView to show card-related transactions.
+    ///
+    /// - Parameter accountId: The account ID to show transactions for
+    func navigateToAccountTransactions(accountId: String) {
+        parent?.switchTab(.accounts)
+        parent?.accountsCoordinator.push(.transactions(accountId: accountId))
+    }
+
     // MARK: - Deep Link Handling
 
     /// Handles deep links to Cards feature screens.
