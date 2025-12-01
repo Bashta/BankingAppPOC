@@ -75,19 +75,24 @@ final class CardsViewFactory {
         makeCardActivationView(cardId: cardId, coordinator: coordinator)
     }
 
-    func makeBlockCardView(cardId: String, coordinator: CardsCoordinator) -> some View {
-        if cachedBlockCardViewModels[cardId] == nil {
-            cachedBlockCardViewModels[cardId] = BlockCardViewModel(
+    func makeBlockCardView(
+        cardId: String,
+        currentStatus: CardStatus,
+        blockReason: BlockReason?,
+        coordinator: CardsCoordinator
+    ) -> some View {
+        // Use a cache key that includes status to handle mode changes
+        let cacheKey = "\(cardId)-\(currentStatus.rawValue)"
+        if cachedBlockCardViewModels[cacheKey] == nil {
+            cachedBlockCardViewModels[cacheKey] = BlockCardViewModel(
                 cardId: cardId,
+                initialStatus: currentStatus,
+                blockReason: blockReason,
                 cardService: dependencyContainer.cardService,
                 coordinator: coordinator
             )
         }
-        return BlockCardView(viewModel: cachedBlockCardViewModels[cardId]!)
-    }
-
-    func makeCardBlockView(cardId: String, coordinator: CardsCoordinator) -> some View {
-        makeBlockCardView(cardId: cardId, coordinator: coordinator)
+        return BlockCardView(viewModel: cachedBlockCardViewModels[cacheKey]!)
     }
 
     func makeCardLimitsView(cardId: String, coordinator: CardsCoordinator) -> some View {

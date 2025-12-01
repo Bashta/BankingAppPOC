@@ -200,7 +200,7 @@ enum CardsRoute: Route {
     case detail(cardId: String)
     case settings(cardId: String)
     case limits(cardId: String)
-    case block(cardId: String)
+    case block(cardId: String, currentStatus: CardStatus, blockReason: BlockReason?)
     case activate(cardId: String)
     case pinChange(cardId: String)
 
@@ -214,7 +214,7 @@ enum CardsRoute: Route {
             return "cards-settings-\(cardId)"
         case .limits(let cardId):
             return "cards-limits-\(cardId)"
-        case .block(let cardId):
+        case .block(let cardId, _, _):
             return "cards-block-\(cardId)"
         case .activate(let cardId):
             return "cards-activate-\(cardId)"
@@ -233,7 +233,7 @@ enum CardsRoute: Route {
             return "cards/\(cardId)/settings"
         case .limits(let cardId):
             return "cards/\(cardId)/limits"
-        case .block(let cardId):
+        case .block(let cardId, _, _):
             return "cards/\(cardId)/block"
         case .activate(let cardId):
             return "cards/\(cardId)/activate"
@@ -507,7 +507,9 @@ struct DeepLinkParser {
             case "limits":
                 return .success(.cards(.limits(cardId: cardId)))
             case "block":
-                return .success(.cards(.block(cardId: cardId)))
+                // Deep links to block default to active card (block mode)
+                // The actual card state will be determined when the view loads
+                return .success(.cards(.block(cardId: cardId, currentStatus: .active, blockReason: nil)))
             case "activate":
                 return .success(.cards(.activate(cardId: cardId)))
             case "pin-change":

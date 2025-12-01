@@ -176,8 +176,19 @@ struct CardDetailView: View {
                     )
                 }
 
-                // Blocked message - if card is blocked
+                // Unblock button - if card is blocked
                 if viewModel.isBlocked {
+                    quickActionButton(
+                        icon: "lock.open",
+                        title: "Unblock Card",
+                        subtitle: card.blockReason?.canUnblock == true
+                            ? "Restore card functionality"
+                            : "Contact support required",
+                        style: .primary,
+                        action: viewModel.unblockCard
+                    )
+
+                    // Show blocked reason info
                     blockedInfoView(card: card)
                 }
 

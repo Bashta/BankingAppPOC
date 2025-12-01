@@ -115,6 +115,13 @@ final class CardsCoordinator: ObservableObject {
         parent?.accountsCoordinator.push(.transactions(accountId: accountId))
     }
 
+    /// Navigates to support section in More tab.
+    /// Used by BlockCardView when card cannot be unblocked and user needs support.
+    func navigateToSupport() {
+        parent?.switchTab(.more)
+        parent?.moreCoordinator.push(.support)
+    }
+
     // MARK: - Deep Link Handling
 
     /// Handles deep links to Cards feature screens.
@@ -128,7 +135,7 @@ final class CardsCoordinator: ObservableObject {
     /// - .detail(cardId) → Push detail
     /// - .settings(cardId) → Push detail, then settings
     /// - .limits(cardId) → Push detail, then limits
-    /// - .block(cardId) → Push detail, then block
+    /// - .block(cardId, status, reason) → Push detail, then block
     /// - .activate(cardId) → Push detail, then activate
     /// - .pinChange(cardId) → Push detail, then PIN change
     ///
@@ -154,10 +161,10 @@ final class CardsCoordinator: ObservableObject {
             push(.detail(cardId: cardId))
             push(.limits(cardId: cardId))
 
-        case .block(let cardId):
+        case .block(let cardId, let currentStatus, let blockReason):
             // Navigate through detail to block
             push(.detail(cardId: cardId))
-            push(.block(cardId: cardId))
+            push(.block(cardId: cardId, currentStatus: currentStatus, blockReason: blockReason))
 
         case .activate(let cardId):
             // Navigate through detail to activate
@@ -194,8 +201,8 @@ final class CardsCoordinator: ObservableObject {
         case .limits(let cardId):
             viewFactory.makeCardLimitsView(cardId: cardId, coordinator: self)
 
-        case .block(let cardId):
-            viewFactory.makeBlockCardView(cardId: cardId, coordinator: self)
+        case .block(let cardId, let currentStatus, let blockReason):
+            viewFactory.makeBlockCardView(cardId: cardId, currentStatus: currentStatus, blockReason: blockReason, coordinator: self)
 
         case .activate(let cardId):
             viewFactory.makeActivateCardView(cardId: cardId, coordinator: self)

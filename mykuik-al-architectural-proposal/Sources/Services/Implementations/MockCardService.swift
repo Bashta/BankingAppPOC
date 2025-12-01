@@ -208,6 +208,12 @@ final class MockCardService: CardServiceProtocol {
             throw CardError.cardNotBlocked
         }
 
+        // Only cards blocked for suspicious activity can be unblocked
+        // Cards blocked as lost, stolen, or damaged require a replacement card
+        guard let reason = card.blockReason, reason.canUnblock else {
+            throw CardError.cannotUnblock
+        }
+
         let updatedCard = Card(
             id: card.id,
             accountId: card.accountId,
@@ -273,11 +279,31 @@ final class MockCardService: CardServiceProtocol {
     }
 }
 
-enum CardError: Error {
+enum CardError: Error, LocalizedError {
     case cardNotFound
     case invalidLastFourDigits
     case cardAlreadyActive
     case cardAlreadyBlocked
     case cardNotBlocked
+    case cannotUnblock
     case invalidOTP
+
+    var errorDescription: String? {
+        switch self {
+        case .cardNotFound:
+            return "Card not found"
+        case .invalidLastFourDigits:
+            return "The last four digits don't match"
+        case .cardAlreadyActive:
+            return "This card is already active"
+        case .cardAlreadyBlocked:
+            return "This card is already blocked"
+        case .cardNotBlocked:
+            return "This card is not blocked"
+        case .cannotUnblock:
+            return "This card cannot be unblocked. Please contact support for a replacement card."
+        case .invalidOTP:
+            return "Invalid verification code"
+        }
+    }
 }

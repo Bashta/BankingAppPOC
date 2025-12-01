@@ -1,6 +1,6 @@
 # iOS Banking App - MVVM-C Architecture Reference
 
-A reference implementation of a SwiftUI banking application using the **MVVM-C** (Model-View-ViewModel-Coordinator) architecture pattern.
+A reference implementation of a SwiftUI banking application using the **MVVM-C-R** (Model-View-ViewModel-Coordinator- Router) architecture pattern.
 
 ---
 
@@ -23,10 +23,9 @@ A reference implementation of a SwiftUI banking application using the **MVVM-C**
 |-----------|------------|
 | Platform | iOS 15.0+ |
 | UI Framework | SwiftUI |
-| Architecture | MVVM-C (Coordinator) |
+| Architecture | MVVM-C-R (Coordinator + Router) |
 | Reactive | Combine |
 | Language | Swift 5.9 |
-| Build System | Swift Package Manager |
 | Logging | OSLog |
 | Secure Storage | Keychain |
 | Biometrics | LocalAuthentication |
@@ -35,7 +34,7 @@ A reference implementation of a SwiftUI banking application using the **MVVM-C**
 
 ## Features
 
-### Completed (Epics 1-4)
+### Completed
 
 - **Authentication**
   - Login with username/password
@@ -63,7 +62,7 @@ A reference implementation of a SwiftUI banking application using the **MVVM-C**
   - Edit beneficiary
   - Delete beneficiary
 
-### In Progress (Epics 5-6)
+### In Progress
 
 - Card management (list, detail, limits, block/unblock)
 - Profile and settings
@@ -87,7 +86,6 @@ A reference implementation of a SwiftUI banking application using the **MVVM-C**
 ```bash
 git clone <repository-url>
 cd mykuik-al-architectural-proposal
-open Package.swift
 ```
 
 ### Build & Run
@@ -208,7 +206,7 @@ Key decisions documented in [ADRs](readme/05-decisions.md):
 
 | ADR | Decision |
 |-----|----------|
-| 001 | MVVM-C over VIPER/TCA |
+| 001 | MVVM-C-R over MVVM/TCA |
 | 002 | NavigationView for iOS 15 compatibility |
 | 003 | Weak coordinator references |
 | 004 | Mock services for POC phase |
@@ -217,11 +215,4 @@ Key decisions documented in [ADRs](readme/05-decisions.md):
 | 007 | Type-safe routing |
 | 008 | Lazy service initialization |
 | 009 | OSLog for logging |
-
 ---
-
-## Related Documentation
-
-- [Product Requirements (PRD)](docs/prd.md)
-- [Epic Breakdown](docs/epics.md)
-- [Detailed Architecture](docs/architecture.md)

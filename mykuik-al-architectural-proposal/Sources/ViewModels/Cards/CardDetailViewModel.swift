@@ -138,12 +138,21 @@ final class CardDetailViewModel: ObservableObject {
     }
 
     func blockCard() {
-        guard card?.status == .active else {
+        guard let card = card, card.status == .active else {
             Logger.cards.warning("Cannot block card: status is not active")
             return
         }
         Logger.cards.debug("Navigating to block card: \(self.cardId)")
-        coordinator?.push(.block(cardId: cardId))
+        coordinator?.push(.block(cardId: cardId, currentStatus: card.status, blockReason: nil))
+    }
+
+    func unblockCard() {
+        guard let card = card, card.status == .blocked else {
+            Logger.cards.warning("Cannot unblock card: status is not blocked")
+            return
+        }
+        Logger.cards.debug("Navigating to unblock card: \(self.cardId)")
+        coordinator?.push(.block(cardId: cardId, currentStatus: card.status, blockReason: card.blockReason))
     }
 
     // MARK: - Computed Properties

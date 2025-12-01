@@ -1,4 +1,4 @@
-import Foundation
+ import Foundation
 
 // MARK: - CardType Enum
 
@@ -46,6 +46,60 @@ enum BlockReason: String, Codable {
             return "Card damaged"
         case .suspicious:
             return "Suspicious activity detected"
+        }
+    }
+
+    /// Whether this block reason allows unblocking.
+    /// Only cards blocked for suspicious activity can be unblocked.
+    /// Cards blocked as lost, stolen, or damaged require a replacement card.
+    var canUnblock: Bool {
+        switch self {
+        case .suspicious:
+            return true
+        case .lost, .stolen, .damaged:
+            return false
+        }
+    }
+
+    /// Short display name for UI selection
+    var shortName: String {
+        switch self {
+        case .lost:
+            return "Lost"
+        case .stolen:
+            return "Stolen"
+        case .damaged:
+            return "Damaged"
+        case .suspicious:
+            return "Suspicious Activity"
+        }
+    }
+
+    /// Description for the reason selection UI
+    var reasonDescription: String {
+        switch self {
+        case .lost:
+            return "I can't find my card"
+        case .stolen:
+            return "My card was stolen"
+        case .damaged:
+            return "My card is physically damaged"
+        case .suspicious:
+            return "I noticed suspicious transactions"
+        }
+    }
+
+    /// SF Symbol icon for the reason
+    var iconName: String {
+        switch self {
+        case .lost:
+            return "location.slash.fill"
+        case .stolen:
+            return "hand.raised.slash.fill"
+        case .damaged:
+            return "exclamationmark.triangle.fill"
+        case .suspicious:
+            return "questionmark.circle.fill"
         }
     }
 }
