@@ -24,6 +24,15 @@ final class MockTransferService: TransferServiceProtocol {
             transferType = .external
         }
 
+        // Determine destination name based on destination type
+        let destinationName: String
+        switch request.destinationType {
+        case .internalAccount(let accountId):
+            destinationName = accountId == "ACC001" ? "Primary Checking" : "Emergency Savings"
+        case .beneficiary(let beneficiaryId):
+            destinationName = "Beneficiary \(beneficiaryId)"
+        }
+
         let transfer = Transfer(
             id: UUID().uuidString,
             sourceAccountId: request.sourceAccountId,
@@ -38,7 +47,9 @@ final class MockTransferService: TransferServiceProtocol {
             initiatedDate: Date(),
             completedDate: nil,
             otpRequired: true,
-            otpReference: otpRef
+            otpReference: otpRef,
+            destinationName: destinationName,
+            sourceAccountName: request.sourceAccountId == "ACC001" ? "Primary Checking" : "Emergency Savings"
         )
 
         transfers.append(transfer)
@@ -76,7 +87,9 @@ final class MockTransferService: TransferServiceProtocol {
             initiatedDate: transfer.initiatedDate,
             completedDate: Date(),
             otpRequired: false,
-            otpReference: nil
+            otpReference: nil,
+            destinationName: transfer.destinationName,
+            sourceAccountName: transfer.sourceAccountName
         )
         transfers[index] = updatedTransfer
 
@@ -110,7 +123,9 @@ final class MockTransferService: TransferServiceProtocol {
             initiatedDate: transfer.initiatedDate,
             completedDate: nil,
             otpRequired: false,
-            otpReference: nil
+            otpReference: nil,
+            destinationName: transfer.destinationName,
+            sourceAccountName: transfer.sourceAccountName
         )
         transfers[index] = updatedTransfer
 
@@ -125,6 +140,112 @@ final class MockTransferService: TransferServiceProtocol {
         }
 
         return transfer
+    }
+
+    func fetchRecentTransfers(limit: Int) async throws -> [Transfer] {
+        try await Task.sleep(nanoseconds: UInt64.random(in: 300_000_000...500_000_000))
+
+        // Return mock transfer history with various statuses
+        let mockTransfers: [Transfer] = [
+            Transfer(
+                id: "TRF001",
+                sourceAccountId: "ACC001",
+                destinationType: .beneficiary(beneficiaryId: "BEN001"),
+                amount: 250.00,
+                currency: "ALL",
+                description: "Monthly rent payment",
+                reference: "REF00000001",
+                status: .completed,
+                date: Date().addingTimeInterval(-86400), // 1 day ago
+                type: .external,
+                initiatedDate: Date().addingTimeInterval(-86400),
+                completedDate: Date().addingTimeInterval(-86000),
+                otpRequired: false,
+                otpReference: nil,
+                destinationName: "John Smith",
+                sourceAccountName: "Primary Checking"
+            ),
+            Transfer(
+                id: "TRF002",
+                sourceAccountId: "ACC001",
+                destinationType: .internalAccount(accountId: "ACC002"),
+                amount: 500.00,
+                currency: "ALL",
+                description: "Savings deposit",
+                reference: "REF00000002",
+                status: .completed,
+                date: Date().addingTimeInterval(-172800), // 2 days ago
+                type: .internal,
+                initiatedDate: Date().addingTimeInterval(-172800),
+                completedDate: Date().addingTimeInterval(-172400),
+                otpRequired: false,
+                otpReference: nil,
+                destinationName: "Emergency Savings",
+                sourceAccountName: "Primary Checking"
+            ),
+            Transfer(
+                id: "TRF003",
+                sourceAccountId: "ACC002",
+                destinationType: .beneficiary(beneficiaryId: "BEN002"),
+                amount: 150.00,
+                currency: "ALL",
+                description: "Utility payment",
+                reference: "REF00000003",
+                status: .pending,
+                date: Date().addingTimeInterval(-3600), // 1 hour ago
+                type: .external,
+                initiatedDate: Date().addingTimeInterval(-3600),
+                completedDate: nil,
+                otpRequired: true,
+                otpReference: OTPReference(
+                    id: "OTP003",
+                    expiresAt: Date().addingTimeInterval(300),
+                    purpose: .transfer
+                ),
+                destinationName: "OSHEE Albania",
+                sourceAccountName: "Emergency Savings"
+            ),
+            Transfer(
+                id: "TRF004",
+                sourceAccountId: "ACC001",
+                destinationType: .beneficiary(beneficiaryId: "BEN003"),
+                amount: 75.50,
+                currency: "ALL",
+                description: "Internet bill",
+                reference: "REF00000004",
+                status: .failed,
+                date: Date().addingTimeInterval(-259200), // 3 days ago
+                type: .external,
+                initiatedDate: Date().addingTimeInterval(-259200),
+                completedDate: nil,
+                otpRequired: false,
+                otpReference: nil,
+                destinationName: "ALBtelecom",
+                sourceAccountName: "Primary Checking"
+            ),
+            Transfer(
+                id: "TRF005",
+                sourceAccountId: "ACC002",
+                destinationType: .internalAccount(accountId: "ACC001"),
+                amount: 1000.00,
+                currency: "ALL",
+                description: "Transfer to checking",
+                reference: "REF00000005",
+                status: .completed,
+                date: Date().addingTimeInterval(-432000), // 5 days ago
+                type: .internal,
+                initiatedDate: Date().addingTimeInterval(-432000),
+                completedDate: Date().addingTimeInterval(-431600),
+                otpRequired: false,
+                otpReference: nil,
+                destinationName: "Primary Checking",
+                sourceAccountName: "Emergency Savings"
+            )
+        ]
+
+        // Return recent transfers (sorted by date, limited)
+        let sortedTransfers = mockTransfers.sorted { $0.date > $1.date }
+        return Array(sortedTransfers.prefix(limit))
     }
 }
 

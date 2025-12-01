@@ -19,8 +19,8 @@ final class TransferViewFactory {
 
     func makeTransferHomeView(coordinator: TransferCoordinator) -> some View {
         let viewModel = TransferHomeViewModel(
-            accountService: dependencyContainer.accountService,
             transferService: dependencyContainer.transferService,
+            beneficiaryService: dependencyContainer.beneficiaryService,
             coordinator: coordinator
         )
         return TransferHomeView(viewModel: viewModel)
