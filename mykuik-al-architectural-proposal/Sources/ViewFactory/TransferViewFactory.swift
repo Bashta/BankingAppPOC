@@ -55,6 +55,15 @@ final class TransferViewFactory {
         return ExternalTransferView(viewModel: viewModel)
     }
 
+    func makeTransferConfirmView(request: TransferRequest, coordinator: TransferCoordinator) -> some View {
+        // Placeholder view for transfer confirmation - to be implemented in Story 4.4
+        Text("Transfer Confirmation\n\nAmount: \(request.amount)\nFrom: \(request.sourceAccountId)\nTo: \(request.destinationAccountId ?? "N/A")")
+            .multilineTextAlignment(.center)
+            .padding()
+            .navigationTitle("Confirm Transfer")
+            .navigationBarTitleDisplayMode(.inline)
+    }
+
     func makeTransferConfirmationView(transferId: String, coordinator: TransferCoordinator) -> some View {
         let viewModel = TransferConfirmViewModel(
             transferId: transferId,

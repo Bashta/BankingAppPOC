@@ -16,34 +16,32 @@ final class MockTransferService: TransferServiceProtocol {
             purpose: .transfer
         )
 
-        let transferType: TransferType
-        switch request.destinationType {
-        case .internalAccount:
-            transferType = .internal
-        case .beneficiary:
-            transferType = .external
-        }
-
-        // Determine destination name based on destination type
+        // Determine destination type and name based on transfer type
+        let destinationType: TransferDestination
         let destinationName: String
-        switch request.destinationType {
-        case .internalAccount(let accountId):
+
+        switch request.type {
+        case .internal:
+            let accountId = request.destinationAccountId ?? ""
+            destinationType = .internalAccount(accountId: accountId)
             destinationName = accountId == "ACC001" ? "Primary Checking" : "Emergency Savings"
-        case .beneficiary(let beneficiaryId):
+        case .external, .international:
+            let beneficiaryId = request.beneficiaryId ?? ""
+            destinationType = .beneficiary(beneficiaryId: beneficiaryId)
             destinationName = "Beneficiary \(beneficiaryId)"
         }
 
         let transfer = Transfer(
             id: UUID().uuidString,
             sourceAccountId: request.sourceAccountId,
-            destinationType: request.destinationType,
+            destinationType: destinationType,
             amount: request.amount,
             currency: request.currency,
-            description: request.description,
+            description: request.description ?? "",
             reference: reference,
             status: .initiated,
             date: Date(),
-            type: transferType,
+            type: request.type,
             initiatedDate: Date(),
             completedDate: nil,
             otpRequired: true,

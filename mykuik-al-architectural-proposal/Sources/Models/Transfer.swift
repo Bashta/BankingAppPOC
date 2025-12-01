@@ -62,10 +62,32 @@ struct Transfer: Identifiable, Hashable, Codable {
 
 // MARK: - TransferRequest Model
 
-struct TransferRequest: Hashable, Codable {
+struct TransferRequest: Hashable, Codable, Identifiable {
+    let id: String
+    let type: TransferType
     let sourceAccountId: String
-    let destinationType: TransferDestination
+    let destinationAccountId: String?
+    let beneficiaryId: String?
     let amount: Decimal
     let currency: String
-    let description: String
+    let description: String?
+
+    init(
+        type: TransferType,
+        sourceAccountId: String,
+        destinationAccountId: String? = nil,
+        beneficiaryId: String? = nil,
+        amount: Decimal,
+        currency: String,
+        description: String? = nil
+    ) {
+        self.id = UUID().uuidString
+        self.type = type
+        self.sourceAccountId = sourceAccountId
+        self.destinationAccountId = destinationAccountId
+        self.beneficiaryId = beneficiaryId
+        self.amount = amount
+        self.currency = currency
+        self.description = description
+    }
 }

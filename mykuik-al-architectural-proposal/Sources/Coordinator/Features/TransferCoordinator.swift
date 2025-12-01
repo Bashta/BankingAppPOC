@@ -70,9 +70,9 @@ final class TransferCoordinator: ObservableObject {
     /// Creates TransferCoordinator with parent and dependencies.
     ///
     /// - Parameters:
-    ///   - parent: AppCoordinator reference (weak)
+    ///   - parent: AppCoordinator reference (weak), optional for preview support
     ///   - dependencyContainer: Service container
-    init(parent: AppCoordinator, dependencyContainer: DependencyContainer) {
+    init(parent: AppCoordinator?, dependencyContainer: DependencyContainer) {
         self.parent = parent
         self.dependencyContainer = dependencyContainer
         self.viewFactory = TransferViewFactory(dependencyContainer: dependencyContainer)
@@ -164,6 +164,11 @@ final class TransferCoordinator: ObservableObject {
             push(.beneficiaryList)
             push(.addBeneficiary)
 
+        case .confirm:
+            // Cannot deep link directly to confirm with request - need to go through transfer flow
+            // Just go to home
+            break
+
         case .confirmation(let transferId):
             // Direct to confirmation (ideally would navigate through transfer flow)
             push(.confirmation(transferId: transferId))
@@ -203,6 +208,9 @@ final class TransferCoordinator: ObservableObject {
 
         case .addBeneficiary:
             viewFactory.makeAddBeneficiaryView(coordinator: self)
+
+        case .confirm(let request):
+            viewFactory.makeTransferConfirmView(request: request, coordinator: self)
 
         case .confirmation(let transferId):
             viewFactory.makeTransferConfirmationView(transferId: transferId, coordinator: self)

@@ -137,6 +137,7 @@ enum TransferRoute: Route {
     case externalTransfer
     case beneficiaryList
     case addBeneficiary
+    case confirm(request: TransferRequest)
     case confirmation(transferId: String)
     case receipt(transferId: String)
 
@@ -154,6 +155,8 @@ enum TransferRoute: Route {
             return "transfer-beneficiaryList"
         case .addBeneficiary:
             return "transfer-addBeneficiary"
+        case .confirm(let request):
+            return "transfer-confirm-\(request.id)"
         case .confirmation(let transferId):
             return "transfer-confirmation-\(transferId)"
         case .receipt(let transferId):
@@ -175,6 +178,8 @@ enum TransferRoute: Route {
             return "transfer/beneficiaries"
         case .addBeneficiary:
             return "transfer/beneficiaries/add"
+        case .confirm(let request):
+            return "transfer/confirm/\(request.id)"
         case .confirmation(let transferId):
             return "transfer/confirmation/\(transferId)"
         case .receipt(let transferId):
